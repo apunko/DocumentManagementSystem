@@ -8,6 +8,6 @@
   <title>Test</title>
 </head>
   <body>
-    <a href="<s:url action='showDepartments' />">Show Departments</a>
+    <a href="<s:url action="departments/index" />">Show Departments</a>
   </body>
 </html>
