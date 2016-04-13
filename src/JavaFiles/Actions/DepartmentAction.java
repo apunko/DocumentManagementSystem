@@ -32,7 +32,7 @@ public class DepartmentAction extends ActionSupport {
     public String index() {
         DepartmentDAO dao = new DepartmentDAO();
         dao.openCurrentSessionWithTransaction();
-        departments = dao.findAll();
+        departments = (ArrayList<Department>) dao.findAll();
         dao.closeCurrentSessionWithTransaction();
         return SUCCESS;
     }
@@ -106,7 +106,7 @@ public class DepartmentAction extends ActionSupport {
     private Department getDepartmentByID(int id){
         DepartmentDAO dao = new DepartmentDAO();
         dao.openCurrentSessionWithTransaction();
-        Department department = dao.findByPK(id);
+        Department department = dao.findById(id);
         dao.closeCurrentSessionWithTransaction();
         return department;
     }

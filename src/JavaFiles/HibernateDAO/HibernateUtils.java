@@ -7,16 +7,16 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
-public class Utils {
-    private static Utils instance = new Utils();
+public class HibernateUtils {
+    private static HibernateUtils instance = new HibernateUtils();
 
-    public static Utils getInstance() {
+    public static HibernateUtils getInstance() {
         return instance;
     }
 
     private SessionFactory sessionFactory;
     private ServiceRegistry serviceRegistry;
-    private Utils() {
+    private HibernateUtils() {
         try{
             Configuration configuration = new Configuration();
             configuration.addAnnotatedClass(JavaFiles.Models.Department.class);

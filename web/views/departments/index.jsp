@@ -30,6 +30,6 @@
             </tr>
         </s:iterator>
     </table>
-    <a href="<s:url action="new" />">Create New Department</a>
+    <a href="<s:url action="new" />">New</a>
 </body>
 </html>
