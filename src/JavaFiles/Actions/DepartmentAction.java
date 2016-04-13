@@ -11,6 +11,7 @@ import JavaFiles.HibernateDAO.Implementations.DepartmentDAO;
 import JavaFiles.Models.Department;
 import com.opensymphony.xwork2.ActionSupport;
 
+
 public class DepartmentAction extends ActionSupport {
 
     private int id;
@@ -20,10 +21,11 @@ public class DepartmentAction extends ActionSupport {
     private Department department = null;
 
     public String show(){
-        DepartmentDAO dao = new DepartmentDAO();
-        dao.openCurrentSessionWithTransaction();
-        department = dao.findByPK(id);
-        dao.closeCurrentSessionWithTransaction();
+        department = getDepartmentByID(id);
+        return SUCCESS;
+    }
+    public String edit(){
+        department = getDepartmentByID(id);
         return SUCCESS;
     }
 
@@ -32,6 +34,40 @@ public class DepartmentAction extends ActionSupport {
         dao.openCurrentSessionWithTransaction();
         departments = dao.findAll();
         dao.closeCurrentSessionWithTransaction();
+        return SUCCESS;
+    }
+
+    public String create(){
+        Department dep = new Department(id, name, description);
+        DepartmentDAO dao = new DepartmentDAO();
+        dao.openCurrentSessionWithTransaction();
+        dao.persist(dep);
+        this.id = dep.getId();
+        dao.closeCurrentSessionWithTransaction();
+        return SUCCESS;
+    }
+
+    public String update(){
+        Department dep = new Department(id, name, description);
+        DepartmentDAO dao = new DepartmentDAO();
+        dao.openCurrentSessionWithTransaction();
+        dao.update(dep);
+        this.id = dep.getId();
+        dao.closeCurrentSessionWithTransaction();
+        return SUCCESS;
+    }
+
+    public String delete(){
+        Department dep = new Department(id, name, description);
+        DepartmentDAO dao = new DepartmentDAO();
+        dao.openCurrentSessionWithTransaction();
+        dao.delete(dep);
+        this.id = dep.getId();
+        dao.closeCurrentSessionWithTransaction();
+        return SUCCESS;
+    }
+
+    public String New() {
         return SUCCESS;
     }
 
@@ -65,5 +101,13 @@ public class DepartmentAction extends ActionSupport {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    private Department getDepartmentByID(int id){
+        DepartmentDAO dao = new DepartmentDAO();
+        dao.openCurrentSessionWithTransaction();
+        Department department = dao.findByPK(id);
+        dao.closeCurrentSessionWithTransaction();
+        return department;
     }
 }

@@ -49,6 +49,18 @@ public class DepartmentDAO {
         return (Department) cs.get(dep.getClass(), pk);
     }
 
+    public void persist(Department entity) {
+        getCurrentSession().persist(entity);
+    }
+
+    public void update(Department entity) {
+        getCurrentSession().update(entity);
+    }
+
+    public void delete(Department entity) {
+        getCurrentSession().delete(entity);
+    }
+
     public Session getCurrentSession() {
         return currentSession;
     }

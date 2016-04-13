@@ -7,6 +7,8 @@
     <constant name="struts.devMode" value="true" />
     <constant name="struts.action.extension" value=""/>
     <constant name="struts.patternMatcher" value="regex"/>
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
 
     <package name="default" namespace="/" extends="struts-default">
         <default-action-ref name="index" />
@@ -21,6 +23,46 @@
                 class="JavaFiles.Actions.DepartmentAction"
                 method="index">
             <result name="success">/views/departments/index.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+
+        <action name="new"
+                class="JavaFiles.Actions.DepartmentAction"
+                method="New">
+            <result name="success">/views/departments/new.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+
+        <action name="create"
+                class="JavaFiles.Actions.DepartmentAction"
+                method="create">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${id}</param>
+                <param name="namespace">/departments</param>
+            </result>
+        </action>
+
+        <action name="update"
+                class="JavaFiles.Actions.DepartmentAction"
+                method="update">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${id}</param>
+                <param name="namespace">/departments</param>
+            </result>
+        </action>
+
+        <action name="delete/{id}"
+                class="JavaFiles.Actions.DepartmentAction"
+                method="delete">
+            <param name="id">{1}</param>
+            <result name="success" type="redirect">
+                <param name="location">/departments/index</param>
+            </result>
+        </action>
+
+        <action name="edit/{id}" class="JavaFiles.Actions.DepartmentAction" method="edit">
+            <param name="id">{1}</param>
+            <result name="success">/views/departments/edit.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
 
