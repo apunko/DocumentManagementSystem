@@ -1,4 +1,4 @@
-package JavaFiles.HibernateDAO.Interfaces;
+package HibernateDAO.Interfaces;
 
 import org.hibernate.Session;
 

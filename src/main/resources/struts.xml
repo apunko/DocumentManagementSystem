@@ -20,21 +20,21 @@
     <package name="test" namespace="/departments" extends="struts-default">
 
         <action name="index"
-                class="JavaFiles.Actions.DepartmentAction"
+                class="Actions.DepartmentAction"
                 method="index">
             <result name="success">/views/departments/index.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
 
         <action name="new"
-                class="JavaFiles.Actions.DepartmentAction"
+                class="Actions.DepartmentAction"
                 method="New">
             <result name="success">/views/departments/new.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
 
         <action name="create"
-                class="JavaFiles.Actions.DepartmentAction"
+                class="Actions.DepartmentAction"
                 method="create">
             <result name="success" type="redirectAction">
                 <param name="actionName">${id}</param>
@@ -43,7 +43,7 @@
         </action>
 
         <action name="update"
-                class="JavaFiles.Actions.DepartmentAction"
+                class="Actions.DepartmentAction"
                 method="update">
             <result name="success" type="redirectAction">
                 <param name="actionName">${id}</param>
@@ -52,7 +52,7 @@
         </action>
 
         <action name="delete/{id}"
-                class="JavaFiles.Actions.DepartmentAction"
+                class="Actions.DepartmentAction"
                 method="delete">
             <param name="id">{1}</param>
             <result name="success" type="redirect">
@@ -60,14 +60,14 @@
             </result>
         </action>
 
-        <action name="edit/{id}" class="JavaFiles.Actions.DepartmentAction" method="edit">
+        <action name="edit/{id}" class="Actions.DepartmentAction" method="edit">
             <param name="id">{1}</param>
             <result name="success">/views/departments/edit.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
 
         <action name="{id}"
-                class="JavaFiles.Actions.DepartmentAction"
+                class="Actions.DepartmentAction"
                 method="show">
             <param name="id">{1}</param>
             <result name="success">/views/departments/show.jsp</result>

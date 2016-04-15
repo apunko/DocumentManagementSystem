@@ -17,6 +17,6 @@
       org.hibernate.dialect.MySQLDialect
     </property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-    <mapping class="JavaFiles.Models.Department" />
+    <mapping class="Models.Department" />
   </session-factory>
 </hibernate-configuration>

@@ -1,4 +1,4 @@
-package JavaFiles.Actions;
+package Actions;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import JavaFiles.HibernateDAO.Implementations.DepartmentDAO;
-import JavaFiles.Models.Department;
+import HibernateDAO.Implementations.DepartmentDAO;
+import Models.Department;
 import com.opensymphony.xwork2.ActionSupport;
 
 
@@ -17,7 +17,7 @@ public class DepartmentAction extends ActionSupport {
     private int id;
     private String name;
     private String description;
-    private ArrayList<Department> departments = new ArrayList<>();
+    private ArrayList<Department> departments = new ArrayList<Department>();
     private Department department = null;
 
     public String show(){

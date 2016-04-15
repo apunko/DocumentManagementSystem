@@ -1,6 +1,6 @@
-package JavaFiles.HibernateDAO.Implementations;
-import JavaFiles.HibernateDAO.HibernateUtils;
-import JavaFiles.Models.Department;
+package HibernateDAO.Implementations;
+import HibernateDAO.HibernateUtils;
+import Models.Department;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

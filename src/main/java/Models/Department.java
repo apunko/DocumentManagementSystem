@@ -1,4 +1,4 @@
-package JavaFiles.Models;
+package Models;
 
 /**
  * Created by Anton on 4/12/2016.

@@ -1,6 +1,6 @@
-package JavaFiles.HibernateDAO;
+package HibernateDAO;
 
-import JavaFiles.Models.Department;
+import Models.Department;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -19,7 +19,7 @@ public class HibernateUtils {
     private HibernateUtils() {
         try{
             Configuration configuration = new Configuration();
-            configuration.addAnnotatedClass(JavaFiles.Models.Department.class);
+            //configuration.addAnnotatedClass(JavaFiles.Models.Department.class);
             configuration.configure();
             serviceRegistry = new ServiceRegistryBuilder().applySettings(
                     configuration.getProperties()).buildServiceRegistry();

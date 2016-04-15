@@ -1,8 +1,8 @@
-package JavaFiles.HibernateDAO.Implementations;
+package HibernateDAO.Implementations;
 
-import JavaFiles.HibernateDAO.HibernateUtils;
-import JavaFiles.HibernateDAO.Interfaces.IDao;
-import JavaFiles.HibernateDAO.HibernateUtils;
+import HibernateDAO.HibernateUtils;
+import HibernateDAO.Interfaces.IDao;
+import HibernateDAO.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -23,8 +23,6 @@ public class GenericEntityDao<T> implements IDao<T> {
         this.entityClass = entityClass;
     }
 
-
-    @Override
     public Session openCurrentSession() {
         currentSession = utils.openSession();
         if (currentSession == null) {
@@ -33,37 +31,29 @@ public class GenericEntityDao<T> implements IDao<T> {
         return currentSession;
     }
 
-    @Override
     public Session openCurrentSessionWithTransaction() {
         currentSession = utils.openSession();
         currentTransaction = currentSession.beginTransaction();
         return currentSession;
     }
 
-    @Override
     public void closeCurrentSession() {
         currentSession.close();
     }
 
-    @Override
     public void closeCurrentSessionWithTransaction() {
         currentTransaction.commit();
         currentSession.close();
     }
 
-
-
-    @Override
     public void persist(T entity) {
         getCurrentSession().persist(entity);
     }
 
-    @Override
     public void update(T entity) {
         getCurrentSession().update(entity);
     }
 
-    @Override
     public T findById(int id) {
         return (T)getCurrentSession().get(getEntityClass(), id);
     }
@@ -74,12 +64,10 @@ public class GenericEntityDao<T> implements IDao<T> {
      * To delete entity with it's dependencies use deleteByPK(entity) method!
      * @param entity - entity, which PK will be used for deletion
      */
-    @Override
     public void delete(T entity) {
         getCurrentSession().delete(entity);
     }
 
-    @Override
     public void deleteById(int id) {
         System.out.print("pk = " + id);
         Object persistentInstance = getCurrentSession().get(getEntityClass(), id);
@@ -88,7 +76,6 @@ public class GenericEntityDao<T> implements IDao<T> {
         }
     }
 
-    @Override
     public List<T> findAll() {
         return getCurrentSession().createCriteria(getEntityClass()).list();
     }
