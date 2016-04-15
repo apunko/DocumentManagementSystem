@@ -19,6 +19,11 @@
 
     <package name="test" namespace="/departments" extends="struts-default">
 
+        <result-types>
+            <result-type name="tiles"
+                         class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>
+
         <action name="index"
                 class="Actions.DepartmentAction"
                 method="index">
@@ -29,7 +34,7 @@
         <action name="new"
                 class="Actions.DepartmentAction"
                 method="New">
-            <result name="success">/views/departments/new.jsp</result>
+            <result name="success" type="tiles">baseLayout</result>
             <result name="error">/error.jsp</result>
         </action>
 
