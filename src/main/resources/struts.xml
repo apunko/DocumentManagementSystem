@@ -86,4 +86,67 @@
         </action>
     </package>
 
+    <package name="users" namespace="/users" extends="struts-default">
+
+    <result-types>
+        <result-type name="tiles"
+                     class="org.apache.struts2.views.tiles.TilesResult" />
+    </result-types>
+
+    <action name="index"
+            class="Actions.UserActions"
+            method="index">
+        <result name="success" type="tiles">allUsers</result>
+        <result name="error" type="tiles">error</result>
+    </action>
+
+    <action name="new"
+            class="Actions.UserActions"
+            method="New">
+        <result name="success" type="tiles">newUser</result>
+        <result name="error" type="tiles">error</result>
+    </action>
+
+    <action name="create"
+            class="Actions.UserActions"
+            method="create">
+        <result name="success" type="redirectAction">
+            <param name="actionName">${id}</param>
+            <param name="namespace">/users</param>
+        </result>
+    </action>
+
+    <action name="update"
+            class="Actions.UserActions"
+            method="update">
+        <result name="success" type="redirectAction">
+            <param name="actionName">${id}</param>
+            <param name="namespace">/users</param>
+        </result>
+    </action>
+
+    <action name="delete/{id}"
+            class="Actions.UserActions"
+            method="delete">
+        <param name="id">{1}</param>
+        <result name="success" type="redirect">
+            <param name="location">/users/index</param>
+        </result>
+    </action>
+
+    <action name="edit/{id}" class="Actions.UserActions" method="edit">
+        <param name="id">{1}</param>
+        <result name="success" type="tiles">editUser</result>
+        <result name="error" type="tiles">error</result>
+    </action>
+
+    <action name="{id}"
+            class="Actions.UserActions"
+            method="show">
+        <param name="id">{1}</param>
+        <result name="success" type="tiles">showUser</result>
+        <result name="error" type="tiles">error</result>
+    </action>
+</package>
+
 </struts>

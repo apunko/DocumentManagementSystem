@@ -5,4 +5,5 @@
 <div>
   ${mainInf}
 </div>
-<a href="<s:url action="departments/index" />">Show Departments</a>
+<div><a href="<s:url action="departments/index" />">Show Departments</a></div>
+<div><a href="<s:url action="users/index" />">Show Users</a></div>

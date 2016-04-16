@@ -1,8 +1,5 @@
 package Models;
 
-/**
- * Created by Anton on 4/12/2016.
- */
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
