@@ -13,6 +13,36 @@
         <put-attribute name="body"   value="/views/layouts/body.jsp"/>
         <put-attribute name="footer"   value="/views/layouts/footer.jsp"/>
     </definition>
+
+    <definition name="error" extends="baseLayout">
+        <put-attribute name="title"  value="Error"/>
+        <put-attribute name="body"   value="/error.jsp"/>
+    </definition>
+
+    <definition name="main" extends="baseLayout">
+        <put-attribute name="title"  value="Main"/>
+        <put-attribute name="body"   value="/index.jsp"/>
+    </definition>
+
+    <definition name="allDepartments" extends="baseLayout">
+        <put-attribute name="title"  value="All Departments"/>
+        <put-attribute name="body"   value="/views/departments/index.jsp"/>
+    </definition>
+
+    <definition name="newDepartment" extends="baseLayout">
+        <put-attribute name="title"  value="New Department"/>
+        <put-attribute name="body"   value="/views/departments/new.jsp"/>
+    </definition>
+
+    <definition name="showDepartment" extends="baseLayout">
+        <put-attribute name="title"  value="Show"/>
+        <put-attribute name="body"   value="/views/departments/show.jsp"/>
+    </definition>
+
+    <definition name="editDepartment" extends="baseLayout">
+        <put-attribute name="title"  value="Edit"/>
+        <put-attribute name="body"   value="/views/departments/edit.jsp"/>
+    </definition>
     <!--
         <definition name="tiger" extends="baseLayout">
             <put-attribute name="title"  value="Tiger"/>

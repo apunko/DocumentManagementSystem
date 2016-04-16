@@ -11,9 +11,15 @@
     <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
 
     <package name="default" namespace="/" extends="struts-default">
+        <result-types>
+            <result-type name="tiles"
+                         class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>
+
         <default-action-ref name="index" />
-        <action name="index">
-            <result>index.jsp</result>
+
+        <action name="index" class="Actions.ApplicationActions" method="index">
+            <result type="tiles">main</result>
         </action>
     </package>
 
@@ -27,15 +33,15 @@
         <action name="index"
                 class="Actions.DepartmentAction"
                 method="index">
-            <result name="success">/views/departments/index.jsp</result>
-            <result name="error">/error.jsp</result>
+            <result name="success" type="tiles">allDepartments</result>
+            <result name="error" type="tiles">error</result>
         </action>
 
         <action name="new"
                 class="Actions.DepartmentAction"
                 method="New">
-            <result name="success" type="tiles">baseLayout</result>
-            <result name="error">/error.jsp</result>
+            <result name="success" type="tiles">newDepartment</result>
+            <result name="error" type="tiles">error</result>
         </action>
 
         <action name="create"
@@ -67,16 +73,16 @@
 
         <action name="edit/{id}" class="Actions.DepartmentAction" method="edit">
             <param name="id">{1}</param>
-            <result name="success">/views/departments/edit.jsp</result>
-            <result name="error">/error.jsp</result>
+            <result name="success" type="tiles">editDepartment</result>
+            <result name="error" type="tiles">error</result>
         </action>
 
         <action name="{id}"
                 class="Actions.DepartmentAction"
                 method="show">
             <param name="id">{1}</param>
-            <result name="success">/views/departments/show.jsp</result>
-            <result name="error">/error.jsp</result>
+            <result name="success" type="tiles">showDepartment</result>
+            <result name="error" type="tiles">error</result>
         </action>
     </package>
 

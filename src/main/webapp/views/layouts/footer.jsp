@@ -1,1 +1,1 @@
-footer
+Developed by Anton Punko.
