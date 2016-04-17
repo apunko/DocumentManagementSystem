@@ -21,5 +21,6 @@
     <mapping class="Models.User" />
     <mapping class="Models.ContractTemplate" />
     <mapping class="Models.Payform" />
+    <mapping class="Models.Contract" />
   </session-factory>
 </hibernate-configuration>
