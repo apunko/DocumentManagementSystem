@@ -89,9 +89,9 @@
                 class="Actions.DepartmentAction"
                 method="New">
             <interceptor-ref name="defaultStack" />
-            <interceptor-ref name="roleInterceptor">
+            <!--<interceptor-ref name="roleInterceptor">
                 <param name="allowedRoles">admin,doctor,client</param>
-            </interceptor-ref>
+            </interceptor-ref>-->
             <result name="success" type="tiles">newDepartment</result>
             <result name="error" type="tiles">error</result>
         </action>

@@ -1,7 +1,7 @@
 package Actions;
 
-import HibernateDAO.Implementations.UserDao;
 import Models.User;
+import Services.UserService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
@@ -20,6 +20,7 @@ public class UserActions extends ActionSupport implements SessionAware {
     private float experience;
     private String position;
     private int departmentId;
+    private UserService service = new UserService();
 
     public String getPassword() {
         return password;
@@ -45,10 +46,7 @@ public class UserActions extends ActionSupport implements SessionAware {
     }
 
     public String signIn() {
-        UserDao dao = new UserDao();
-        dao.openCurrentSessionWithTransaction();
-        User user = dao.findByLoginAndPassword(login, password);
-        dao.closeCurrentSessionWithTransaction();
+        User user = service.getByLoginAndPassword(login, password);
         if (user != null){
             session.put("id", user.getId());
             session.put("login", user.getLogin());
@@ -68,10 +66,7 @@ public class UserActions extends ActionSupport implements SessionAware {
     }
 
     public String signUp(){
-        UserDao dao = new UserDao();
-        dao.openCurrentSessionWithTransaction();
-        User user = dao.findByLogin(login);
-        dao.closeCurrentSessionWithTransaction();
+        User user = service.getByLogin(login);
         if (user != null) {
             return ERROR;
         }
@@ -81,9 +76,7 @@ public class UserActions extends ActionSupport implements SessionAware {
         user.setLogin(login);
         user.setPassword(password);
         user.setDepartmentId(1);
-        dao.openCurrentSessionWithTransaction();
-        dao.persist(user);
-        dao.closeCurrentSessionWithTransaction();
+        service.create(user);
         if (user.getId() > 0){
             session.put("id", user.getId());
             session.put("login", user.getLogin());
@@ -98,60 +91,40 @@ public class UserActions extends ActionSupport implements SessionAware {
     }
 
     public String show(){
-        user = getUserByID(id);
+        user = service.getById(id);
         return SUCCESS;
     }
     public String edit(){
-        user = getUserByID(id);
+        user = service.getById(id);
         return SUCCESS;
     }
 
     public String index() {
-        UserDao dao = new UserDao();
-        dao.openCurrentSessionWithTransaction();
-        users = (ArrayList<User>) dao.findAll();
-        dao.closeCurrentSessionWithTransaction();
+        users = (ArrayList<User>) service.getAll();
         return SUCCESS;
     }
 
     public String create(){
         User newUser = new User(id, firstName, lastName, role, experience, position, departmentId);
-        UserDao dao = new UserDao();
-        dao.openCurrentSessionWithTransaction();
-        dao.persist(newUser);
+        service.create(newUser);
         this.id = newUser.getId();
-        dao.closeCurrentSessionWithTransaction();
         return SUCCESS;
     }
 
     public String update(){
-        User userToUpdate = getUserByID(id);
+        User userToUpdate = service.getById(id);
         userToUpdate.setFirstName(firstName);
         userToUpdate.setLastName(lastName);
-        UserDao dao = new UserDao();
-        dao.openCurrentSessionWithTransaction();
-        dao.update(userToUpdate);
+        service.update(userToUpdate);
         this.id = userToUpdate.getId();
-        dao.closeCurrentSessionWithTransaction();
         return SUCCESS;
     }
 
     public String delete(){
-        User dep = getUserByID(id);
-        UserDao dao = new UserDao();
-        dao.openCurrentSessionWithTransaction();
-        dao.delete(dep);
-        this.id = dep.getId();
-        dao.closeCurrentSessionWithTransaction();
+        User user = service.getById(id);
+        service.delete(user);
+        this.id = user.getId();
         return SUCCESS;
-    }
-
-    private User getUserByID(int id){
-        UserDao dao = new UserDao();
-        dao.openCurrentSessionWithTransaction();
-        User user = dao.findById(id);
-        dao.closeCurrentSessionWithTransaction();
-        return user;
     }
 
     public ArrayList<User> getUsers() {

@@ -1,15 +1,10 @@
 package Actions;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-import HibernateDAO.Implementations.DepartmentDAO;
+import java.util.ArrayList;
+import java.util.Map;
 import Models.Department;
+import Services.DepartmentService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.dispatcher.SessionMap;
 
@@ -21,51 +16,40 @@ public class DepartmentAction extends ActionSupport {
     private String description;
     private ArrayList<Department> departments = new ArrayList<Department>();
     private Department department = null;
+    private DepartmentService service = new DepartmentService();
 
     public String show(){
-        department = getDepartmentByID(id);
+        department = service.getById(id);
         return SUCCESS;
     }
     public String edit(){
-        department = getDepartmentByID(id);
+        department = service.getById(id);
         return SUCCESS;
     }
 
     public String index() {
-        DepartmentDAO dao = new DepartmentDAO();
-        dao.openCurrentSessionWithTransaction();
-        departments = (ArrayList<Department>) dao.findAll();
-        dao.closeCurrentSessionWithTransaction();
+        departments = service.getAll();
         return SUCCESS;
     }
 
     public String create(){
         Department dep = new Department(id, name, description);
-        DepartmentDAO dao = new DepartmentDAO();
-        dao.openCurrentSessionWithTransaction();
-        dao.persist(dep);
+        service.create(dep);
         this.id = dep.getId();
-        dao.closeCurrentSessionWithTransaction();
         return SUCCESS;
     }
 
     public String update(){
         Department dep = new Department(id, name, description);
-        DepartmentDAO dao = new DepartmentDAO();
-        dao.openCurrentSessionWithTransaction();
-        dao.update(dep);
+        service.update(dep);
         this.id = dep.getId();
-        dao.closeCurrentSessionWithTransaction();
         return SUCCESS;
     }
 
     public String delete(){
         Department dep = new Department(id, name, description);
-        DepartmentDAO dao = new DepartmentDAO();
-        dao.openCurrentSessionWithTransaction();
-        dao.delete(dep);
+        service.delete(dep);
         this.id = dep.getId();
-        dao.closeCurrentSessionWithTransaction();
         return SUCCESS;
     }
 
@@ -103,14 +87,6 @@ public class DepartmentAction extends ActionSupport {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    private Department getDepartmentByID(int id){
-        DepartmentDAO dao = new DepartmentDAO();
-        dao.openCurrentSessionWithTransaction();
-        Department department = dao.findById(id);
-        dao.closeCurrentSessionWithTransaction();
-        return department;
     }
 
     public SessionMap<String, Object> getSession() {
