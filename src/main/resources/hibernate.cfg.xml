@@ -19,5 +19,7 @@
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="Models.Department" />
     <mapping class="Models.User" />
+    <mapping class="Models.ContractTemplate" />
+    <mapping class="Models.Payform" />
   </session-factory>
 </hibernate-configuration>
