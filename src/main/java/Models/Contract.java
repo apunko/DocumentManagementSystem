@@ -1,10 +1,6 @@
 package Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -36,8 +32,13 @@ public class Contract {
     @Column(name="User_id")
     private int clientId;
 
+    @Transient
     private ContractTemplate template;
+
+    @Transient
     private User client;
+
+    @Transient
     private PayForm payForm;
 
 

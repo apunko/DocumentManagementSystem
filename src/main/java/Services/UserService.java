@@ -3,6 +3,8 @@ package Services;
 import HibernateDAO.Implementations.UserDao;
 import Models.User;
 
+import java.util.ArrayList;
+
 public class UserService extends GenericService<User> {
 
     public UserService(){
@@ -22,4 +24,11 @@ public class UserService extends GenericService<User> {
         dao.closeCurrentSessionWithTransaction();
         return user;
     }
+
+     public ArrayList<User> getClients(){
+         dao.openCurrentSessionWithTransaction();
+         ArrayList<User> users = ((UserDao)dao).findAllClients();
+         dao.closeCurrentSessionWithTransaction();
+         return users;
+     }
 }

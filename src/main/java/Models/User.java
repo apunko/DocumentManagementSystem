@@ -1,10 +1,6 @@
 package Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="user")
@@ -38,8 +34,9 @@ public class User {
     @Column(name="position")
     private String position;
 
-    @Column(name="Department_id")
-    private int departmentId;
+    @ManyToOne
+    @JoinColumn(name="Department_id")
+    private Department department;
 
     @Column(name="password")
     private String password;
@@ -52,7 +49,6 @@ public class User {
         this.role = role;
         this.experience = experience;
         this.position = position;
-        this.departmentId = departmentId;
     }
 
     public String getPassword() {
@@ -62,14 +58,14 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
+/*
     public int getDepartmentId() {
         return departmentId;
     }
 
     public void setDepartmentId(int departmentId) {
         this.departmentId = departmentId;
-    }
+    }*/
 
     public String getPosition() {
         return position;
@@ -140,5 +136,13 @@ public class User {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

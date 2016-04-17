@@ -7,3 +7,4 @@
 </div>
 <div><a href="<s:url action="departments/index" />">Show Departments</a></div>
 <div><a href="<s:url action="users/index" />">Show Users</a></div>
+<div><a href="<s:url action="contracts/index" />">Show Contracts</a></div>

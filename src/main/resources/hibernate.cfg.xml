@@ -20,7 +20,7 @@
     <mapping class="Models.Department" />
     <mapping class="Models.User" />
     <mapping class="Models.ContractTemplate" />
-    <mapping class="Models.Payform" />
+    <mapping class="Models.PayForm" />
     <mapping class="Models.Contract" />
   </session-factory>
 </hibernate-configuration>

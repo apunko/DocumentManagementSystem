@@ -3,6 +3,8 @@ package HibernateDAO.Implementations;
 import Models.User;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.ArrayList;
+
 public class UserDao extends GenericEntityDao<User> {
 
     public UserDao( ) {
@@ -23,6 +25,13 @@ public class UserDao extends GenericEntityDao<User> {
         return (User)getCurrentSession().createCriteria(User.class)
                 .add(Restrictions.eq( "login", login ))
                 .uniqueResult();
+    }
+
+    public ArrayList<User> findAllClients(){
+        ArrayList<User> clients = (ArrayList<User>) getCurrentSession().createCriteria(User.class)
+                .add(Restrictions.eq( "role", "client" ))
+                .list();
+        return clients;
     }
 
 }

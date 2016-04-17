@@ -210,6 +210,50 @@
         <result name="success" type="tiles">showUser</result>
         <result name="error" type="tiles">error</result>
     </action>
+</package>
+
+    <package name="contracts" namespace="/contracts" extends="struts-default">
+
+        <result-types>
+            <result-type name="tiles"
+                         class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>
+
+        <action name="index"
+                class="Actions.ContractActions"
+                method="index">
+            <interceptor-ref name="defaultStack" />
+            <result name="success" type="tiles">allContracts</result>
+            <result name="error" type="tiles">error</result>
+        </action>
+
+        <action name="new"
+                class="Actions.ContractActions"
+                method="New">
+            <interceptor-ref name="defaultStack" />
+            <result name="success" type="tiles">newContract</result>
+            <result name="error" type="tiles">error</result>
+        </action>
+
+        <action name="create"
+                class="Actions.ContractActions"
+                method="create">
+            <interceptor-ref name="defaultStack" />
+            <result name="success" type="redirectAction">
+                <param name="actionName">${id}</param>
+                <param name="namespace">/contracts</param>
+            </result>
+        </action>
+
+        <action name="{id}"
+                class="Actions.ContractActions"
+                method="show">
+            <param name="id">{1}</param>
+            <interceptor-ref name="defaultStack" />
+            <result name="success" type="tiles">showContract</result>
+            <result name="error" type="tiles">error</result>
+        </action>
+
 
 </package>
 

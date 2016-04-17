@@ -67,4 +67,17 @@
         <put-attribute name="body"   value="/views/users/edit.jsp"/>
     </definition>
 
+    <definition name="newContract" extends="baseLayout">
+        <put-attribute name="title"  value="New Contract"/>
+        <put-attribute name="body"   value="/views/contracts/new.jsp"/>
+    </definition>
+
+    <definition name="allContracts" extends="baseLayout">
+        <put-attribute name="title"  value="All Contracts"/>
+        <put-attribute name="body"   value="/views/contracts/index.jsp"/>
+    </definition>
+
+    <definition name="showContract" extends="showDepartment">
+        <put-attribute name="body"   value="/views/contracts/show.jsp"/>
+    </definition>
 </tiles-definitions>

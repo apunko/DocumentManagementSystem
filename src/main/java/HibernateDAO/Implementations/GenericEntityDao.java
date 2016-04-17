@@ -2,11 +2,8 @@ package HibernateDAO.Implementations;
 
 import HibernateDAO.HibernateUtils;
 import HibernateDAO.Interfaces.IDao;
-import HibernateDAO.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
-import sun.rmi.runtime.Log;
 
 import java.io.Serializable;
 import java.util.List;

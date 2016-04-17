@@ -1,10 +1,8 @@
 package Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Set;
 
 @Entity
 @Table(name="department")
@@ -19,6 +17,9 @@ public class Department {
 
     @Column(name="description")
     private String description;
+
+    @OneToMany(mappedBy="department")
+    private Set<User> employees;
 
     public Department(int id, String name, String description){
         this.id = id;

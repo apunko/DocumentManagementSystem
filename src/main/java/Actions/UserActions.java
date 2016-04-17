@@ -75,7 +75,7 @@ public class UserActions extends ActionSupport implements SessionAware {
         user.setLastName(lastName);
         user.setLogin(login);
         user.setPassword(password);
-        user.setDepartmentId(1);
+        //user.setDepartmentId(1);
         service.create(user);
         if (user.getId() > 0){
             session.put("id", user.getId());
