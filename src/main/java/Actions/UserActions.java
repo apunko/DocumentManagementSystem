@@ -4,11 +4,12 @@ import HibernateDAO.Implementations.UserDao;
 import Models.User;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-public class UserActions extends ActionSupport {
+public class UserActions extends ActionSupport implements SessionAware {
     private int id;
     private String firstName;
     private String lastName;
@@ -35,13 +36,19 @@ public class UserActions extends ActionSupport {
 
     private SessionMap<String, Object> session;
 
+    public SessionMap<String, Object> getSession() {
+        return session;
+    }
+
     public void setSession(Map<String, Object> map) {
         this.session = (SessionMap<String, Object>) map;
     }
 
     public String signIn() {
         UserDao dao = new UserDao();
+        dao.openCurrentSessionWithTransaction();
         User user = dao.findByLoginAndPassword(login, password);
+        dao.closeCurrentSessionWithTransaction();
         if (user != null){
             session.put("id", user.getId());
             session.put("login", user.getLogin());
@@ -62,7 +69,9 @@ public class UserActions extends ActionSupport {
 
     public String signUp(){
         UserDao dao = new UserDao();
+        dao.openCurrentSessionWithTransaction();
         User user = dao.findByLogin(login);
+        dao.closeCurrentSessionWithTransaction();
         if (user != null) {
             return ERROR;
         }
@@ -71,7 +80,10 @@ public class UserActions extends ActionSupport {
         user.setLastName(lastName);
         user.setLogin(login);
         user.setPassword(password);
+        user.setDepartmentId(1);
+        dao.openCurrentSessionWithTransaction();
         dao.persist(user);
+        dao.closeCurrentSessionWithTransaction();
         if (user.getId() > 0){
             session.put("id", user.getId());
             session.put("login", user.getLogin());

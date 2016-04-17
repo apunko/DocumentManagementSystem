@@ -113,6 +113,10 @@ public class DepartmentAction extends ActionSupport {
         return department;
     }
 
+    public SessionMap<String, Object> getSession() {
+        return session;
+    }
+
     private SessionMap<String, Object> session;
 
     public void setSession(Map<String, Object> map) {

@@ -19,12 +19,14 @@
         <default-action-ref name="index" />
 
         <action name="index" class="Actions.ApplicationActions" method="index">
+            <interceptor-ref name="defaultStack" />
             <result type="tiles">main</result>
         </action>
 
         <action name="register"
                 class="Actions.UserActions"
                 method="register">
+            <interceptor-ref name="defaultStack" />
             <result name="success" type="tiles">register</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -32,6 +34,7 @@
         <action name="signUp"
                 class="Actions.UserActions"
                 method="signUp">
+            <interceptor-ref name="defaultStack" />
             <result name="success" type="redirectAction">
                 <param name="actionName">main</param>
                 <param name="namespace">/</param>
@@ -42,6 +45,7 @@
         <action name="signIn"
                 class="Actions.UserActions"
                 method="signIn">
+            <interceptor-ref name="defaultStack" />
             <result name="success" type="redirectAction">
                 <param name="actionName">main</param>
                 <param name="namespace">/</param>
@@ -52,6 +56,7 @@
         <action name="signOut"
                 class="Actions.UserActions"
                 method="signOut">
+            <interceptor-ref name="defaultStack" />
             <result name="success" type="redirectAction">
                 <param name="actionName">main</param>
                 <param name="namespace">/</param>
@@ -75,6 +80,7 @@
         <action name="index"
                 class="Actions.DepartmentAction"
                 method="index">
+            <interceptor-ref name="defaultStack" />
             <result name="success" type="tiles">allDepartments</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -93,6 +99,7 @@
         <action name="create"
                 class="Actions.DepartmentAction"
                 method="create">
+            <interceptor-ref name="defaultStack" />
             <result name="success" type="redirectAction">
                 <param name="actionName">${id}</param>
                 <param name="namespace">/departments</param>
@@ -102,6 +109,7 @@
         <action name="update"
                 class="Actions.DepartmentAction"
                 method="update">
+            <interceptor-ref name="defaultStack" />
             <result name="success" type="redirectAction">
                 <param name="actionName">${id}</param>
                 <param name="namespace">/departments</param>
@@ -112,6 +120,7 @@
                 class="Actions.DepartmentAction"
                 method="delete">
             <param name="id">{1}</param>
+            <interceptor-ref name="defaultStack" />
             <result name="success" type="redirect">
                 <param name="location">/departments/index</param>
             </result>
@@ -119,6 +128,7 @@
 
         <action name="edit/{id}" class="Actions.DepartmentAction" method="edit">
             <param name="id">{1}</param>
+            <interceptor-ref name="defaultStack" />
             <result name="success" type="tiles">editDepartment</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -127,6 +137,7 @@
                 class="Actions.DepartmentAction"
                 method="show">
             <param name="id">{1}</param>
+            <interceptor-ref name="defaultStack" />
             <result name="success" type="tiles">showDepartment</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -142,6 +153,7 @@
     <action name="index"
             class="Actions.UserActions"
             method="index">
+        <interceptor-ref name="defaultStack" />
         <result name="success" type="tiles">allUsers</result>
         <result name="error" type="tiles">error</result>
     </action>
@@ -149,6 +161,7 @@
     <action name="new"
             class="Actions.UserActions"
             method="New">
+        <interceptor-ref name="defaultStack" />
         <result name="success" type="tiles">newUser</result>
         <result name="error" type="tiles">error</result>
     </action>
@@ -156,6 +169,7 @@
     <action name="create"
             class="Actions.UserActions"
             method="create">
+        <interceptor-ref name="defaultStack" />
         <result name="success" type="redirectAction">
             <param name="actionName">${id}</param>
             <param name="namespace">/users</param>
@@ -165,6 +179,7 @@
     <action name="update"
             class="Actions.UserActions"
             method="update">
+        <interceptor-ref name="defaultStack" />
         <result name="success" type="redirectAction">
             <param name="actionName">${id}</param>
             <param name="namespace">/users</param>
@@ -182,6 +197,7 @@
 
     <action name="edit/{id}" class="Actions.UserActions" method="edit">
         <param name="id">{1}</param>
+        <interceptor-ref name="defaultStack" />
         <result name="success" type="tiles">editUser</result>
         <result name="error" type="tiles">error</result>
     </action>
@@ -190,6 +206,7 @@
             class="Actions.UserActions"
             method="show">
         <param name="id">{1}</param>
+        <interceptor-ref name="defaultStack" />
         <result name="success" type="tiles">showUser</result>
         <result name="error" type="tiles">error</result>
     </action>

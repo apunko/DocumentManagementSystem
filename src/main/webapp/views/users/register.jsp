@@ -1,7 +1,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form action="/users/signUp" method="post">
+<form action="/signUp" method="post">
     <label for="firstName">First Name: </label><br/>
     <input type="text" name="firstName"/><br/>
     <label for="lastName">Last Name: </label><br/>
