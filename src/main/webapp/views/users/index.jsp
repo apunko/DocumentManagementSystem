@@ -7,6 +7,7 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>Login</th>
+        <th>Password</th>
         <th>Passport</th>
         <th>Role</th>
         <th>Position</th>
@@ -21,6 +22,7 @@
             <td><s:property value="firstName"/></td>
             <td><s:property value="lastName"/></td>
             <td><s:property value="login"/></td>
+            <td><s:property value="password"/></td>
             <td><s:property value="passport"/></td>
             <td><s:property value="role"/></td>
             <td><s:property value="position"/></td>

@@ -41,6 +41,9 @@ public class User {
     @Column(name="Department_id")
     private int departmentId;
 
+    @Column(name="password")
+    private String password;
+
     public User(){}
 
     public User(int id, String firstName, String lastName, String role, float experience, String position, int departmentId){
@@ -50,6 +53,14 @@ public class User {
         this.experience = experience;
         this.position = position;
         this.departmentId = departmentId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getDepartmentId() {

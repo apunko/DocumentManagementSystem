@@ -6,10 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import HibernateDAO.Implementations.DepartmentDAO;
 import Models.Department;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.dispatcher.SessionMap;
 
 
 public class DepartmentAction extends ActionSupport {
@@ -109,5 +111,11 @@ public class DepartmentAction extends ActionSupport {
         Department department = dao.findById(id);
         dao.closeCurrentSessionWithTransaction();
         return department;
+    }
+
+    private SessionMap<String, Object> session;
+
+    public void setSession(Map<String, Object> map) {
+        this.session = (SessionMap<String, Object>) map;
     }
 }

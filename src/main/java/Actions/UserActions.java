@@ -3,8 +3,10 @@ package Actions;
 import HibernateDAO.Implementations.UserDao;
 import Models.User;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.dispatcher.SessionMap;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class UserActions extends ActionSupport {
     private int id;
@@ -18,23 +20,65 @@ public class UserActions extends ActionSupport {
     private String position;
     private int departmentId;
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    private String password;
+
     private User user;
     private ArrayList<User> users;
 
-    public ArrayList<User> getUsers() {
-        return users;
+    private SessionMap<String, Object> session;
+
+    public void setSession(Map<String, Object> map) {
+        this.session = (SessionMap<String, Object>) map;
     }
 
-    public void setUsers(ArrayList<User> users) {
-        this.users = users;
+    public String signIn() {
+        UserDao dao = new UserDao();
+        User user = dao.findByLoginAndPassword(login, password);
+        if (user != null){
+            session.put("id", user.getId());
+            session.put("login", user.getLogin());
+            session.put("role", user.getRole());
+            return SUCCESS;
+        }
+        return ERROR;
     }
 
-    public User getUser() {
-        return user;
+    public String signOut(){
+        session.invalidate();
+        return SUCCESS;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public String register(){
+        return SUCCESS;
+    }
+
+    public String signUp(){
+        UserDao dao = new UserDao();
+        User user = dao.findByLogin(login);
+        if (user != null) {
+            return ERROR;
+        }
+        user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setLogin(login);
+        user.setPassword(password);
+        dao.persist(user);
+        if (user.getId() > 0){
+            session.put("id", user.getId());
+            session.put("login", user.getLogin());
+            session.put("role", user.getRole());
+            return SUCCESS;
+        }
+        return SUCCESS;
     }
 
     public String New() {
@@ -96,6 +140,22 @@ public class UserActions extends ActionSupport {
         User user = dao.findById(id);
         dao.closeCurrentSessionWithTransaction();
         return user;
+    }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getId() {
