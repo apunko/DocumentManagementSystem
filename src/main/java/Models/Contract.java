@@ -31,10 +31,15 @@ public class Contract {
     private int templateId;
 
     @Column(name="Payform_id")
-    private int payformId;
+    private int payFormId;
 
     @Column(name="User_id")
     private int clientId;
+
+    private ContractTemplate template;
+    private User client;
+    private PayForm payForm;
+
 
     public Contract(){}
 
@@ -86,12 +91,12 @@ public class Contract {
         this.templateId = templateId;
     }
 
-    public int getPayformId() {
-        return payformId;
+    public int getPayFormId() {
+        return payFormId;
     }
 
-    public void setPayformId(int payformId) {
-        this.payformId = payformId;
+    public void setPayFormId(int payformId) {
+        this.payFormId = payformId;
     }
 
     public int getClientId() {
@@ -100,5 +105,29 @@ public class Contract {
 
     public void setClientId(int clientId) {
         this.clientId = clientId;
+    }
+
+    public ContractTemplate getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(ContractTemplate template) {
+        this.template = template;
+    }
+
+    public User getClient() {
+        return client;
+    }
+
+    public void setClient(User client) {
+        this.client = client;
+    }
+
+    public PayForm getPayForm() {
+        return payForm;
+    }
+
+    public void setPayForm(PayForm payform) {
+        this.payForm = payform;
     }
 }

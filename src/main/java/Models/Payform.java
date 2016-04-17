@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="payform")
-public class Payform {
+public class PayForm {
 
     @Id
     @GeneratedValue
@@ -17,7 +17,7 @@ public class Payform {
     @Column(name="type")
     private String type;
 
-    private Payform(){}
+    private PayForm(){}
 
     public int getId() {
         return id;
