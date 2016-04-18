@@ -57,9 +57,9 @@ public class ContractActions extends ActionSupport {
 
         contract.setPayDate(payDate);
         contract.setPaySum(paySum);
-        contract.setTemplateId(templateId);
-        contract.setClientId(clientId);
-        contract.setPayFormId(payFormId);
+        contract.getTemplate().setId(templateId);
+        contract.getClient().setId(clientId);
+        contract.getPayForm().setId(payFormId);
         contract.setStartDate(startDate);
         contract.setEndDate(endDate);
 

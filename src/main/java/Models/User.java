@@ -39,7 +39,7 @@ public class User {
     @JoinColumn(name="Department_id")
     private Department department;
 
-    @OneToMany(mappedBy="user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="client", fetch = FetchType.EAGER)
     private Set<Contract> contracts;
 
     @Column(name="password")

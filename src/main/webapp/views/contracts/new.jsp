@@ -3,11 +3,11 @@
 
 <form action="/contracts/create" method="post">
     <s:select name="payFormType" label="Pay Form:"
-              list="${payFormTypes}" />
+              list="payFormTypes" />
     <s:select name="clientName" label="Client:"
-              list="${clientNames}" />
+              list="clientNames" />
     <s:select name="templateTitle" label="Template:"
-              list="${templateTitles}" />
+              list="templateTitles" />
     <label for="paySum">Pay Sum: </label><br/>
     <input type="number" name="paySum"/><br/>
     <label for="payDate">Pay Date: </label><br/>

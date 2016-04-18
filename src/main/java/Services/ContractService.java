@@ -26,7 +26,7 @@ public class ContractService extends GenericService<Contract> {
         for (PayForm form : payForms) {
             payFormTypes.add(form.getType());
         }
-        return (String[]) payFormTypes.toArray();
+        return payFormTypes.toArray(new String[0]);
     }
 
     public String[] getClientNames(){
@@ -36,7 +36,7 @@ public class ContractService extends GenericService<Contract> {
         for (User client : clients) {
             clientNames.add(client.getFirstName() + client.getLastName());
         }
-        return (String[]) clientNames.toArray();
+        return clientNames.toArray(new String[0]);
     }
 
     public String[] getTemplateTitles(){
@@ -46,6 +46,6 @@ public class ContractService extends GenericService<Contract> {
         for (ContractTemplate template : templates) {
             templateTitles.add(template.getTitle());
         }
-        return (String[]) templateTitles.toArray();
+        return templateTitles.toArray(new String[0]);
     }
 }
