@@ -23,24 +23,19 @@ public class Contract {
     @Column(name="pay_sum")
     private int paySum;
 
-    @Column(name="Template_id")
-    private int templateId;
 
-    @Column(name="Payform_id")
-    private int payFormId;
-
-    @Column(name="User_id")
-    private int clientId;
-
-    @Transient
+    @ManyToOne
+    @JoinColumn(name="Template_id")
     private ContractTemplate template;
 
-    @Transient
-    private User client;
-
-    @Transient
+    @ManyToOne
+    @JoinColumn(name="Payform_id")
     private PayForm payForm;
 
+
+    @ManyToOne
+    @JoinColumn(name="User_id")
+    private User client;
 
     public Contract(){}
 
@@ -82,30 +77,6 @@ public class Contract {
 
     public void setPaySum(int paySum) {
         this.paySum = paySum;
-    }
-
-    public int getTemplateId() {
-        return templateId;
-    }
-
-    public void setTemplateId(int templateId) {
-        this.templateId = templateId;
-    }
-
-    public int getPayFormId() {
-        return payFormId;
-    }
-
-    public void setPayFormId(int payformId) {
-        this.payFormId = payformId;
-    }
-
-    public int getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
     }
 
     public ContractTemplate getTemplate() {

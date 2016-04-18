@@ -3,7 +3,10 @@ package Actions;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
+
 import Models.Department;
+import Models.User;
 import Services.DepartmentService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -15,7 +18,7 @@ public class DepartmentAction extends ActionSupport {
     private String name;
     private String description;
     private ArrayList<Department> departments = new ArrayList<Department>();
-    private Department department = null;
+    private Department department;
     private DepartmentService service = new DepartmentService();
 
     public String show(){

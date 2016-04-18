@@ -1,6 +1,7 @@
 package Models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="user")
@@ -38,6 +39,9 @@ public class User {
     @JoinColumn(name="Department_id")
     private Department department;
 
+    @OneToMany(mappedBy="user", fetch = FetchType.EAGER)
+    private Set<Contract> contracts;
+
     @Column(name="password")
     private String password;
 
@@ -58,14 +62,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-/*
-    public int getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
-    }*/
 
     public String getPosition() {
         return position;
@@ -144,5 +140,13 @@ public class User {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public Set<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(Set<Contract> contracts) {
+        this.contracts = contracts;
     }
 }

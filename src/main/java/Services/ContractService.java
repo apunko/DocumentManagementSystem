@@ -16,7 +16,6 @@ public class ContractService extends GenericService<Contract> {
     @Override
     public Contract getById(int id) {
         Contract contract = super.getById(id);
-        contract = getFullContract(contract);
         return contract;
     }
 
@@ -49,16 +48,4 @@ public class ContractService extends GenericService<Contract> {
         }
         return (String[]) templateTitles.toArray();
     }
-
-    private Contract getFullContract(Contract contract){
-        ContractTemplateService service = new ContractTemplateService();
-        ContractTemplate template = service.getById(contract.getTemplateId());
-        contract.setTemplate(template);
-        PayFormService pfService = new PayFormService();
-        PayForm payForm = pfService.getById(contract.getPayFormId());
-        contract.setPayForm(payForm);
-        return contract;
-    }
-
-
 }

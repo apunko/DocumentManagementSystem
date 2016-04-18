@@ -18,7 +18,7 @@ public class Department {
     @Column(name="description")
     private String description;
 
-    @OneToMany(mappedBy="department")
+    @OneToMany(mappedBy="department", fetch = FetchType.EAGER)
     private Set<User> employees;
 
     public Department(int id, String name, String description){
@@ -34,6 +34,7 @@ public class Department {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -41,13 +42,24 @@ public class Department {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getDescription() {
         return description;
     }
-    public void setFirstName(String description) {
+
+    public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<User> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<User> employees) {
+        this.employees = employees;
     }
 }
