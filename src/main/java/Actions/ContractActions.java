@@ -18,25 +18,18 @@ public class ContractActions extends ActionSupport {
     private Date startDate;
     private Date endDate;
     private int paySum;
-    private int templateId;
+
     private int payFormId;
     private int clientId;
-
-    private ContractTemplate template;
-    private User client;
-    private PayForm payForm;
+    private int templateId;
 
     private ArrayList<Contract> contracts = new ArrayList<Contract>();
     private Contract contract;
     private ContractService service = new ContractService();
 
-    private String[] templateTitles;
-    private String[] clientNames;
-    private String[] payFormTypes;
-
-    private String payFormType;
-    private String clientName;
-    private String templateTitle;
+    private ArrayList<PayForm> payForms;
+    private ArrayList<ContractTemplate> templates;
+    private User[] clients;
 
     public String show(){
         contract = service.getById(id);
@@ -57,9 +50,9 @@ public class ContractActions extends ActionSupport {
 
         contract.setPayDate(payDate);
         contract.setPaySum(paySum);
-        contract.getTemplate().setId(templateId);
-        contract.getClient().setId(clientId);
-        contract.getPayForm().setId(payFormId);
+        contract.setTemplate(service.getTemplateById(templateId));
+        contract.setClient(service.getUserById(clientId));
+        contract.setPayForm(service.getPayFormById(payFormId));
         contract.setStartDate(startDate);
         contract.setEndDate(endDate);
 
@@ -68,11 +61,10 @@ public class ContractActions extends ActionSupport {
         return SUCCESS;
     }
 
-
     public String New() {
-        payFormTypes = service.getPayFormTypes();
-        templateTitles = service.getTemplateTitles();
-        clientNames = service.getClientNames();
+        payForms = service.getPayForms();
+        templates = service.getTemplates();
+        clients = service.getClients();
         return SUCCESS;
     }
 
@@ -88,18 +80,8 @@ public class ContractActions extends ActionSupport {
         return id;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
-    }
-
-    private SessionMap<String, Object> session;
-
-    public SessionMap<String, Object> getSession() {
-        return session;
-    }
-
-    public void setSession(Map<String, Object> map) {
-        this.session = (SessionMap<String, Object>) map;
     }
 
     public Date getPayDate() {
@@ -134,12 +116,44 @@ public class ContractActions extends ActionSupport {
         this.paySum = paySum;
     }
 
-    public int getTemplateId() {
-        return templateId;
+    public ArrayList<Contract> getContracts() {
+        return contracts;
     }
 
-    public void setTemplateId(int templateId) {
-        this.templateId = templateId;
+    public void setContracts(ArrayList<Contract> contracts) {
+        this.contracts = contracts;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
+    }
+
+    public ArrayList<PayForm> getPayForms() {
+        return payForms;
+    }
+
+    public void setPayForms(ArrayList<PayForm> payForms) {
+        this.payForms = payForms;
+    }
+
+    public ArrayList<ContractTemplate> getTemplates() {
+        return templates;
+    }
+
+    public void setTemplates(ArrayList<ContractTemplate> templates) {
+        this.templates = templates;
+    }
+
+    public User[] getClients() {
+        return clients;
+    }
+
+    public void setClients(User[] clients) {
+        this.clients = clients;
     }
 
     public int getPayFormId() {
@@ -158,91 +172,11 @@ public class ContractActions extends ActionSupport {
         this.clientId = clientId;
     }
 
-    public Contract getContract() {
-        return contract;
+    public int getTemplateId() {
+        return templateId;
     }
 
-    public void setContract(Contract contract) {
-        this.contract = contract;
-    }
-
-    public ArrayList<Contract> getContracts() {
-        return contracts;
-    }
-
-    public void setContracts(ArrayList<Contract> contracts) {
-        this.contracts = contracts;
-    }
-
-    public ContractTemplate getTemplate() {
-        return template;
-    }
-
-    public void setTemplate(ContractTemplate template) {
-        this.template = template;
-    }
-
-    public User getClient() {
-        return client;
-    }
-
-    public void setClient(User client) {
-        this.client = client;
-    }
-
-    public PayForm getPayForm() {
-        return payForm;
-    }
-
-    public void setPayForm(PayForm payForm) {
-        this.payForm = payForm;
-    }
-
-    public String[] getTemplateTitles() {
-        return templateTitles;
-    }
-
-    public void setTemplateTitles(String[] templateTitles) {
-        this.templateTitles = templateTitles;
-    }
-
-    public String[] getClientNames() {
-        return clientNames;
-    }
-
-    public void setClientNames(String[] clientNames) {
-        this.clientNames = clientNames;
-    }
-
-    public String[] getPayFormTypes() {
-        return payFormTypes;
-    }
-
-    public void setPayFormTypes(String[] payFormTypes) {
-        this.payFormTypes = payFormTypes;
-    }
-
-    public String getPayFormType() {
-        return payFormType;
-    }
-
-    public void setPayFormType(String payFormType) {
-        this.payFormType = payFormType;
-    }
-
-    public String getClientName() {
-        return clientName;
-    }
-
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public String getTemplateTitle() {
-        return templateTitle;
-    }
-
-    public void setTemplateTitle(String templateTitle) {
-        this.templateTitle = templateTitle;
+    public void setTemplateId(int templateId) {
+        this.templateId = templateId;
     }
 }

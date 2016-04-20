@@ -238,7 +238,6 @@
         <action name="create"
                 class="Actions.ContractActions"
                 method="create">
-            <interceptor-ref name="defaultStack" />
             <result name="success" type="redirectAction">
                 <param name="actionName">${id}</param>
                 <param name="namespace">/contracts</param>

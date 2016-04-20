@@ -19,33 +19,39 @@ public class ContractService extends GenericService<Contract> {
         return contract;
     }
 
-    public String[] getPayFormTypes(){
+    public ArrayList<PayForm> getPayForms(){
         PayFormService pfService = new PayFormService();
         ArrayList<PayForm> payForms = pfService.getAll();
-        ArrayList<String> payFormTypes = new ArrayList<String>();
-        for (PayForm form : payForms) {
-            payFormTypes.add(form.getType());
-        }
-        return payFormTypes.toArray(new String[0]);
+        return payForms;
     }
 
-    public String[] getClientNames(){
+    public User[] getClients(){
         UserService userService = new UserService();
-        ArrayList<User> clients = userService.getClients();
-        ArrayList<String> clientNames = new ArrayList<String>();
-        for (User client : clients) {
-            clientNames.add(client.getFirstName() + client.getLastName());
-        }
-        return clientNames.toArray(new String[0]);
+        User[] clients = userService.getClients();
+        return clients;
     }
 
-    public String[] getTemplateTitles(){
+    public ArrayList<ContractTemplate> getTemplates(){
         ContractTemplateService contractTemplateService = new ContractTemplateService();
         ArrayList<ContractTemplate> templates = contractTemplateService.getAll();
-        ArrayList<String> templateTitles = new ArrayList<String>();
-        for (ContractTemplate template : templates) {
-            templateTitles.add(template.getTitle());
-        }
-        return templateTitles.toArray(new String[0]);
+        return templates;
+    }
+
+    public ContractTemplate getTemplateById(int id){
+        ContractTemplateService contractTemplateService = new ContractTemplateService();
+        ContractTemplate template = contractTemplateService.getById(id);
+        return template;
+    }
+
+    public User getUserById(int id){
+        UserService userService = new UserService();
+        User user = userService.getById(id);
+        return user;
+    }
+
+    public PayForm getPayFormById(int id){
+        PayFormService payFormService = new PayFormService();
+        PayForm payForm = payFormService.getById(id);
+        return payForm;
     }
 }

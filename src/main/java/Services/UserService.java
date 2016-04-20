@@ -25,10 +25,10 @@ public class UserService extends GenericService<User> {
         return user;
     }
 
-     public ArrayList<User> getClients(){
+     public User[] getClients(){
          dao.openCurrentSessionWithTransaction();
          ArrayList<User> users = ((UserDao)dao).findAllClients();
          dao.closeCurrentSessionWithTransaction();
-         return users;
+         return users.toArray(new User[0]);
      }
 }

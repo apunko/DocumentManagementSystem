@@ -2,6 +2,7 @@ package HibernateDAO.Implementations;
 
 import HibernateDAO.HibernateUtils;
 import HibernateDAO.Interfaces.IDao;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -74,7 +75,8 @@ public class GenericEntityDao<T> implements IDao<T> {
     }
 
     public List<T> findAll() {
-        return getCurrentSession().createCriteria(getEntityClass()).list();
+        return getCurrentSession().createCriteria(getEntityClass())
+                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 /*
     @Override

@@ -43,10 +43,6 @@ public class Contract {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public Date getPayDate() {
         return payDate;
     }
