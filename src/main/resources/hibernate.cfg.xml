@@ -22,5 +22,7 @@
     <mapping class="Models.ContractTemplate" />
     <mapping class="Models.PayForm" />
     <mapping class="Models.Contract" />
+    <mapping class="Models.Project" />
+    <mapping class="Models.Work" />
   </session-factory>
 </hibernate-configuration>
