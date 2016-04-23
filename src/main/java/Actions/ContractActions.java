@@ -4,6 +4,7 @@ package Actions;
 import java.util.ArrayList;
 import java.util.Map;
 
+import Actions.Interfaces.CRUD;
 import Models.*;
 import Services.ContractService;
 import Services.DepartmentService;
@@ -11,7 +12,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.dispatcher.SessionMap;
 import java.util.Date;
 
-public class ContractActions extends ActionSupport {
+public class ContractActions extends ActionSupport implements CRUD {
 
     private int id;
     private Date payDate;
@@ -61,7 +62,7 @@ public class ContractActions extends ActionSupport {
         return SUCCESS;
     }
 
-    public String New() {
+    public String add() {
         payForms = service.getPayForms();
         templates = service.getTemplates();
         clients = service.getClients();

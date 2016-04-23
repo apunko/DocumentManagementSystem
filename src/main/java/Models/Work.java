@@ -30,7 +30,8 @@ public class Work {
     @JoinColumn(name="Project_id")
     private Project project;
 
-    @ManyToMany(cascade=CascadeType.ALL, mappedBy="works")
+    @ManyToMany(cascade=CascadeType.MERGE)
+    @JoinTable(name="employee_work", joinColumns=@JoinColumn(name="Work_id"), inverseJoinColumns=@JoinColumn(name="User_id"))
     private Set<User> employees;
 
     public int getId() {

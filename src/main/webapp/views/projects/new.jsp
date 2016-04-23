@@ -3,7 +3,7 @@
 
 <form action="/projects/create" method="post">
     <label for="title">Title: </label><br/>
-    <input type="text" name="name"/><br/>
+    <input type="text" name="title"/><br/>
     <label for="description">Description: </label><br/>
     <input type="text" name="description"/><br/>
     <label for="planEndDate">End Date: </label><br/>

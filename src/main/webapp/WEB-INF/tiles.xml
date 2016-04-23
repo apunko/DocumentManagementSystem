@@ -80,4 +80,32 @@
     <definition name="showContract" extends="showDepartment">
         <put-attribute name="body"   value="/views/contracts/show.jsp"/>
     </definition>
+
+    <definition name="showProject" extends="showDepartment">
+        <put-attribute name="body"   value="/views/projects/show.jsp"/>
+    </definition>
+
+    <definition name="newProject" extends="baseLayout">
+        <put-attribute name="title"  value="New Project"/>
+        <put-attribute name="body"   value="/views/projects/new.jsp"/>
+    </definition>
+
+    <definition name="allProjects" extends="baseLayout">
+        <put-attribute name="title"  value="All Projects"/>
+        <put-attribute name="body"   value="/views/projects/index.jsp"/>
+    </definition>
+
+    <definition name="showWork" extends="showDepartment">
+        <put-attribute name="body"   value="/views/works/show.jsp"/>
+    </definition>
+
+    <definition name="newWork" extends="baseLayout">
+        <put-attribute name="title"  value="New Work"/>
+        <put-attribute name="body"   value="/views/works/new.jsp"/>
+    </definition>
+
+    <definition name="allWorks" extends="baseLayout">
+        <put-attribute name="title"  value="All Works"/>
+        <put-attribute name="body"   value="/views/works/index.jsp"/>
+    </definition>
 </tiles-definitions>

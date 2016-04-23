@@ -27,7 +27,8 @@ public class Project {
     @OneToMany(mappedBy="project", fetch = FetchType.EAGER)
     private Set<Work> works;
 
-    @ManyToMany(cascade=CascadeType.ALL, mappedBy="projects")
+    @ManyToMany(cascade=CascadeType.MERGE)
+    @JoinTable(name="employee_project", joinColumns=@JoinColumn(name="Project_id"), inverseJoinColumns=@JoinColumn(name="User_id"))
     private Set<User> employees;
 
     public int getId() {
@@ -50,7 +51,7 @@ public class Project {
         this.description = description;
     }
 
-    public Date getPlanEndDate() {
+    public Date getPlanEndDate(){
         return planEndDate;
     }
 

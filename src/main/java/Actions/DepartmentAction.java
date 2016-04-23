@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
+import Actions.Interfaces.CRUD;
 import Models.Department;
 import Models.User;
 import Services.DepartmentService;
@@ -12,7 +13,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.dispatcher.SessionMap;
 
 
-public class DepartmentAction extends ActionSupport {
+public class DepartmentAction extends ActionSupport implements CRUD {
 
     private int id;
     private String name;
@@ -56,7 +57,7 @@ public class DepartmentAction extends ActionSupport {
         return SUCCESS;
     }
 
-    public String New() {
+    public String add() {
         return SUCCESS;
     }
 

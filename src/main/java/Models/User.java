@@ -45,12 +45,10 @@ public class User {
     @Column(name="password")
     private String password;
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="employee_project", joinColumns=@JoinColumn(name="User_id"), inverseJoinColumns=@JoinColumn(name="Project_id"))
+    @ManyToMany(cascade=CascadeType.ALL, mappedBy="employees")
     private Set<Project> projects;
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="employee_work", joinColumns=@JoinColumn(name="User_id"), inverseJoinColumns=@JoinColumn(name="Work_id"))
+    @ManyToMany(cascade=CascadeType.ALL, mappedBy="employees")
     private Set<Work> works;
 
     public User(){}

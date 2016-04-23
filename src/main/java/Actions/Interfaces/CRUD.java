@@ -1,7 +1,7 @@
 package Actions.Interfaces;
 
 public interface CRUD {
-    String New();
+    String add();
     String create();
     String show();
     String update();

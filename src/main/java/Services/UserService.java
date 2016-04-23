@@ -2,8 +2,10 @@ package Services;
 
 import HibernateDAO.Implementations.UserDao;
 import Models.User;
+import Models.Work;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class UserService extends GenericService<User> {
 
@@ -31,4 +33,19 @@ public class UserService extends GenericService<User> {
          dao.closeCurrentSessionWithTransaction();
          return users.toArray(new User[0]);
      }
+
+     public ArrayList<User> getEmployees(){
+         dao.openCurrentSessionWithTransaction();
+         ArrayList<User> employees = ((UserDao)dao).findAllEmployees();
+         dao.closeCurrentSessionWithTransaction();
+         return employees;
+     }
+
+    public HashSet<User> getUsersByIds(int[] ids){
+        HashSet<User> users = new HashSet<User>();
+        for (int id: ids) {
+            users.add(this.getById(id));
+        }
+        return users;
+    }
 }

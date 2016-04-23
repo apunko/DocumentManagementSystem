@@ -1,5 +1,6 @@
 package Actions;
 
+import Actions.Interfaces.CRUD;
 import Models.User;
 import Services.UserService;
 import com.opensymphony.xwork2.ActionSupport;
@@ -9,7 +10,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class UserActions extends ActionSupport implements SessionAware {
+public class UserActions extends ActionSupport implements SessionAware, CRUD {
     private int id;
     private String firstName;
     private String lastName;
@@ -86,7 +87,7 @@ public class UserActions extends ActionSupport implements SessionAware {
         return SUCCESS;
     }
 
-    public String New() {
+    public String add() {
         return SUCCESS;
     }
 

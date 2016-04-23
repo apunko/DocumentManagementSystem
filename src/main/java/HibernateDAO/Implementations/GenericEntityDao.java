@@ -76,31 +76,10 @@ public class GenericEntityDao<T> implements IDao<T> {
 
     public List<T> findAll() {
         return getCurrentSession().createCriteria(getEntityClass())
-                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-    }
-/*
-    @Override
-    public void deleteAll() {
-        List<T> entityList = findAll();
-        for (T entity : entityList) {
-            delete(entity);
-        }
+                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+                .list();
     }
 
-    @Override
-    public List<T> getModelListByStringField(String fieldName, String fieldValue) {
-        return getCurrentSession().createCriteria(entityClass)
-                .add(Restrictions.eq(fieldName, fieldValue)).list();
-    }
-
-    @Override
-    public T getModelByUniqueStringField(String fieldName, String fieldValue) {
-        return (T) getCurrentSession().createCriteria(entityClass)
-                .add(Restrictions.eq(fieldName, fieldValue)).uniqueResult();
-    }
-
-*/
-    // GETTERS AND SETTERS
     public Session getCurrentSession() {
         return currentSession;
     }

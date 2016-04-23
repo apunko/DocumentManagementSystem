@@ -8,7 +8,7 @@
         <th>Description</th>
         <th>Plan End date</th>
         <th>Contract Number</th>
-        <th>Works</th>
+        <th>Works Amount</th>
         <th>Edit</th>
     </tr>
     <s:iterator value="projects">
@@ -18,7 +18,7 @@
             <td><s:property value="description"/></td>
             <td><s:property value="planEndDate"/></td>
             <td><s:property value="contract.id"/></td>
-            <td><s:property value="worksTitles"/></td>
+            <td><s:property value="works.size()"/></td>
             <td><a href="edit/${id}">Edit</a></td>
         </tr>
     </s:iterator>

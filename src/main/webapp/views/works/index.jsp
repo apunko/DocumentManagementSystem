@@ -10,7 +10,7 @@
         <th>End date</th>
         <th>Resolved</th>
         <th>Project Title</th>
-        <th>Employees</th>
+        <th>Employees Amount</th>
         <th>Edit</th>
     </tr>
     <s:iterator value="works">
@@ -20,8 +20,9 @@
             <td><s:property value="description"/></td>
             <td><s:property value="startDate"/></td>
             <td><s:property value="endDate"/></td>
-            <td><s:property value="project.getTitle()"/></td>
-            <td><s:property value="employeesNames"/></td>
+            <td><s:property value="resolved"/></td>
+            <td><s:property value="project.title"/></td>
+            <td><s:property value="employees.size()"/></td>
             <td><a href="edit/${id}">Edit</a></td>
         </tr>
     </s:iterator>

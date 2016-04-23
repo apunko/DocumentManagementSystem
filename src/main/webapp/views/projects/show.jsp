@@ -8,6 +8,6 @@
     ${project.title}
 </div>
 <div>
-    ${department.description}
+    ${project.description}
 </div>
 
