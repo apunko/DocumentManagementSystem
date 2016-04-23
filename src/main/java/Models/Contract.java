@@ -2,6 +2,7 @@ package Models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="contract")
@@ -36,6 +37,9 @@ public class Contract {
     @ManyToOne
     @JoinColumn(name="User_id")
     private User client;
+
+    @OneToMany(mappedBy="contract", fetch = FetchType.EAGER)
+    private Set<Project> projects;
 
     public Contract(){}
 
@@ -97,5 +101,13 @@ public class Contract {
 
     public void setPayForm(PayForm payform) {
         this.payForm = payform;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 }

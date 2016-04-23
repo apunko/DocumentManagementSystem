@@ -45,6 +45,14 @@ public class User {
     @Column(name="password")
     private String password;
 
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="employee_project", joinColumns=@JoinColumn(name="User_id"), inverseJoinColumns=@JoinColumn(name="Project_id"))
+    private Set<Project> projects;
+
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="employee_work", joinColumns=@JoinColumn(name="User_id"), inverseJoinColumns=@JoinColumn(name="Work_id"))
+    private Set<Work> works;
+
     public User(){}
 
     public User(int id, String firstName, String lastName, String role, float experience, String position, int departmentId){
@@ -122,9 +130,6 @@ public class User {
     public int getId() {
         return id;
     }
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getFirstName(){
         return firstName;
@@ -148,5 +153,21 @@ public class User {
 
     public void setContracts(Set<Contract> contracts) {
         this.contracts = contracts;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
+
+    public Set<Work> getWorks() {
+        return works;
+    }
+
+    public void setWorks(Set<Work> works) {
+        this.works = works;
     }
 }
