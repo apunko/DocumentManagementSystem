@@ -9,11 +9,15 @@
 </s:if>
 <s:else>
     <a href="/register" />Register</a> or Sign In:
-    <form action="/signIn" method="post">
-        <label for="login">Login: </label><br/>
-        <input type="text" name="login"/><br/>
-        <label for="password">Password: </label><br/>
-        <input type="password" name="password"/><br/>
-        <input type="submit" value="Sign In"/>
+    <form action="/signIn" class="form-inline" method="post">
+        <div class="form-group">
+            <label for="login">Login: </label>
+            <input class="form-control" type="text" name="login"/>
+        </div>
+        <div class="form-group">
+            <label for="password">Password: </label>
+            <input class="form-control" type="password" name="password"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Sign In</button>
     </form>
 </s:else>
