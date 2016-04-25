@@ -19,7 +19,6 @@
         <tiles:insertAttribute name="header" /><br/>
         <hr/>
         <tiles:insertAttribute name="navigation" /><br/>
-        <hr/>
         <s:actionerror theme="bootstrap"/>
         <s:actionmessage theme="bootstrap"/>
         <s:fielderror theme="bootstrap"/>

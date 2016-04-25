@@ -1,8 +1,9 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<h1>The Document Management System.</h1>
-
+<div class="page-header">
+    <h1>The Document Management System.</h1>
+</div>
 <s:if test="session.containsKey('fullName')">
     <div>
         <div class="col-xs-10">
