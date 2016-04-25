@@ -17,6 +17,10 @@ public class ApplicationActions  extends ActionSupport implements SessionAware {
         return SUCCESS;
     }
 
+    public String error(){
+        return SUCCESS;
+    }
+
     public String getMainInf() {
         return mainInf;
     }

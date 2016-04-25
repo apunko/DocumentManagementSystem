@@ -23,6 +23,11 @@
         <s:actionerror theme="bootstrap"/>
         <s:actionmessage theme="bootstrap"/>
         <s:fielderror theme="bootstrap"/>
+        <s:if test="%{#request['error'] != null}">
+            <div class="alert alert-warning">
+                <s:property value="#request['error']" />
+            </div>
+        </s:if>
         <tiles:insertAttribute name="body" /><br/>
         <hr/>
         <tiles:insertAttribute name="footer" /><br/>

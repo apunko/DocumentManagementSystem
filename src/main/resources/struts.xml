@@ -81,6 +81,9 @@
                 class="Actions.DepartmentAction"
                 method="index">
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="tiles">allDepartments</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -89,9 +92,9 @@
                 class="Actions.DepartmentAction"
                 method="add">
             <interceptor-ref name="defaultStack" />
-            <!--<interceptor-ref name="roleInterceptor">
-                <param name="allowedRoles">admin,doctor,client</param>
-            </interceptor-ref>-->
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="tiles">newDepartment</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -100,6 +103,9 @@
                 class="Actions.DepartmentAction"
                 method="create">
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="redirectAction">
                 <param name="actionName">${id}</param>
                 <param name="namespace">/departments</param>
@@ -110,6 +116,9 @@
                 class="Actions.DepartmentAction"
                 method="update">
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="redirectAction">
                 <param name="actionName">${id}</param>
                 <param name="namespace">/departments</param>
@@ -120,6 +129,9 @@
                 class="Actions.DepartmentAction"
                 method="delete">
             <param name="id">{1}</param>
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <interceptor-ref name="defaultStack" />
             <result name="success" type="redirect">
                 <param name="location">/departments/index</param>
@@ -129,6 +141,9 @@
         <action name="edit/{id}" class="Actions.DepartmentAction" method="edit">
             <param name="id">{1}</param>
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="tiles">editDepartment</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -138,6 +153,9 @@
                 method="show">
             <param name="id">{1}</param>
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="tiles">showDepartment</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -149,6 +167,10 @@
             <result-type name="tiles"
                          class="org.apache.struts2.views.tiles.TilesResult" />
         </result-types>
+
+        <interceptors>
+            <interceptor name="roleInterceptor" class="Interceptors.RoleInterceptor"/>
+        </interceptors>
 
         <action name="index"
                 class="Actions.UserActions"
@@ -162,6 +184,9 @@
                 class="Actions.UserActions"
                 method="add">
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="tiles">newUser</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -170,6 +195,9 @@
                 class="Actions.UserActions"
                 method="create">
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="redirectAction">
                 <param name="actionName">${id}</param>
                 <param name="namespace">/users</param>
@@ -181,6 +209,9 @@
                 class="Actions.UserActions"
                 method="update">
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="redirectAction">
                 <param name="actionName">${id}</param>
                 <param name="namespace">/users</param>
@@ -192,6 +223,10 @@
                 class="Actions.UserActions"
                 method="delete">
             <param name="id">{1}</param>
+            <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="redirect">
                 <param name="location">/users/index</param>
             </result>
@@ -201,6 +236,9 @@
         <action name="edit/{id}" class="Actions.UserActions" method="edit">
             <param name="id">{1}</param>
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="tiles">editUser</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -222,10 +260,17 @@
                          class="org.apache.struts2.views.tiles.TilesResult" />
         </result-types>
 
+        <interceptors>
+            <interceptor name="roleInterceptor" class="Interceptors.RoleInterceptor"/>
+        </interceptors>
+
         <action name="index"
                 class="Actions.ContractActions"
                 method="index">
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="tiles">allContracts</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -234,6 +279,9 @@
                 class="Actions.ContractActions"
                 method="add">
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="tiles">newContract</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -241,6 +289,10 @@
         <action name="create"
                 class="Actions.ContractActions"
                 method="create">
+            <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="redirectAction">
                 <param name="actionName">${id}</param>
                 <param name="namespace">/contracts</param>
@@ -265,10 +317,17 @@
                          class="org.apache.struts2.views.tiles.TilesResult" />
         </result-types>
 
+        <interceptors>
+            <interceptor name="roleInterceptor" class="Interceptors.RoleInterceptor"/>
+        </interceptors>
+
         <action name="index"
                 class="Actions.ProjectActions"
                 method="index">
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="tiles">allProjects</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -284,6 +343,10 @@
         <action name="create"
                 class="Actions.ProjectActions"
                 method="create">
+            <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="redirectAction">
                 <param name="actionName">${id}</param>
                 <param name="namespace">/projects</param>
@@ -296,6 +359,9 @@
                 method="show">
             <param name="id">{1}</param>
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="tiles">showProject</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -308,10 +374,17 @@
                          class="org.apache.struts2.views.tiles.TilesResult" />
         </result-types>
 
+        <interceptors>
+            <interceptor name="roleInterceptor" class="Interceptors.RoleInterceptor"/>
+        </interceptors>
+
         <action name="index"
                 class="Actions.WorkActions"
                 method="index">
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="tiles">allWorks</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -320,6 +393,9 @@
                 class="Actions.WorkActions"
                 method="add">
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="tiles">newWork</result>
             <result name="error" type="tiles">error</result>
         </action>
@@ -327,6 +403,10 @@
         <action name="create"
                 class="Actions.WorkActions"
                 method="create">
+            <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="redirectAction">
                 <param name="actionName">${id}</param>
                 <param name="namespace">/works</param>
@@ -339,6 +419,9 @@
                 method="show">
             <param name="id">{1}</param>
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
             <result name="success" type="tiles">showWork</result>
             <result name="error" type="tiles">error</result>
         </action>

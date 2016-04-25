@@ -11,9 +11,10 @@ import Models.User;
 import Services.DepartmentService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
 
 
-public class DepartmentAction extends ActionSupport implements CRUD {
+public class DepartmentAction extends ActionSupport implements CRUD, SessionAware {
 
     private int id;
     private String name;

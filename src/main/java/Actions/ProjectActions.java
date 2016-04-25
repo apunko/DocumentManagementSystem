@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
-public class ProjectActions extends ActionSupport implements CRUD {
+public class ProjectActions extends ActionSupport implements CRUD, SessionAware {
 
     private int id;
     private String title;
@@ -146,5 +146,15 @@ public class ProjectActions extends ActionSupport implements CRUD {
 
     public void setEmployeeIds(int[] employeeIds) {
         this.employeeIds = employeeIds;
+    }
+
+    public SessionMap<String, Object> getSession() {
+        return session;
+    }
+
+    private SessionMap<String, Object> session;
+
+    public void setSession(Map<String, Object> map) {
+        this.session = (SessionMap<String, Object>) map;
     }
 }

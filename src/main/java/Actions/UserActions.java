@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class UserActions extends ActionSupport implements SessionAware, CRUD {
+
     private int id;
     private String firstName;
     private String lastName;
@@ -49,9 +50,7 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD {
     public String signIn() {
         User user = service.getByLoginAndPassword(login, password);
         if (user != null){
-            session.put("id", user.getId());
-            session.put("login", user.getLogin());
-            session.put("role", user.getRole());
+            setSessionInformation(user);
             return SUCCESS;
         }
         return ERROR;
@@ -79,9 +78,7 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD {
         //user.setDepartmentId(1);
         service.create(user);
         if (user.getId() > 0){
-            session.put("id", user.getId());
-            session.put("login", user.getLogin());
-            session.put("role", user.getRole());
+            setSessionInformation(user);
             return SUCCESS;
         }
         return SUCCESS;
@@ -101,7 +98,7 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD {
     }
 
     public String index() {
-        users = (ArrayList<User>) service.getAll();
+        users = service.getAll();
         return SUCCESS;
     }
 
@@ -126,6 +123,13 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD {
         service.delete(user);
         this.id = user.getId();
         return SUCCESS;
+    }
+
+    private void setSessionInformation(User user){
+        session.put("id", user.getId());
+        session.put("login", user.getLogin());
+        session.put("role", user.getRole());
+        session.put("fullName", user.getFirstName() + " " + user.getLastName());
     }
 
     public ArrayList<User> getUsers() {

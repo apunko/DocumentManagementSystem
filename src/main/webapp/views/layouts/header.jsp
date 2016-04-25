@@ -1,11 +1,17 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div>The Document Management System.</div>
+<h1>The Document Management System.</h1>
 
-<s:if test="session.containsKey('login')">
-    <div>${session.get('login')}</div>
-    <a href="/signOut" /> Sign Out</a>
+<s:if test="session.containsKey('fullName')">
+    <div>
+        <div class="col-xs-10">
+            Welcome, ${session.get('fullName')}!
+        </div>
+        <div class="col-xs-2">
+            <a href="/signOut" />Sign Out</a>
+        </div>
+    </div>
 </s:if>
 <s:else>
     <a href="/register" />Register</a> or Sign In:

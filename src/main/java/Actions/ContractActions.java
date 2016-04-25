@@ -10,9 +10,11 @@ import Services.ContractService;
 import Services.DepartmentService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
+
 import java.util.Date;
 
-public class ContractActions extends ActionSupport implements CRUD {
+public class ContractActions extends ActionSupport implements CRUD, SessionAware {
 
     private int id;
     private Date payDate;
@@ -179,5 +181,15 @@ public class ContractActions extends ActionSupport implements CRUD {
 
     public void setTemplateId(int templateId) {
         this.templateId = templateId;
+    }
+
+    public SessionMap<String, Object> getSession() {
+        return session;
+    }
+
+    private SessionMap<String, Object> session;
+
+    public void setSession(Map<String, Object> map) {
+        this.session = (SessionMap<String, Object>) map;
     }
 }

@@ -12,7 +12,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
-public class WorkActions extends ActionSupport implements CRUD {
+public class WorkActions extends ActionSupport implements CRUD, SessionAware {
 
     private int id;
     private String title;
@@ -28,12 +28,14 @@ public class WorkActions extends ActionSupport implements CRUD {
     private ArrayList<Work> works;
     private ArrayList<Project> projects;
     private WorkService service = new WorkService();
+    private String errorMessage;
 
     public String index() {
         try {
             works = service.getAll();
         }
         catch (Exception e){
+            errorMessage = e.getMessage();
             return ERROR;
         }
         return SUCCESS;
@@ -45,6 +47,7 @@ public class WorkActions extends ActionSupport implements CRUD {
             employees = service.getEmployees();
         }
         catch (Exception e) {
+            errorMessage = e.getMessage();
             return  ERROR;
         }
         return SUCCESS;
@@ -65,6 +68,7 @@ public class WorkActions extends ActionSupport implements CRUD {
             this.id = work.getId();
         }
         catch (Exception e){
+            errorMessage = e.getMessage();
             return ERROR;
         }
         return SUCCESS;
@@ -75,6 +79,7 @@ public class WorkActions extends ActionSupport implements CRUD {
             work = service.getById(id);
         }
         catch (Exception e){
+            errorMessage = e.getMessage();
             return ERROR;
         }
         return SUCCESS;
@@ -194,5 +199,23 @@ public class WorkActions extends ActionSupport implements CRUD {
 
     public void setProjects(ArrayList<Project> projects) {
         this.projects = projects;
+    }
+
+    public SessionMap<String, Object> getSession() {
+        return session;
+    }
+
+    private SessionMap<String, Object> session;
+
+    public void setSession(Map<String, Object> map) {
+        this.session = (SessionMap<String, Object>) map;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }
