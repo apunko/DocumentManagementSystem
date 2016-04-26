@@ -1,6 +1,10 @@
 package Models;
 
+import Services.UtilsService;
+
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
@@ -40,6 +44,10 @@ public class Contract {
 
     @OneToMany(mappedBy="contract", fetch = FetchType.EAGER)
     private Set<Project> projects;
+
+    private String stringStartDate;
+    private String stringEndDate;
+    private String stringPayDate;
 
     public Contract(){}
 
@@ -109,5 +117,17 @@ public class Contract {
 
     public void setProjects(Set<Project> projects) {
         this.projects = projects;
+    }
+
+    public String getStringStartDate() {
+        return UtilsService.getDateFormat().format(startDate);
+    }
+
+    public String getStringEndDate() {
+        return UtilsService.getDateFormat().format(endDate);
+    }
+
+    public String getStringPayDate() {
+        return UtilsService.getDateFormat().format(payDate);
     }
 }

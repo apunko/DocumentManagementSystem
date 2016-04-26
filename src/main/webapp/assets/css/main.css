@@ -1,7 +1,13 @@
 body {
     overflow-x: hidden;
+    padding-bottom: 30px;
 }
 
-div.container {
+div.footerText {
     margin-bottom: 20px;
+    text-align: right;
+}
+
+.smallInput {
+    width : 250px;
 }

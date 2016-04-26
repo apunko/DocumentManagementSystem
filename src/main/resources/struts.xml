@@ -305,6 +305,9 @@
                 method="show">
             <param name="id">{1}</param>
             <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager,client</param>
+            </interceptor-ref>
             <result name="success" type="tiles">showContract</result>
             <result name="error" type="tiles">error</result>
         </action>

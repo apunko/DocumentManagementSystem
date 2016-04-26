@@ -1,7 +1,6 @@
 <div class="navbar-fixed-bottom">
     <div class="navbar-inner">
-        <hr/>
-        <div class="container">
+        <div class="container footerText">
             Developed by Anton Punko.
         </div>
     </div>

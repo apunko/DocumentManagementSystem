@@ -17,6 +17,8 @@ public class User {
     @Column(name="last_name")
     private String lastName;
 
+    private String fullName;
+
     @Column(name="email")
     private String email;
 
@@ -167,5 +169,9 @@ public class User {
 
     public void setWorks(Set<Work> works) {
         this.works = works;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 }
