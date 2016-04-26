@@ -18,9 +18,9 @@
 <body>
 <div class="row">
     <div class="col-xs-10 col-xs-offset-1">
-        <tiles:insertAttribute name="header" /><br/>
+        <tiles:insertAttribute name="header" />
         <hr/>
-        <tiles:insertAttribute name="navigation" /><br/>
+        <tiles:insertAttribute name="navigation" />
         <s:actionerror theme="bootstrap"/>
         <s:actionmessage theme="bootstrap"/>
         <s:fielderror theme="bootstrap"/>
@@ -29,8 +29,8 @@
                 <s:property value="#request['error']" />
             </div>
         </s:if>
-        <tiles:insertAttribute name="body" /><br/>
-        <tiles:insertAttribute name="footer" /><br/>
+        <tiles:insertAttribute name="body" />
+        <tiles:insertAttribute name="footer" />
     </div>
 </div>
 </body>

@@ -11,3 +11,9 @@ div.footerText {
 .smallInput {
     width : 250px;
 }
+
+.multiline
+{
+    padding:20px;
+    white-space: pre;
+}

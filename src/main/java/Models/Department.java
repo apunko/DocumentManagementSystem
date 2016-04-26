@@ -21,15 +21,7 @@ public class Department {
     @OneToMany(mappedBy="department", fetch = FetchType.EAGER)
     private Set<User> employees;
 
-    public Department(int id, String name, String description){
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
-
-    public Department(){
-
-    }
+    public Department(){}
 
     public int getId() {
         return id;

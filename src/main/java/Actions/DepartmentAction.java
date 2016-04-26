@@ -38,21 +38,25 @@ public class DepartmentAction extends ActionSupport implements CRUD, SessionAwar
     }
 
     public String create(){
-        Department dep = new Department(id, name, description);
-        service.create(dep);
-        this.id = dep.getId();
+        Department department = new Department();
+        department.setName(name);
+        department.setDescription(description);
+        service.create(department);
+        this.id = department.getId();
         return SUCCESS;
     }
 
     public String update(){
-        Department dep = new Department(id, name, description);
-        service.update(dep);
-        this.id = dep.getId();
+        Department department = service.getById(id);
+        department.setName(name);
+        department.setDescription(description);
+        service.update(department);
+        this.id = department.getId();
         return SUCCESS;
     }
 
     public String delete(){
-        Department dep = new Department(id, name, description);
+        Department dep = service.getById(id);
         service.delete(dep);
         this.id = dep.getId();
         return SUCCESS;

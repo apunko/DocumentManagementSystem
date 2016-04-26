@@ -1,23 +1,27 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<table border="1">
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    <s:iterator value="departments">
+<table class="table table-bordered">
+    <thead>
         <tr>
-            <td><s:property value="id"/></td>
-            <td><s:property value="name"/></td>
-            <td><s:property value="description"/></td>
-            <td><a href="edit/${id}">Edit</a></td>
-            <td><a href="delete/${id}" methods="delete">Delete</a></td>
+            <th>Name</th>
+            <th>People amount</th>
+            <th>View</th>
+            <th>Edit</th>
         </tr>
-    </s:iterator>
+    </thead>
+    <tbody>
+        <s:iterator value="departments">
+            <tr>
+                <td><s:property value="name"/></td>
+                <td><s:property value="employees.size()"/></td>
+                <td><a href="${id}">View</a></td>
+                <td><a href="edit/${id}">Edit</a></td>
+            </tr>
+        </s:iterator>
+    </tbody>
 </table>
-<a href="<s:url action="new" />">New</a>
+<div>
+    <a href="<s:url action="new" />">Add new Department</a>
+</div>
 

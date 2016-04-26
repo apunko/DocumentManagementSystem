@@ -17,5 +17,5 @@
     <input class="form-control smallInput newDateInput" type="date" name="startDate"/><br/>
     <label for="endDate">Enter end date: </label>
     <input class="form-control smallInput newDateInput" type="date" name="endDate"/><br/>
-    <s:submit cssClass="btn" value="Create"/>
+    <s:submit cssClass="btn btn-block btn-primary" value="Create"/>
 </s:form>
