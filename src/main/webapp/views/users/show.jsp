@@ -1,13 +1,25 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <div>
-    ${user.id}
+    <h2>
+        <s:property value="user.firstName" /> <s:property value="user.lastName" />
+    </h2>
 </div>
-<div>
-    ${user.firstName}
+<div class="col-xs-6">
+    <h3>My projects</h3>
+    <ul>
+        <s:iterator value="user.projects">
+            <li><a href="/projects/<s:property value='id' />" ><s:property value="title" /></a></li>
+        </s:iterator>
+    </ul>
 </div>
-<div>
-    ${user.lastName}
+<div class="col-xs-6">
+    <h3>My works</h3>
+    <ul>
+        <s:iterator value="user.works">
+            <li><a href="/works/<s:property value='id' />" ><s:property value="title" /></a></li>
+        </s:iterator>
+    </ul>
 </div>
 

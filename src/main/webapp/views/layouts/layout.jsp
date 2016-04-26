@@ -12,10 +12,12 @@
     </title>
     <script type="text/javascript" src="/assets/js/jquery-2.2.3.min.js"></script>
     <sb:head/>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
 </head>
 <body>
 <div class="row">
-    <div class="col-xs-11 col-xs-offset-1">
+    <div class="col-xs-10 col-xs-offset-1">
         <tiles:insertAttribute name="header" /><br/>
         <hr/>
         <tiles:insertAttribute name="navigation" /><br/>
@@ -28,7 +30,6 @@
             </div>
         </s:if>
         <tiles:insertAttribute name="body" /><br/>
-        <hr/>
         <tiles:insertAttribute name="footer" /><br/>
     </div>
 </div>

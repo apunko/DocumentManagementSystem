@@ -45,10 +45,10 @@ public class User {
     @Column(name="password")
     private String password;
 
-    @ManyToMany(cascade=CascadeType.ALL, mappedBy="employees")
+    @ManyToMany(cascade=CascadeType.ALL, mappedBy="employees", fetch = FetchType.EAGER)
     private Set<Project> projects;
 
-    @ManyToMany(cascade=CascadeType.ALL, mappedBy="employees")
+    @ManyToMany(cascade=CascadeType.ALL, mappedBy="employees", fetch = FetchType.EAGER)
     private Set<Work> works;
 
     public User(){}
