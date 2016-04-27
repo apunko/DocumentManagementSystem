@@ -4,17 +4,7 @@
 <div class="page-header">
     <h1>The Document Management System.</h1>
 </div>
-<s:if test="session.containsKey('fullName')">
-    <div>
-        <div class="col-xs-10">
-            Welcome, ${session.get('fullName')}!
-        </div>
-        <div class="col-xs-2">
-            <a href="/signOut" />Sign Out</a>
-        </div>
-    </div>
-</s:if>
-<s:else>
+<s:if test="!session.containsKey('fullName')">
     <a href="/register" />Register</a> or Sign In:
     <form action="/signIn" class="form-inline" method="post">
         <div class="form-group">
@@ -27,4 +17,5 @@
         </div>
         <button class="btn btn-primary" type="submit">Sign In</button>
     </form>
-</s:else>
+    <br/>
+</s:if>

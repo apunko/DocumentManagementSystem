@@ -17,3 +17,7 @@ div.footerText {
     padding:20px;
     white-space: pre;
 }
+
+.nav.navbar-nav li a {
+    color: #337ab7;
+}

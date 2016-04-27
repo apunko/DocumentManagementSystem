@@ -1,6 +1,6 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default nav-justified" role="navigation">
     <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
             <li role="presentation"><a href="/index" >Main</a></li>
@@ -13,6 +13,12 @@
                     <li role="presentation"><a href="/departments/index">Departments</a></li>
                     <li role="presentation"><a href="/users/index">Users</a></li>
                 </s:if>
+            </s:if>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <s:if test="session.containsKey('role')">
+                <li class="navbar-brand">Welcome, ${session.get('fullName')}!</li>
+                <li><a href="/signOut">Sign Out</a></li>
             </s:if>
         </ul>
     </div>
