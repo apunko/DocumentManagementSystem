@@ -90,6 +90,10 @@
         <put-attribute name="body"   value="/views/projects/new.jsp"/>
     </definition>
 
+    <definition name="editProject" extends="editDepartment">
+        <put-attribute name="body"   value="/views/projects/edit.jsp"/>
+    </definition>
+
     <definition name="allProjects" extends="baseLayout">
         <put-attribute name="title"  value="All Projects"/>
         <put-attribute name="body"   value="/views/projects/index.jsp"/>

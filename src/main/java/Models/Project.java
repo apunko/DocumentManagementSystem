@@ -1,6 +1,9 @@
 package Models;
 
+import Services.UtilsService;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 
@@ -27,9 +30,13 @@ public class Project {
     @OneToMany(mappedBy="project", fetch = FetchType.EAGER)
     private Set<Work> works;
 
-    @ManyToMany(cascade=CascadeType.MERGE)
+    @ManyToMany(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name="employee_project", joinColumns=@JoinColumn(name="Project_id"), inverseJoinColumns=@JoinColumn(name="User_id"))
     private Set<User> employees;
+
+    private String stringPlanEndDate;
+
+    private ArrayList<String> employeesFullNames;
 
     public int getId() {
         return id;
@@ -81,6 +88,18 @@ public class Project {
 
     public void setEmployees(Set<User> employees) {
         this.employees = employees;
+    }
+
+    public String getStringPlanEndDate() {
+        return UtilsService.getDateFormat().format(planEndDate);
+    }
+
+    public ArrayList<String> getEmployeesFullNames() {
+        ArrayList<String> list = new ArrayList<String>();
+        for (User employee : employees) {
+            list.add(employee.getFullName());
+        }
+        return list;
     }
 }
 

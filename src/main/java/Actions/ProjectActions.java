@@ -26,7 +26,7 @@ public class ProjectActions extends ActionSupport implements CRUD, SessionAware 
     private ArrayList<User> employees;
     private ProjectService service = new ProjectService();
     private Project project;
-
+    private ArrayList<String> employeesFullNames;
     public String add() {
         contracts = service.getContracts();
         employees = service.getEmployees();
@@ -57,7 +57,15 @@ public class ProjectActions extends ActionSupport implements CRUD, SessionAware 
     }
 
     public String update() {
-        throw new UnsupportedOperationException("You cannot edit project now");
+        Project oldProject = service.getById(id);
+        oldProject.setTitle(title);
+        oldProject.setDescription(description);
+        oldProject.setPlanEndDate(planEndDate);
+        oldProject.setContract(service.getContractById(contractId));
+        oldProject.setEmployees(service.getEmployeesByIds(employeeIds));
+        service.update(oldProject);
+        this.id = oldProject.getId();
+        return SUCCESS;
     }
 
     public String delete() {
@@ -65,7 +73,12 @@ public class ProjectActions extends ActionSupport implements CRUD, SessionAware 
     }
 
     public String edit() {
-        throw new UnsupportedOperationException("You cannot edit project now");
+        project = service.getById(id);
+        contracts = service.getContracts();
+        employees = service.getEmployees();
+        contractId = project.getContract().getId();
+        employeesFullNames = project.getEmployeesFullNames();
+        return SUCCESS;
     }
 
     public Project getProject() {
@@ -156,5 +169,13 @@ public class ProjectActions extends ActionSupport implements CRUD, SessionAware 
 
     public void setSession(Map<String, Object> map) {
         this.session = (SessionMap<String, Object>) map;
+    }
+
+    public ArrayList<String> getEmployeesFullNames() {
+        return employeesFullNames;
+    }
+
+    public void setEmployeesFullNames(ArrayList<String> employeesFullNames) {
+        this.employeesFullNames = employeesFullNames;
     }
 }
