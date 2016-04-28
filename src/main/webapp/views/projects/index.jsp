@@ -1,28 +1,33 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<table border="1">
+<table class="table table-bordered">
+    <thead>
     <tr>
-        <th>Id</th>
         <th>Title</th>
-        <th>Description</th>
-        <th>Plan End date</th>
-        <th>Contract Number</th>
-        <th>Works Amount</th>
+        <th>On contract</th>
+        <th>Works amount</th>
+        <th>Employees amount</th>
+        <th>Plan end date</th>
+        <th>View</th>
         <th>Edit</th>
     </tr>
-    <s:iterator value="projects">
-        <tr>
-            <td><s:property value="id"/></td>
-            <td><s:property value="title"/></td>
-            <td><s:property value="description"/></td>
-            <td><s:property value="planEndDate"/></td>
-            <td><s:property value="contract.id"/></td>
-            <td><s:property value="works.size()"/></td>
-            <td><a href="edit/${id}">Edit</a></td>
-        </tr>
-    </s:iterator>
+    </thead>
+    <tbody>
+        <s:iterator value="projects" var="project">
+            <tr>
+                <td><s:property value="title"/></td>
+                <td><a href="/contracts/${project.contract.id}">&#8470;${project.contract.id}</a></td>
+                <td><s:property value="works.size()"/></td>
+                <td><s:property value="employees.size()"/></td>
+                <td><s:property value="stringPlanEndDate"/></td>
+                <td><a href="${id}">View</a></td>
+                <td><a href="edit/${id}">Edit</a></td>
+            </tr>
+        </s:iterator>
+    </tbody>
 </table>
-<a href="<s:url action="new" />">Add new project</a>
-
+<div>
+    <a href="<s:url action="new" />">Add new Project</a>
+</div>
 

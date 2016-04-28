@@ -27,7 +27,7 @@
         <s:fielderror theme="bootstrap"/>
         <s:if test="%{#request['error'] != null}">
             <div class="alert alert-warning">
-                <s:property value="#request['error']" />
+                ${request['error']}
             </div>
         </s:if>
         <tiles:insertAttribute name="body" />
