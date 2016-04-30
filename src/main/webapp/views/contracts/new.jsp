@@ -9,13 +9,13 @@
     <s:select name="templateId" listKey="Id" label="Choose template for contract:"
               list="templates" listValue="Title"/>
     </br>
-    <label for="paySum">Enter contract sum: </label>
+    <label>Enter contract sum: </label>
     <input class="form-control smallInput" type="number" name="paySum" value="1000"/><br/>
-    <label for="payDate">Enter pay date: </label>
+    <label>Enter pay date: </label>
     <input class="form-control smallInput newDateInput" type="date" name="payDate"/><br/>
-    <label for="startDate">Enter start date: </label>
+    <label>Enter start date: </label>
     <input class="form-control smallInput newDateInput" type="date" name="startDate"/><br/>
-    <label for="endDate">Enter end date: </label>
+    <label>Enter end date: </label>
     <input class="form-control smallInput newDateInput" type="date" name="endDate"/><br/>
     <s:submit cssClass="btn btn-block btn-primary" value="Create"/>
 </s:form>

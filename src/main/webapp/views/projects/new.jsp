@@ -2,10 +2,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <s:form action="create" theme="bootstrap" method="post">
-    <label for="title">Title: </label><br/>
+    <label>Title: </label><br/>
     <input type="text"  class="form-control"  name="title"/><br/>
+    <label>Description: </label><br/>
+    <textarea class="form-control" rows="5" name="description"></textarea><br/>
     <div class="col-xs-4">
-        <label for="planEndDate">Plan end of project: </label><br/>
+        <label>Plan end of project: </label><br/>
         <input type="date" class="form-control smallInput newDateInput" name="planEndDate"/><br/>
     </div>
     <div class="col-xs-4">
