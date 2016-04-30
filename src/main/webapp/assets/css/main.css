@@ -22,3 +22,8 @@ div.footerText {
 .nav.navbar-nav li a {
     color: #337ab7;
 }
+
+div.text-primary {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
