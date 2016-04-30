@@ -428,6 +428,30 @@
             <result name="error" type="tiles">error</result>
         </action>
 
+        <action name="edit/{id}" class="Actions.WorkActions" method="edit">
+            <param name="id">{1}</param>
+            <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
+            <result name="success" type="tiles">editWork</result>
+            <result name="error" type="tiles">error</result>
+        </action>
+
+        <action name="update"
+                class="Actions.WorkActions"
+                method="update">
+            <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
+            <result name="success" type="redirectAction">
+                <param name="actionName">${id}</param>
+                <param name="namespace">/works</param>
+            </result>
+            <result name="error" type="tiles">error</result>
+        </action>
+
         <action name="create"
                 class="Actions.WorkActions"
                 method="create">

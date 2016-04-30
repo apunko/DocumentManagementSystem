@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 
 public class UtilsService {
 
-    private static DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     public static DateFormat getDateFormat(){
         return dateFormat;
     }

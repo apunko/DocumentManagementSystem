@@ -86,7 +86,23 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware {
     }
 
     public String update() {
-        throw new UnsupportedOperationException("You cannot edit project now");
+        try {
+            Work oldWork = service.getById(id);
+
+            oldWork.setTitle(title);
+            oldWork.setDescription(description);
+            oldWork.setEndDate(endDate);
+            oldWork.setStartDate(startDate);
+            oldWork.setProject(service.getProjectById(projectId));
+            Set<User> employees = service.getEmployeesByIds(employeesIds);
+            oldWork.setEmployees(employees);
+            service.update(oldWork);
+            return SUCCESS;
+        }
+        catch (Exception e){
+            errorMessage = e.getMessage();
+            return ERROR;
+        }
     }
 
     public String delete() {
@@ -94,7 +110,18 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware {
     }
 
     public String edit() {
-        throw new UnsupportedOperationException("You cannot edit project now");
+        try {
+            work = service.getById(id);
+            projects = service.getProjects();
+            employees = service.getEmployees();
+            projectId = work.getProject().getId();
+            return SUCCESS;
+        }
+        catch (Exception e)
+        {
+            errorMessage = e.getMessage();
+            return ERROR;
+        }
     }
 
     public int getId() {

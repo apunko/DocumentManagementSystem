@@ -1,5 +1,7 @@
 package Models;
 
+import Services.UtilsService;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -30,9 +32,12 @@ public class Work {
     @JoinColumn(name="Project_id")
     private Project project;
 
-    @ManyToMany(cascade=CascadeType.MERGE)
+    @ManyToMany(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name="employee_work", joinColumns=@JoinColumn(name="Work_id"), inverseJoinColumns=@JoinColumn(name="User_id"))
     private Set<User> employees;
+
+    private String stringEndDate;
+    private String stringStartDate;
 
     public int getId() {
         return id;
@@ -92,5 +97,13 @@ public class Work {
 
     public void setEmployees(Set<User> employees) {
         this.employees = employees;
+    }
+
+    public String getStringEndDate() {
+        return UtilsService.getDateFormat().format(endDate);
+    }
+
+    public String getStringStartDate() {
+        return UtilsService.getDateFormat().format(startDate);
     }
 }
