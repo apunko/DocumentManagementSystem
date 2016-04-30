@@ -1,28 +1,28 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<table border="1">
+<table class="table table-bordered">
     <tr>
-        <th>Id</th>
         <th>Title</th>
         <th>Description</th>
+        <th>Belongs to project</th>
         <th>Start date</th>
         <th>End date</th>
         <th>Resolved</th>
-        <th>Project Title</th>
         <th>Employees Amount</th>
+        <th>View</th>
         <th>Edit</th>
     </tr>
-    <s:iterator value="works">
+    <s:iterator value="works" var="work">
         <tr>
-            <td><s:property value="id"/></td>
             <td><s:property value="title"/></td>
             <td><s:property value="description"/></td>
-            <td><s:property value="startDate"/></td>
-            <td><s:property value="endDate"/></td>
+            <td><a href="/projects/${work.project.id}">${work.project.title}</a></td>
+            <td><s:property value="stringStartDate"/></td>
+            <td><s:property value="stringEndDate"/></td>
             <td><s:property value="resolved"/></td>
-            <td><s:property value="project.title"/></td>
             <td><s:property value="employees.size()"/></td>
+            <td><a href="${id}">View</a></td>
             <td><a href="edit/${id}">Edit</a></td>
         </tr>
     </s:iterator>

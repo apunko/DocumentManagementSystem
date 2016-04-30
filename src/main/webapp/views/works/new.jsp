@@ -1,18 +1,26 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form action="/works/create" method="post">
-    <label for="title">Title: </label><br/>
-    <input type="text" name="title"/><br/>
-    <label for="description">Description: </label><br/>
-    <input type="text" name="description"/><br/>
-    <label for="startDate">Start Date: </label><br/>
-    <input type="date" name="startDate"/><br/>
-    <label for="endDate">End Date: </label><br/>
-    <input type="date" name="endDate"/><br/>
-    <s:select name="projectId" label="Project:"
-              list="projects" listKey="Id" listValue="Title" />
-    <s:select name="employeesIds" multiple="true" listKey="Id" label="Employees:"
-              list="employees" listValue="FirstName"/>
-    <input type="submit" value="Create"/>
-</form>
+<s:form action="create" theme="bootstrap" method="post">
+    <label>Title: </label><br/>
+    <input type="text"  class="form-control"  name="title"/><br/>
+    <label>Description: </label><br/>
+    <textarea class="form-control" rows="5" name="description"></textarea><br/>
+    <div class="col-xs-3">
+        <label>Work start date: </label><br/>
+        <input type="date" class="form-control smallInput newDateInput" name="startDate"/><br/>
+    </div>
+    <div class="col-xs-3">
+        <label>Work end date: </label><br/>
+        <input type="date" class="form-control smallInput newDateInput" name="endDate"/><br/>
+    </div>
+    <div class="col-xs-3">
+        <s:select class="form-control smallInput" name="projectId" label="Create on project:"
+                  list="projects" listKey="Id" listValue="Title" />
+    </div>
+    <div class="col-xs-3">
+        <s:select name="employeesIds" class="multiSelect" multiple="true" listKey="Id" label="Employees:"
+                  list="employees" listValue="fullName"/>
+    </div>
+    <s:submit cssClass="btn btn-block btn-primary" value="Create"/>
+</s:form>
