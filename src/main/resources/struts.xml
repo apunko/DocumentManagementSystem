@@ -77,6 +77,8 @@
             <interceptor name="roleInterceptor" class="Interceptors.RoleInterceptor"/>
         </interceptors>
 
+        <default-action-ref name="index" />
+
         <action name="index"
                 class="Actions.DepartmentAction"
                 method="index">
@@ -406,6 +408,8 @@
             <interceptor name="roleInterceptor" class="Interceptors.RoleInterceptor"/>
         </interceptors>
 
+        <default-action-ref name="index" />
+
         <action name="index"
                 class="Actions.WorkActions"
                 method="index">
@@ -426,6 +430,19 @@
             </interceptor-ref>
             <result name="success" type="tiles">newWork</result>
             <result name="error" type="tiles">error</result>
+        </action>
+
+        <action name="delete/{id}"
+                class="Actions.WorkActions"
+                method="delete">
+            <param name="id">{1}</param>
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack" />
+            <result name="success" type="redirect">
+                <param name="location">/works/index</param>
+            </result>
         </action>
 
         <action name="edit/{id}" class="Actions.WorkActions" method="edit">
@@ -450,6 +467,7 @@
                 <param name="namespace">/works</param>
             </result>
             <result name="error" type="tiles">error</result>
+            <result name="input" type="tiles">editWork</result>
         </action>
 
         <action name="create"
@@ -464,10 +482,7 @@
                 <param name="namespace">/works</param>
             </result>
             <result name="error" type="tiles">error</result>
-            <result name="input" type="redirectAction">
-                <param name="actionName">new</param>
-                <param name="namespace">/works</param>
-            </result>
+            <result name="input" type="tiles">newWork</result>
         </action>
 
         <action name="{id}"

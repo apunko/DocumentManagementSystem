@@ -24,14 +24,12 @@
         <tiles:insertAttribute name="navigation" />
         <s:actionerror theme="bootstrap"/>
         <s:actionmessage theme="bootstrap"/>
-        <s:fielderror theme="bootstrap"/>
         <s:if test="%{#request['error'] != null}">
             <div class="alert alert-warning">
                 ${request['error']}
             </div>
         </s:if>
         <tiles:insertAttribute name="body" />
-        <tiles:insertAttribute name="footer" />
     </div>
 </div>
 </body>

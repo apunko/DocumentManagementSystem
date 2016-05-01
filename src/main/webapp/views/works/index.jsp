@@ -8,10 +8,10 @@
         <th>Belongs to project</th>
         <th>Start date</th>
         <th>End date</th>
-        <th>Resolved</th>
         <th>Employees Amount</th>
         <th>View</th>
         <th>Edit</th>
+        <th>Delete</th>
     </tr>
     <s:iterator value="works" var="work">
         <tr>
@@ -20,10 +20,10 @@
             <td><a href="/projects/${work.project.id}">${work.project.title}</a></td>
             <td><s:property value="stringStartDate"/></td>
             <td><s:property value="stringEndDate"/></td>
-            <td><s:property value="resolved"/></td>
             <td><s:property value="employees.size()"/></td>
             <td><a href="${id}">View</a></td>
             <td><a href="edit/${id}">Edit</a></td>
+            <td><a href="delete/${id}">Delete</a></td>
         </tr>
     </s:iterator>
 </table>

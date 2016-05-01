@@ -1,8 +1,12 @@
 package Models;
 
 import Services.UtilsService;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
 
@@ -13,25 +17,33 @@ public class Work {
     @GeneratedValue
     private int id;
 
+    @NotNull(message = "Field is required")
+    @Size(min = 3, max = 100)
     @Column(name="title")
     private String title;
 
+    @NotNull(message = "Field is required")
+    @Size(min = 15, max = 2000)
     @Column(name="description")
     private String description;
 
+    @NotNull(message = "Field is required")
     @Column(name="work_end_date")
     private Date endDate;
 
+    @NotNull(message = "Field is required")
     @Column(name="work_start_date")
     private Date startDate;
 
     @Column(name="resolved")
     private boolean resolved;
 
+    @NotNull(message = "Project is required.")
     @ManyToOne
     @JoinColumn(name="Project_id")
     private Project project;
 
+    @NotEmpty(message="At least one employee is required")
     @ManyToMany(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name="employee_work", joinColumns=@JoinColumn(name="Work_id"), inverseJoinColumns=@JoinColumn(name="User_id"))
     private Set<User> employees;

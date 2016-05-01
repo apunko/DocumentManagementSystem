@@ -3,7 +3,7 @@
 
 <h2>${work.title}</h2>
 <div>
-    <a href="edit/${id}">Edit</a> | <a href="#">Resolve</a> | <a href="#">Delete</a>
+    <a href="edit/${id}">Edit</a> | <a href="#">Delete</a>
 </div>
 <div class="col-xs-12">
     <div class="text-primary">

@@ -6,13 +6,18 @@ import Models.User;
 import Models.Work;
 import Services.WorkService;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.Preparable;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
-public class WorkActions extends ActionSupport implements CRUD, SessionAware {
+public class WorkActions extends ActionSupport implements CRUD, SessionAware, Preparable {
 
     private int id;
     private String title;
@@ -29,6 +34,7 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware {
     private ArrayList<Project> projects;
     private WorkService service = new WorkService();
     private String errorMessage;
+    private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     public String index() {
         try {
@@ -62,8 +68,18 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware {
             work.setEndDate(endDate);
             work.setStartDate(startDate);
             work.setProject(service.getProjectById(projectId));
-            Set<User> employees = service.getEmployeesByIds(employeesIds);
-            work.setEmployees(employees);
+            Set<User> employeesToAdd = service.getEmployeesByIds(employeesIds);
+            work.setEmployees(employeesToAdd);
+
+            Set<ConstraintViolation<Work>> constraintViolations =
+                    validator.validate(work);
+
+            if (constraintViolations.size() > 0){
+                for (ConstraintViolation<Work> valid : constraintViolations) {
+                    addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
+                }
+                return INPUT;
+            }
             service.create(work);
             this.id = work.getId();
         }
@@ -87,16 +103,27 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware {
 
     public String update() {
         try {
-            Work oldWork = service.getById(id);
+            work = service.getById(id);
 
-            oldWork.setTitle(title);
-            oldWork.setDescription(description);
-            oldWork.setEndDate(endDate);
-            oldWork.setStartDate(startDate);
-            oldWork.setProject(service.getProjectById(projectId));
+            work.setTitle(title);
+            work.setDescription(description);
+            work.setEndDate(endDate);
+            work.setStartDate(startDate);
+            work.setProject(service.getProjectById(projectId));
             Set<User> employees = service.getEmployeesByIds(employeesIds);
-            oldWork.setEmployees(employees);
-            service.update(oldWork);
+            work.setEmployees(employees);
+
+            Set<ConstraintViolation<Work>> constraintViolations =
+                    validator.validate(work);
+
+            if (constraintViolations.size() > 0){
+                for (ConstraintViolation<Work> valid : constraintViolations) {
+                    addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
+                }
+                return INPUT;
+            }
+
+            service.update(work);
             return SUCCESS;
         }
         catch (Exception e){
@@ -106,14 +133,19 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware {
     }
 
     public String delete() {
-        throw new UnsupportedOperationException("You cannot edit project now");
+        try{
+            work = service.getById(id);
+            service.delete(work);
+            return SUCCESS;
+        }
+        catch (Exception e){
+            addActionError(e.getMessage());
+            return ERROR;
+        }
     }
 
     public String edit() {
         try {
-            int i = 0;
-            int a = i;
-
             work = service.getById(id);
             projects = service.getProjects();
             employees = service.getEmployees();
@@ -124,6 +156,22 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware {
         {
             errorMessage = e.getMessage();
             return ERROR;
+        }
+    }
+
+    public void prepare() throws Exception {
+        if (work == null){
+            if (id != 0){
+                work = service.getById(id);
+            }
+            else {
+                work = new Work();
+            }
+        }
+        projects = service.getProjects();
+        employees = service.getEmployees();
+        if (work.getProject() != null){
+            projectId = work.getProject().getId();
         }
     }
 
