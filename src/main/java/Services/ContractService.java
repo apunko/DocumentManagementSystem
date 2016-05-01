@@ -25,9 +25,9 @@ public class ContractService extends GenericService<Contract> {
         return payForms;
     }
 
-    public User[] getClients(){
+    public ArrayList<User> getClients(){
         UserService userService = new UserService();
-        User[] clients = userService.getClients();
+        ArrayList<User> clients = userService.getClients();
         return clients;
     }
 

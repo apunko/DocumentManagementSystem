@@ -111,6 +111,9 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware {
 
     public String edit() {
         try {
+            int i = 0;
+            int a = i;
+
             work = service.getById(id);
             projects = service.getProjects();
             employees = service.getEmployees();

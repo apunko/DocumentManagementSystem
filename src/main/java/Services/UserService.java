@@ -1,6 +1,7 @@
 package Services;
 
 import HibernateDAO.Implementations.UserDao;
+import Models.Department;
 import Models.User;
 import Models.Work;
 
@@ -27,11 +28,11 @@ public class UserService extends GenericService<User> {
         return user;
     }
 
-     public User[] getClients(){
+     public ArrayList<User> getClients(){
          dao.openCurrentSessionWithTransaction();
          ArrayList<User> users = ((UserDao)dao).findAllClients();
          dao.closeCurrentSessionWithTransaction();
-         return users.toArray(new User[0]);
+         return users;
      }
 
      public ArrayList<User> getEmployees(){
@@ -47,5 +48,15 @@ public class UserService extends GenericService<User> {
             users.add(this.getById(id));
         }
         return users;
+    }
+
+    public ArrayList<Department> getDepartments(){
+        DepartmentService departmentService = new DepartmentService();
+        return departmentService.getAll();
+    }
+
+    public Department getDepartmentById(int id){
+        DepartmentService departmentService = new DepartmentService();
+        return departmentService.getById(id);
     }
 }

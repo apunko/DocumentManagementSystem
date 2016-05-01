@@ -32,7 +32,7 @@ public class ContractActions extends ActionSupport implements CRUD, SessionAware
 
     private ArrayList<PayForm> payForms;
     private ArrayList<ContractTemplate> templates;
-    private User[] clients;
+    private ArrayList<User> clients;
 
     public String show(){
         contract = service.getById(id);
@@ -151,11 +151,11 @@ public class ContractActions extends ActionSupport implements CRUD, SessionAware
         this.templates = templates;
     }
 
-    public User[] getClients() {
+    public ArrayList<User> getClients() {
         return clients;
     }
 
-    public void setClients(User[] clients) {
+    public void setClients(ArrayList<User> clients) {
         this.clients = clients;
     }
 

@@ -464,6 +464,10 @@
                 <param name="namespace">/works</param>
             </result>
             <result name="error" type="tiles">error</result>
+            <result name="input" type="redirectAction">
+                <param name="actionName">new</param>
+                <param name="namespace">/works</param>
+            </result>
         </action>
 
         <action name="{id}"
