@@ -2,9 +2,12 @@ package HibernateDAO.Implementations;
 
 import HibernateDAO.HibernateUtils;
 import HibernateDAO.Interfaces.IDao;
+import Models.Department;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Restrictions;
 
 import java.io.Serializable;
 import java.util.List;
@@ -78,6 +81,13 @@ public class GenericEntityDao<T> implements IDao<T> {
         return getCurrentSession().createCriteria(getEntityClass())
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
                 .list();
+    }
+
+    public T getByUniqueAttribute(String attrName, String value){
+        return (T) getCurrentSession().createCriteria(Department.class)
+                .add(Restrictions.eq( attrName, value ))
+                .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
+                .uniqueResult();
     }
 
     public Session getCurrentSession() {

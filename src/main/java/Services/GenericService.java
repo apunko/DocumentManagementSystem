@@ -1,6 +1,9 @@
 package Services;
 
 import HibernateDAO.Interfaces.IDao;
+import Models.Department;
+import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
 
@@ -47,6 +50,10 @@ public class GenericService<TEntity> {
         return  entities;
     }
 
-
-
+    public TEntity getByUniqueAttribute(String attrName, String value){
+        dao.openCurrentSessionWithTransaction();
+        TEntity entity = dao.getByUniqueAttribute(attrName, value);
+        dao.closeCurrentSessionWithTransaction();
+        return  entity;
+    }
 }

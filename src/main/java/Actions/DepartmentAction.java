@@ -77,7 +77,7 @@ public class DepartmentAction extends ActionSupport implements CRUD, SessionAwar
                 }
                 return INPUT;
             }
-            if (service.getByName(name) != null) {
+            if (service.getByUniqueAttribute("name", name) != null) {
                 addFieldError("name", "Must be unique");
                 return INPUT;
             }
@@ -106,7 +106,7 @@ public class DepartmentAction extends ActionSupport implements CRUD, SessionAwar
                 }
                 return INPUT;
             }
-            if (service.getByName(name) != null) {
+            if (service.getByUniqueAttribute("name", name) != null) {
                 addFieldError("name", "Must be unique");
                 return INPUT;
             }

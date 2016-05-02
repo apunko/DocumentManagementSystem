@@ -27,9 +27,5 @@ public interface IDao <T> {
 
     List<T> findAll();
 
-   /* public void deleteAll();
-
-    public List<T> getModelListByStringField(String fieldName, String fieldValue);
-
-    public T getModelByUniqueStringField(String fieldName, String fieldValue);*/
+    T getByUniqueAttribute(String attrName, String value);
 }
