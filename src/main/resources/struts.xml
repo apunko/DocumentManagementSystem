@@ -112,6 +112,7 @@
                 <param name="actionName">${id}</param>
                 <param name="namespace">/departments</param>
             </result>
+            <result name="input" type="tiles">newDepartment</result>
         </action>
 
         <action name="update"
@@ -125,6 +126,7 @@
                 <param name="actionName">${id}</param>
                 <param name="namespace">/departments</param>
             </result>
+            <result name="input" type="tiles">editDepartment</result>
         </action>
 
         <action name="delete/{id}"

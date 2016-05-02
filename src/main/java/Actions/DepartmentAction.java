@@ -8,13 +8,19 @@ import java.util.Set;
 import Actions.Interfaces.CRUD;
 import Models.Department;
 import Models.User;
+import Models.Work;
 import Services.DepartmentService;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.Preparable;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 
-public class DepartmentAction extends ActionSupport implements CRUD, SessionAware {
+
+public class DepartmentAction extends ActionSupport implements CRUD, SessionAware, Preparable {
 
     private int id;
     private String name;
@@ -22,37 +28,96 @@ public class DepartmentAction extends ActionSupport implements CRUD, SessionAwar
     private ArrayList<Department> departments = new ArrayList<Department>();
     private Department department;
     private DepartmentService service = new DepartmentService();
+    private Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     public String show(){
-        department = service.getById(id);
-        return SUCCESS;
+        try {
+            department = service.getById(id);
+            return SUCCESS;
+        }
+        catch (Exception e){
+            addActionError(e.getMessage());
+            return ERROR;
+        }
     }
     public String edit(){
-        department = service.getById(id);
-        return SUCCESS;
+        try {
+            department = service.getById(id);
+            return SUCCESS;
+        }
+        catch (Exception e){
+            addActionError(e.getMessage());
+            return ERROR;
+        }
     }
 
     public String index() {
-        departments = service.getAll();
-        return SUCCESS;
+        try {
+            departments = service.getAll();
+            return SUCCESS;
+        }
+        catch (Exception e){
+            addActionError(e.getMessage());
+            return ERROR;
+        }
     }
 
     public String create(){
-        Department department = new Department();
-        department.setName(name);
-        department.setDescription(description);
-        service.create(department);
-        this.id = department.getId();
-        return SUCCESS;
+        try {
+            department = new Department();
+            department.setName(name);
+            department.setDescription(description);
+
+            Set<ConstraintViolation<Department>> constraintViolations =
+                    validator.validate(department);
+
+            if (constraintViolations.size() > 0){
+                for (ConstraintViolation<Department> valid : constraintViolations) {
+                    addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
+                }
+                return INPUT;
+            }
+            if (service.getByName(name) != null) {
+                addFieldError("name", "Must be unique");
+                return INPUT;
+            }
+
+            service.create(department);
+            this.id = department.getId();
+            return SUCCESS;
+        }
+        catch (Exception e){
+            addActionError(e.getMessage());
+            return ERROR;
+        }
     }
 
     public String update(){
-        Department department = service.getById(id);
-        department.setName(name);
-        department.setDescription(description);
-        service.update(department);
-        this.id = department.getId();
-        return SUCCESS;
+        try {
+            department = service.getById(id);
+            department.setName(name);
+            department.setDescription(description);
+            Set<ConstraintViolation<Department>> constraintViolations =
+                    validator.validate(department);
+
+            if (constraintViolations.size() > 0){
+                for (ConstraintViolation<Department> valid : constraintViolations) {
+                    addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
+                }
+                return INPUT;
+            }
+            if (service.getByName(name) != null) {
+                addFieldError("name", "Must be unique");
+                return INPUT;
+            }
+
+            service.update(department);
+            return SUCCESS;
+        }
+        catch (Exception e){
+            addActionError(e.getMessage());
+            return ERROR;
+        }
     }
 
     public String delete(){
@@ -64,6 +129,12 @@ public class DepartmentAction extends ActionSupport implements CRUD, SessionAwar
 
     public String add() {
         return SUCCESS;
+    }
+
+    public void prepare() throws Exception {
+        if (department == null) {
+            department = new Department();
+        }
     }
 
     public int getId() {

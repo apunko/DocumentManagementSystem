@@ -1,6 +1,8 @@
 package Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -12,9 +14,13 @@ public class Department {
     @GeneratedValue
     private int id;
 
-    @Column(name="name")
+    @NotNull
+    @Size(min = 2, max = 30)
+    @Column(name="name", unique = true)
     private String name;
 
+    @NotNull
+    @Size(min = 15, max = 2000)
     @Column(name="description")
     private String description;
 
