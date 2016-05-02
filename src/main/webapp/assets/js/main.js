@@ -19,9 +19,19 @@ function setDateInputs(){
 }
 
 function setNewDateInputs(){
+    debugger;
     var date = new Date();
-    var dateString =  (date.getYear() + 1900) + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
-    $('.newDateInput').val(dateString);
+    var dateString =  (date.getYear() + 1900) + "-0" + (date.getMonth() + 1) + "-0" + date.getDate();
+    var dateInputs = $(".newDateInput");
+    for (var i = 0; i<dateInputs.length; i++){
+        debugger;
+        var date = dateInputs[i];
+        var value = $(dateInputs[i]).attr("date-value");
+        if (value == "") {
+            value = dateString;
+        }
+        $(dateInputs).val(value);
+    }
 }
 
 function setEditDateInputs(){

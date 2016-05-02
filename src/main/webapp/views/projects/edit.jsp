@@ -11,7 +11,7 @@
     <s:fielderror fieldName="description"/>
     <div class="col-xs-4">
         <label>Plan end of project: </label><br/>
-        <input type="date" class="form-control smallInput" name="planEndDate" value="${project.planEndDate}"/><br/>
+        <input type="date" class="form-control smallInput" name="planEndDate" date-value="${project.stringPlanEndDate}"/><br/>
         <s:fielderror fieldName="planEndDate"/>
     </div>
     <div class="col-xs-4">

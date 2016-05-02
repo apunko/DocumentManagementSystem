@@ -300,6 +300,7 @@
                 <param name="namespace">/contracts</param>
             </result>
             <result name="error" type="tiles">error</result>
+            <result name="input" type="tiles">newContract</result>
         </action>
 
         <action name="{id}"

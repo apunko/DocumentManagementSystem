@@ -1,8 +1,10 @@
 package Models;
 
 import Services.UtilsService;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,28 +18,34 @@ public class Contract {
     @GeneratedValue
     private int id;
 
+    @NotNull(message = "Field is required")
     @Column(name="pay_date")
     private Date payDate;
 
+    @NotNull(message = "Field is required")
     @Column(name="start_date")
     private Date startDate;
 
+    @NotNull(message = "Field is required")
     @Column(name="end_date")
     private Date endDate;
 
+    @NotNull(message = "Field is required")
     @Column(name="pay_sum")
+    @Range(min=10, message="Contract sum should be 10+")
     private int paySum;
 
-
+    @NotNull(message = "Field is required")
     @ManyToOne
     @JoinColumn(name="Template_id")
     private ContractTemplate template;
 
+    @NotNull(message = "Field is required")
     @ManyToOne
     @JoinColumn(name="Payform_id")
     private PayForm payForm;
 
-
+    @NotNull(message = "Field is required")
     @ManyToOne
     @JoinColumn(name="User_id")
     private User client;
@@ -120,14 +128,14 @@ public class Contract {
     }
 
     public String getStringStartDate() {
-        return UtilsService.getDateFormat().format(startDate);
+        return UtilsService.formatDate(startDate);
     }
 
     public String getStringEndDate() {
-        return UtilsService.getDateFormat().format(endDate);
+        return UtilsService.formatDate(endDate);
     }
 
     public String getStringPayDate() {
-        return UtilsService.getDateFormat().format(payDate);
+        return UtilsService.formatDate(payDate);
     }
 }

@@ -10,12 +10,12 @@
     <s:fielderror fieldName="description"/>
     <div class="col-xs-3">
         <label>Work start date: </label><br/>
-        <input type="date" class="form-control smallInput newDateInput" name="startDate"/><br/>
+        <input type="date" class="form-control smallInput newDateInput" name="startDate" date-value="${work.stringStartDate}"/><br/>
         <s:fielderror fieldName="startDate"/>
     </div>
     <div class="col-xs-3">
         <label>Work end date: </label><br/>
-        <input type="date" class="form-control smallInput newDateInput" name="endDate"/><br/>
+        <input type="date" class="form-control smallInput newDateInput" name="endDate" date-value="${work.stringEndDate}"/><br/>
         <s:fielderror fieldName="endDate"/>
     </div>
     <div class="col-xs-3">
