@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <h2>${project.title}</h2>
 <div>
-    <a href="edit/${id}">Edit</a> | <a href="#">Delete</a>
+    <a href="edit/${id}">Edit</a>
 </div>
 <div class="col-xs-12">
     <div class="text-primary">

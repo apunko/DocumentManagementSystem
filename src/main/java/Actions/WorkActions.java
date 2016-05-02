@@ -34,7 +34,7 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware, Pr
     private ArrayList<Project> projects;
     private WorkService service = new WorkService();
     private String errorMessage;
-    private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+    private Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     public String index() {
         try {

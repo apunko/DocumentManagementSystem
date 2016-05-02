@@ -26,7 +26,6 @@
     <div class="col-xs-3">
         <s:select name="employeesIds" class="multiSelect" multiple="true" listKey="Id" label="Employees:"
                   list="employees" listValue="fullName"/>
-        <s:fielderror fieldName="employeesIds"/>
     </div>
     <s:submit cssClass="btn btn-block btn-primary" value="Create"/>
 </s:form>

@@ -5,15 +5,19 @@
     <input type="hidden" name="id" value="${project.id}">
     <label>Title: </label><br/>
     <input type="text"  class="form-control"  name="title" value="${project.title}"/><br/>
+    <s:fielderror fieldName="title"/>
     <label>Description: </label><br/>
     <textarea class="form-control" rows="5" name="description">${project.description}</textarea><br/>
+    <s:fielderror fieldName="description"/>
     <div class="col-xs-4">
-        <label>Plna end of project: </label><br/>
+        <label>Plan end of project: </label><br/>
         <input type="date" class="form-control smallInput" name="planEndDate" value="${project.planEndDate}"/><br/>
+        <s:fielderror fieldName="planEndDate"/>
     </div>
     <div class="col-xs-4">
         <s:select class="form-control smallInput editDateInput" name="contractId" label="Belongs to contract Number:"
                   list="contracts" listKey="Id" listValue="Id" value="contractId" />
+        <s:fielderror fieldName="contractId"/>
     </div>
     <div class="col-xs-4">
         <s:select name="employeeIds" class="multiSelect" multiple="true" listKey="Id" label="Employees:"

@@ -357,6 +357,7 @@
                 <param name="namespace">/projects</param>
             </result>
             <result name="error" type="tiles">error</result>
+            <result name="input" type="tiles">newProject</result>
         </action>
 
         <action name="edit/{id}" class="Actions.ProjectActions" method="edit">
@@ -393,6 +394,7 @@
                 <param name="namespace">/projects</param>
             </result>
             <result name="error" type="tiles">error</result>
+            <result name="input" type="tiles">editProject</result>
         </action>
 
     </package>

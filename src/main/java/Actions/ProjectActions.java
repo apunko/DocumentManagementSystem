@@ -4,16 +4,23 @@ import Actions.Interfaces.CRUD;
 import Models.Contract;
 import Models.Project;
 import Models.User;
+import Models.Work;
 import Services.ProjectService;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.Preparable;
 import com.sun.deploy.perf.PerfRollup;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
+import java.util.Set;
 
-public class ProjectActions extends ActionSupport implements CRUD, SessionAware {
+public class ProjectActions extends ActionSupport implements CRUD, SessionAware, Preparable {
 
     private int id;
     private String title;
@@ -27,23 +34,51 @@ public class ProjectActions extends ActionSupport implements CRUD, SessionAware 
     private ProjectService service = new ProjectService();
     private Project project;
     private ArrayList<String> employeesFullNames;
+    private Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+
     public String add() {
-        contracts = service.getContracts();
-        employees = service.getEmployees();
-        return SUCCESS;
+        try {
+            contracts = service.getContracts();
+            employees = service.getEmployees();
+            return SUCCESS;
+        }
+        catch (Exception e){
+            addActionError(e.getMessage());
+            return ERROR;
+        }
     }
 
     public String create() {
-        project = new Project();
+        try {
+            project = new Project();
+            project.setTitle(title);
+            project.setDescription(description);
+            project.setPlanEndDate(planEndDate);
+            project.setContract(service.getContractById(contractId));
+            project.setEmployees(service.getEmployeesByIds(employeeIds));
 
-        project.setTitle(title);
-        project.setDescription(description);
-        project.setPlanEndDate(planEndDate);
-        project.setContract(service.getContractById(contractId));
-        project.setEmployees(service.getEmployeesByIds(employeeIds));
-        service.create(project);
-        this.id = project.getId();
-        return SUCCESS;
+            Set<ConstraintViolation<Project>> constraintViolations =
+                    validator.validate(project);
+            if (constraintViolations.size() > 0){
+                for (ConstraintViolation<Project> valid : constraintViolations) {
+                    if (valid.getPropertyPath().toString().equals("employees")) {
+                        addFieldError("employeeIds", valid.getMessage());
+                    }
+                    else {
+                        addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
+                    }
+                }
+                return INPUT;
+            }
+
+            service.create(project);
+            this.id = project.getId();
+            return SUCCESS;
+        }
+        catch (Exception e){
+            addActionError(e.getMessage());
+            return ERROR;
+        }
     }
 
     public String show() {
@@ -52,20 +87,46 @@ public class ProjectActions extends ActionSupport implements CRUD, SessionAware 
     }
 
     public String index() {
-        projects = service.getAll();
-        return SUCCESS;
+        try {
+            projects = service.getAll();
+            return SUCCESS;
+        }
+        catch (Exception e){
+            addActionError(e.getMessage());
+            return ERROR;
+        }
     }
 
     public String update() {
-        Project oldProject = service.getById(id);
-        oldProject.setTitle(title);
-        oldProject.setDescription(description);
-        oldProject.setPlanEndDate(planEndDate);
-        oldProject.setContract(service.getContractById(contractId));
-        oldProject.setEmployees(service.getEmployeesByIds(employeeIds));
-        service.update(oldProject);
-        this.id = oldProject.getId();
-        return SUCCESS;
+        try {
+            project = service.getById(id);
+            project.setTitle(title);
+            project.setDescription(description);
+            project.setPlanEndDate(planEndDate);
+            project.setContract(service.getContractById(contractId));
+            project.setEmployees(service.getEmployeesByIds(employeeIds));
+
+            Set<ConstraintViolation<Project>> constraintViolations =
+                    validator.validate(project);
+            if (constraintViolations.size() > 0){
+                for (ConstraintViolation<Project> valid : constraintViolations) {
+                    if (valid.getPropertyPath().toString().equals("employees")) {
+                        addFieldError("employeeIds", valid.getMessage());
+                    }
+                    else {
+                        addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
+                    }
+                }
+                return INPUT;
+            }
+
+            service.update(project);
+            return SUCCESS;
+        }
+        catch (Exception e){
+            addActionError(e.getMessage());
+            return ERROR;
+        }
     }
 
     public String delete() {
@@ -73,12 +134,34 @@ public class ProjectActions extends ActionSupport implements CRUD, SessionAware 
     }
 
     public String edit() {
-        project = service.getById(id);
+        try{
+            project = service.getById(id);
+            contracts = service.getContracts();
+            employees = service.getEmployees();
+            contractId = project.getContract().getId();
+            return SUCCESS;
+        }
+        catch (Exception e)
+        {
+            addActionError(e.getMessage());
+            return ERROR;
+        }
+    }
+
+    public void prepare() throws Exception {
+        if (project == null){
+            if (id != 0){
+                project = service.getById(id);
+            }
+            else {
+                project = new Project();
+            }
+        }
         contracts = service.getContracts();
         employees = service.getEmployees();
-        contractId = project.getContract().getId();
-        employeesFullNames = project.getEmployeesFullNames();
-        return SUCCESS;
+        if (project.getContract() != null) {
+            contractId = project.getContract().getId();
+        }
     }
 
     public Project getProject() {

@@ -1,8 +1,11 @@
 package Models;
 
 import Services.UtilsService;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
@@ -14,15 +17,21 @@ public class Project {
     @GeneratedValue
     private int id;
 
+    @NotNull(message = "Field is required")
+    @Size(min = 3, max = 100)
     @Column(name="title")
     private String title;
 
+    @NotNull(message = "Field is required")
+    @Size(min = 15, max = 4000)
     @Column(name="description")
     private String description;
 
+    @NotNull(message = "Field is required")
     @Column(name="plan_end_date")
     private Date planEndDate;
 
+    @NotNull(message = "Field is required")
     @ManyToOne
     @JoinColumn(name="Contract_id")
     private Contract contract;
@@ -30,6 +39,7 @@ public class Project {
     @OneToMany(mappedBy="project", fetch = FetchType.EAGER)
     private Set<Work> works;
 
+    @NotEmpty(message="At least one employee is required")
     @ManyToMany(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name="employee_project", joinColumns=@JoinColumn(name="Project_id"), inverseJoinColumns=@JoinColumn(name="User_id"))
     private Set<User> employees;
@@ -92,14 +102,6 @@ public class Project {
 
     public String getStringPlanEndDate() {
         return UtilsService.getDateFormat().format(planEndDate);
-    }
-
-    public ArrayList<String> getEmployeesFullNames() {
-        ArrayList<String> list = new ArrayList<String>();
-        for (User employee : employees) {
-            list.add(employee.getFullName());
-        }
-        return list;
     }
 }
 

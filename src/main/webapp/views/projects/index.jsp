@@ -14,10 +14,10 @@
     </tr>
     </thead>
     <tbody>
-        <s:iterator value="projects" var="project">
+        <s:iterator value="projects">
             <tr>
                 <td><s:property value="title"/></td>
-                <td><a href="/contracts/${project.contract.id}">&#8470;${project.contract.id}</a></td>
+                <td><a href="/contracts/<s:property value="contract.id"/>">&#8470;<s:property value="contract.id"/></a></td>
                 <td><s:property value="works.size()"/></td>
                 <td><s:property value="employees.size()"/></td>
                 <td><s:property value="stringPlanEndDate"/></td>

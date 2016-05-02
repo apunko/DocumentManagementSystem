@@ -17,7 +17,7 @@
         <tr>
             <td><s:property value="title"/></td>
             <td><s:property value="description"/></td>
-            <td><a href="/projects/${work.project.id}">${work.project.title}</a></td>
+            <td><a href="/projects/<s:property value="project.id"/>"><s:property value="project.title"/></a></td>
             <td><s:property value="stringStartDate"/></td>
             <td><s:property value="stringEndDate"/></td>
             <td><s:property value="employees.size()"/></td>
