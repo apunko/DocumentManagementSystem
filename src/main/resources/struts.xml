@@ -40,6 +40,7 @@
                 <param name="namespace">/</param>
             </result>
             <result name="error" type="tiles">error</result>
+            <result name="input" type="tiles">register</result>
         </action>
 
         <action name="signIn"
@@ -207,6 +208,7 @@
                 <param name="namespace">/users</param>
             </result>
             <result name="error" type="tiles">error</result>
+            <result name="input" type="tiles">newUser</result>
         </action>
 
         <action name="update"
@@ -221,6 +223,7 @@
                 <param name="namespace">/users</param>
             </result>
             <result name="error" type="tiles">error</result>
+            <result name="input" type="tiles">editUser</result>
         </action>
 
         <action name="delete/{id}"

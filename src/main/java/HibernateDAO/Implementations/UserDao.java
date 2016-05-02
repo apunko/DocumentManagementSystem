@@ -40,7 +40,7 @@ public class UserDao extends GenericEntityDao<User> {
 
     public ArrayList<User> findAllEmployees(){
         ArrayList<User> employees = (ArrayList<User>) getCurrentSession().createCriteria(User.class)
-                .add(Restrictions.eq( "role", "employee" ))
+                .add(Restrictions.or(Restrictions.eq( "role", "employee" ), Restrictions.eq( "role", "manager" )))
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
                 .list();
         return employees;

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
+import Models.User;
+import Services.UserService;
 import com.opensymphony.xwork2.interceptor.PreResultListener;
 import org.apache.struts2.ServletActionContext;
 
@@ -55,9 +57,12 @@ public class RoleInterceptor extends AbstractInterceptor {
         boolean result = false;
         String loginRole = null;
 
-        if(session != null){
-            loginRole = (String)session.getAttribute("role");
-        }
+        if(session == null) return false;
+        int id = (Integer) session.getAttribute("id");
+        UserService service = new UserService();
+        User user = service.getById(id);
+        if (user == null) return false;
+        loginRole = user.getRole();
 
         if (allowedRoles.size() > 0) {
             if(session==null || loginRole==null){
@@ -84,8 +89,6 @@ public class RoleInterceptor extends AbstractInterceptor {
     protected String handleRejection(ActionInvocation invocation,
                                      HttpServletResponse response)
             throws Exception {
-
-        //  response.sendError(HttpServletResponse.SC_FORBIDDEN);
         return "error";
     }
 

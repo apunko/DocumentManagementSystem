@@ -6,6 +6,11 @@
         <s:property value="user.fullName" />
     </h2>
 </div>
+<div>
+    <h4>
+        <s:property value="user.email" />
+    </h4>
+</div>
 <s:if test="session.containsKey('role')">
     <s:if test='session.get("role") == "client"'>
         <div class="col-xs-6">

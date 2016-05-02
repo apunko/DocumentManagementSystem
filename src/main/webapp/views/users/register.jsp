@@ -1,16 +1,21 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<s:form action="/signUp" theme="bootstrap" method="post">
+<s:form action="signUp" theme="bootstrap" method="post">
     <label>First Name: </label><br/>
-    <input type="text" class="form-control" name="firstName"/><br/>
+    <input type="text" class="form-control" name="firstName" value="${user.firstName}" /><br/>
+    <s:fielderror fieldName="firstName"/>
     <label>Last Name: </label><br/>
-    <input type="text" class="form-control" name="lastName"/><br/>
+    <input type="text" class="form-control" name="lastName" value="${user.lastName}" /><br/>
+    <s:fielderror fieldName="lastName"/>
     <label>Email: </label><br/>
-    <input type="text" class="form-control" name="email"/><br/>
+    <input type="text" class="form-control" name="email" value="${user.email}"/><br/>
+    <s:fielderror fieldName="email"/>
     <label>Login: </label><br/>
-    <input type="text" class="form-control" name="login"/><br/>
+    <s:fielderror fieldName="login"/>
+    <input type="text" class="form-control" name="login" value="${user.login}"/><br/>
     <label>Password: </label><br/>
     <input type="password" class="form-control" name="password"/><br/>
+    <s:fielderror fieldName="password"/>
     <s:submit cssClass="btn btn-block btn-primary" value="Sing Up"/>
 </s:form>

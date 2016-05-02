@@ -3,15 +3,22 @@ package Actions;
 import Actions.Interfaces.CRUD;
 import Models.Department;
 import Models.User;
+import Models.Work;
 import Services.UserService;
+import Services.UtilsService;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.Preparable;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 
-public class UserActions extends ActionSupport implements SessionAware, CRUD {
+public class UserActions extends ActionSupport implements SessionAware, CRUD, Preparable {
 
     private int id;
     private String firstName;
@@ -25,6 +32,8 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD {
     private int departmentId;
     private UserService service = new UserService();
     private ArrayList<Department> departments;
+    private Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+
     public String getPassword() {
         return password;
     }
@@ -52,11 +61,12 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD {
 
     public String signIn() {
         try {
-            User user = service.getByLoginAndPassword(login, password);
+            user = service.getByLoginAndPassword(login, UtilsService.getPasswordHash(password));
             if (user != null){
                 setSessionInformation(user);
                 return SUCCESS;
             }
+            addActionError("Invalid Login or password");
             return ERROR;
         }
         catch (Exception e){
@@ -76,9 +86,11 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD {
 
     public String signUp(){
         try {
-            User user = service.getByLogin(login);
+            user = service.getByUniqueAttribute("login", login);
+
             if (user != null) {
-                return ERROR;
+                addFieldError("login", "Login must be unique");
+                return INPUT;
             }
             user = new User();
             user.setFirstName(firstName);
@@ -86,7 +98,14 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD {
             user.setLogin(login);
             user.setPassword(password);
             user.setEmail(email);
-            user.setDepartment(service.getDepartmentById(1));
+            user.setPosition("client");
+            user.setRole("client");
+            user.setDepartment(service.getDepartmentById(14));
+
+            if (!isUserValid(user)){
+                return INPUT;
+            }
+            user.setPassword(UtilsService.getPasswordHash(password));
             service.create(user);
             if (user.getId() > 0){
                 setSessionInformation(user);
@@ -112,24 +131,14 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD {
     }
 
     public String show(){
-        try{
-            user = service.getById(id);
-            return SUCCESS;
-        }
-        catch (Exception e){
-            addActionError(e.getMessage());
-            return ERROR;
-        }
+        String result = setUser();
+        return result;
     }
+
     public String edit(){
-        try {
-            user = service.getById(id);
-            return SUCCESS;
-        }
-        catch (Exception e){
-            addActionError(e.getMessage());
-            return ERROR;
-        }
+        String result = setUser();
+        departments = service.getDepartments();
+        return result;
     }
 
     public String index() {
@@ -146,16 +155,21 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD {
 
     public String create(){
         try {
-            User newUser = new User();
-            newUser.setFirstName(firstName);
-            newUser.setLastName(lastName);
-            newUser.setPosition(position);
-            newUser.setRole("employee");
-            newUser.setEmail(email);
-            newUser.setExperience(experience);
-            newUser.setDepartment(service.getDepartmentById(departmentId));
-            service.create(newUser);
-            this.id = newUser.getId();
+            user = new User();
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setPosition(position);
+            user.setRole("employee");
+            user.setEmail(email);
+            user.setExperience(experience);
+            user.setDepartment(service.getDepartmentById(departmentId));
+
+            if (!isUserValid(user)){
+                return INPUT;
+            }
+
+            service.create(user);
+            this.id = user.getId();
             return SUCCESS;
         }
         catch (Exception e){
@@ -166,15 +180,19 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD {
 
     public String update(){
         try {
-            User userToUpdate = service.getById(id);
-            userToUpdate.setFirstName(firstName);
-            userToUpdate.setLastName(lastName);
-            userToUpdate.setExperience(experience);
-            userToUpdate.setPosition(position);
-            userToUpdate.setEmail(email);
-            userToUpdate.setDepartment(service.getDepartmentById(departmentId));
-            service.update(userToUpdate);
-            this.id = userToUpdate.getId();
+            user = service.getById(id);
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setExperience(experience);
+            user.setPosition(position);
+            user.setEmail(email);
+            user.setDepartment(service.getDepartmentById(departmentId));
+
+            if (!isUserValid(user)){
+                return INPUT;
+            }
+
+            service.update(user);
             return SUCCESS;
         }
         catch (Exception e){
@@ -196,11 +214,47 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD {
         }
     }
 
+    public void prepare() throws Exception {
+        if (user == null){
+            user = new User();
+        }
+        departments = service.getDepartments();
+    }
+
     private void setSessionInformation(User user){
         session.put("id", user.getId());
         session.put("login", user.getLogin());
         session.put("role", user.getRole());
         session.put("fullName", user.getFirstName() + " " + user.getLastName());
+    }
+
+    private String setUser(){
+        try {
+            user = service.getById(id);
+            return SUCCESS;
+        }
+        catch (Exception e){
+            addActionError(e.getMessage());
+            return ERROR;
+        }
+    }
+
+    private boolean isUserValid(User user){
+        Set<ConstraintViolation<User>> constraintViolations =
+                validator.validate(user);
+
+        if (constraintViolations.size() > 0){
+            for (ConstraintViolation<User> valid : constraintViolations) {
+                addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
+            }
+            return false;
+        }
+
+        if (service.getByUniqueAttribute("email", email) != null) {
+            addFieldError("email", "Must be unique");
+            return false;
+        }
+        return true;
     }
 
 

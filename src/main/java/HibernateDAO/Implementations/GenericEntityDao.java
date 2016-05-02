@@ -84,7 +84,7 @@ public class GenericEntityDao<T> implements IDao<T> {
     }
 
     public T getByUniqueAttribute(String attrName, String value){
-        return (T) getCurrentSession().createCriteria(Department.class)
+        return (T) getCurrentSession().createCriteria(entityClass)
                 .add(Restrictions.eq( attrName, value ))
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
                 .uniqueResult();

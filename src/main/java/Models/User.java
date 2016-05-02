@@ -1,6 +1,10 @@
 package Models;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 @Entity
@@ -11,14 +15,19 @@ public class User {
     @GeneratedValue
     private int id;
 
+    @NotNull
+    @Length(min=2, max=15, message="First Name should be between 2 - 15 symbols")
     @Column(name="first_name")
     private String firstName;
 
+    @NotNull
+    @Length(min=2, max=15, message="Last Name should be between 2 - 15 symbols")
     @Column(name="last_name")
     private String lastName;
 
     private String fullName;
 
+    @Pattern(regexp=".+@.+\\..+", message="Wrong email")
     @Column(name="email")
     private String email;
 
@@ -34,6 +43,8 @@ public class User {
     @Column(name="experience")
     private float experience;
 
+    @NotNull
+    @Length(min=2, max=15, message="Position should be between 2 - 15 symbols")
     @Column(name="position")
     private String position;
 
@@ -44,6 +55,9 @@ public class User {
     @OneToMany(mappedBy="client", fetch = FetchType.EAGER)
     private Set<Contract> contracts;
 
+
+    @NotNull(message="Please select a password")
+    @Length(min=5, max=32, message="Password should be between 5 - 30 symbols")
     @Column(name="password")
     private String password;
 
@@ -54,14 +68,6 @@ public class User {
     private Set<Work> works;
 
     public User(){}
-
-    public User(int id, String firstName, String lastName, String role, float experience, String position, int departmentId){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.role = role;
-        this.experience = experience;
-        this.position = position;
-    }
 
     public String getPassword() {
         return password;
