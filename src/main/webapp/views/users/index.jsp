@@ -7,12 +7,14 @@
             <th>Full Name</th>
             <th>Email</th>
             <th>View</th>
+            <th>Delete</th>
         </tr>
         <s:iterator value="clients">
             <tr>
                 <td><s:property value="fullName"/></td>
                 <td><s:property value="email"/></td>
                 <td><a href="edit/${id}">Edit</a></td>
+                <td><a href="delete/${id}">Delete</a></td>
             </tr>
         </s:iterator>
     </table>
@@ -27,6 +29,7 @@
         <th>Department</th>
         <th>View</th>
         <th>Edit</th>
+        <th>Delete</th>
     </tr>
     <s:iterator value="employees" var="employee">
         <tr>
@@ -38,6 +41,7 @@
             <td>${employee.department.name}</td>
             <td><a href="${id}">View</a></td>
             <td><a href="edit/${id}">Edit</a></td>
+            <td><a href="delete/${id}">Delete</a></td>
         </tr>
     </s:iterator>
 </table>

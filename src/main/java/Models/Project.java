@@ -101,7 +101,7 @@ public class Project {
     }
 
     public String getStringPlanEndDate() {
-        return UtilsService.getDateFormat().format(planEndDate);
+        return UtilsService.formatDate(planEndDate);
     }
 }
 

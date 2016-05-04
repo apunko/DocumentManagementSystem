@@ -30,6 +30,9 @@
             </div>
         </s:if>
         <tiles:insertAttribute name="body" />
+        <p></p>
+        <br/>
+        <tiles:insertAttribute name="footer" />
     </div>
 </div>
 </body>

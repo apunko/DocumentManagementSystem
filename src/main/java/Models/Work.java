@@ -112,12 +112,10 @@ public class Work {
     }
 
     public String getStringEndDate() {
-        if (endDate == null) return null;
-        return UtilsService.getDateFormat().format(endDate);
+        return UtilsService.formatDate(endDate);
     }
 
     public String getStringStartDate() {
-        if (endDate == null) return null;
-        return UtilsService.getDateFormat().format(startDate);
+        return UtilsService.formatDate(startDate);
     }
 }

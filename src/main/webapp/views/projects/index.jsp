@@ -11,6 +11,7 @@
         <th>Plan end date</th>
         <th>View</th>
         <th>Edit</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
                 <td><s:property value="stringPlanEndDate"/></td>
                 <td><a href="${id}">View</a></td>
                 <td><a href="edit/${id}">Edit</a></td>
+                <td><a href="delete/${id}">Delete</a></td>
             </tr>
         </s:iterator>
     </tbody>

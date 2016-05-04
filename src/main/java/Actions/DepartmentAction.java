@@ -121,10 +121,20 @@ public class DepartmentAction extends ActionSupport implements CRUD, SessionAwar
     }
 
     public String delete(){
-        Department dep = service.getById(id);
-        service.delete(dep);
-        this.id = dep.getId();
-        return SUCCESS;
+
+        try {
+            department = service.getById(id);
+            service.delete(department);
+            if (department.getId() == 0){
+                addActionMessage("User was deleted!");
+                return SUCCESS;
+            }
+            return SUCCESS;
+        }
+        catch (Exception e){
+            addActionError(e.getMessage());
+            return ERROR;
+        }
     }
 
     public String add() {

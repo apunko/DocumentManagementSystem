@@ -203,9 +203,12 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD, Pr
 
     public String delete(){
         try {
-            User user = service.getById(id);
+            user = service.getById(id);
             service.delete(user);
-            this.id = user.getId();
+            if (user.getId() == 0){
+                addActionMessage("User was deleted!");
+                return SUCCESS;
+            }
             return SUCCESS;
         }
         catch (Exception e){
@@ -245,6 +248,10 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD, Pr
 
         if (constraintViolations.size() > 0){
             for (ConstraintViolation<User> valid : constraintViolations) {
+                if (valid.getPropertyPath().toString().equals("department")) {
+                    addFieldError("departmentId", valid.getMessage());
+                    continue;
+                }
                 addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
             }
             return false;
@@ -256,7 +263,6 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD, Pr
         }
         return true;
     }
-
 
     public ArrayList<User> getUsers() {
         return users;

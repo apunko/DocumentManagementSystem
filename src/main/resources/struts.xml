@@ -366,6 +366,20 @@
             <result name="input" type="tiles">newProject</result>
         </action>
 
+        <action name="delete/{id}"
+                class="Actions.ProjectActions"
+                method="delete">
+            <param name="id">{1}</param>
+            <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="roleInterceptor">
+                <param name="allowedRoles">manager</param>
+            </interceptor-ref>
+            <result name="success" type="redirect">
+                <param name="location">/projects/index</param>
+            </result>
+            <result name="error" type="tiles">error</result>
+        </action>
+
         <action name="edit/{id}" class="Actions.ProjectActions" method="edit">
             <param name="id">{1}</param>
             <interceptor-ref name="defaultStack" />

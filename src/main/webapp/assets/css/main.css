@@ -27,3 +27,7 @@ div.text-primary {
     white-space: pre-wrap;
     word-wrap: break-word;
 }
+
+.navbar-fixed-bottom {
+    z-index: -100;
+}

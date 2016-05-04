@@ -17,7 +17,6 @@
     <div class="col-xs-4">
         <s:select class="form-control smallInput editDateInput" name="contractId" label="Belongs to contract Number:"
                   list="contracts" listKey="Id" listValue="Id" value="contractId" />
-        <s:fielderror fieldName="contractId"/>
     </div>
     <div class="col-xs-4">
         <s:select name="employeeIds" class="multiSelect" multiple="true" listKey="Id" label="Employees:"

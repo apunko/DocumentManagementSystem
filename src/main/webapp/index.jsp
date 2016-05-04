@@ -3,3 +3,4 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <h1>Our works: </h1>
+<img src="assets/images/1.jpg" />

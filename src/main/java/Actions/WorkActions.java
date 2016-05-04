@@ -62,7 +62,6 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware, Pr
     public String create() {
         try {
             work = new Work();
-
             work.setTitle(title);
             work.setDescription(description);
             work.setEndDate(endDate);
@@ -70,14 +69,7 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware, Pr
             work.setProject(service.getProjectById(projectId));
             Set<User> employeesToAdd = service.getEmployeesByIds(employeesIds);
             work.setEmployees(employeesToAdd);
-
-            Set<ConstraintViolation<Work>> constraintViolations =
-                    validator.validate(work);
-
-            if (constraintViolations.size() > 0){
-                for (ConstraintViolation<Work> valid : constraintViolations) {
-                    addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
-                }
+            if (!isWorkValid(work)){
                 return INPUT;
             }
             service.create(work);
@@ -104,7 +96,6 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware, Pr
     public String update() {
         try {
             work = service.getById(id);
-
             work.setTitle(title);
             work.setDescription(description);
             work.setEndDate(endDate);
@@ -112,17 +103,9 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware, Pr
             work.setProject(service.getProjectById(projectId));
             Set<User> employees = service.getEmployeesByIds(employeesIds);
             work.setEmployees(employees);
-
-            Set<ConstraintViolation<Work>> constraintViolations =
-                    validator.validate(work);
-
-            if (constraintViolations.size() > 0){
-                for (ConstraintViolation<Work> valid : constraintViolations) {
-                    addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
-                }
+            if (!isWorkValid(work)){
                 return INPUT;
             }
-
             service.update(work);
             return SUCCESS;
         }
@@ -136,6 +119,10 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware, Pr
         try{
             work = service.getById(id);
             service.delete(work);
+            if (work.getId() == 0){
+                addActionMessage("Work was deleted!");
+                return SUCCESS;
+            }
             return SUCCESS;
         }
         catch (Exception e){
@@ -173,6 +160,23 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware, Pr
         if (work.getProject() != null){
             projectId = work.getProject().getId();
         }
+    }
+
+    private boolean isWorkValid(Work work){
+        Set<ConstraintViolation<Work>> constraintViolations =
+                validator.validate(work);
+
+        if (constraintViolations.size() > 0){
+            for (ConstraintViolation<Work> valid : constraintViolations) {
+                if (valid.getPropertyPath().toString().equals("project")) {
+                    addFieldError("projectId", valid.getMessage());
+                    continue;
+                }
+                addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
+            }
+            return false;
+        }
+        return true;
     }
 
     public int getId() {

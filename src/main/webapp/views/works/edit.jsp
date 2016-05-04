@@ -22,7 +22,6 @@
     <div class="col-xs-3">
         <s:select class="form-control smallInput" name="projectId" label="Create on project:"
                   list="projects" listKey="Id" listValue="Title" value="projectId"/>
-        <s:fielderror fieldName="projectId"/>
     </div>
     <div class="col-xs-3">
         <s:select name="employeesIds" class="multiSelect" multiple="true" listKey="Id" label="Employees:"

@@ -56,21 +56,9 @@ public class ProjectActions extends ActionSupport implements CRUD, SessionAware,
             project.setPlanEndDate(planEndDate);
             project.setContract(service.getContractById(contractId));
             project.setEmployees(service.getEmployeesByIds(employeeIds));
-
-            Set<ConstraintViolation<Project>> constraintViolations =
-                    validator.validate(project);
-            if (constraintViolations.size() > 0){
-                for (ConstraintViolation<Project> valid : constraintViolations) {
-                    if (valid.getPropertyPath().toString().equals("employees")) {
-                        addFieldError("employeeIds", valid.getMessage());
-                    }
-                    else {
-                        addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
-                    }
-                }
+            if (!isProjectValid(project)){
                 return INPUT;
             }
-
             service.create(project);
             this.id = project.getId();
             return SUCCESS;
@@ -105,21 +93,9 @@ public class ProjectActions extends ActionSupport implements CRUD, SessionAware,
             project.setPlanEndDate(planEndDate);
             project.setContract(service.getContractById(contractId));
             project.setEmployees(service.getEmployeesByIds(employeeIds));
-
-            Set<ConstraintViolation<Project>> constraintViolations =
-                    validator.validate(project);
-            if (constraintViolations.size() > 0){
-                for (ConstraintViolation<Project> valid : constraintViolations) {
-                    if (valid.getPropertyPath().toString().equals("employees")) {
-                        addFieldError("employeeIds", valid.getMessage());
-                    }
-                    else {
-                        addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
-                    }
-                }
+            if (!isProjectValid(project)){
                 return INPUT;
             }
-
             service.update(project);
             return SUCCESS;
         }
@@ -130,7 +106,19 @@ public class ProjectActions extends ActionSupport implements CRUD, SessionAware,
     }
 
     public String delete() {
-        throw new UnsupportedOperationException("You cannot delete project now");
+        try {
+            project = service.getById(id);
+            service.delete(project);
+            if (project.getId() == 0){
+                addActionMessage("Project was deleted!");
+                return SUCCESS;
+            }
+            return SUCCESS;
+        }
+        catch (Exception e){
+            addActionError(e.getMessage());
+            return ERROR;
+        }
     }
 
     public String edit() {
@@ -162,6 +150,26 @@ public class ProjectActions extends ActionSupport implements CRUD, SessionAware,
         if (project.getContract() != null) {
             contractId = project.getContract().getId();
         }
+    }
+
+    private boolean isProjectValid(Project project){
+        Set<ConstraintViolation<Project>> constraintViolations =
+                validator.validate(project);
+        if (constraintViolations.size() > 0){
+            for (ConstraintViolation<Project> valid : constraintViolations) {
+                if (valid.getPropertyPath().toString().equals("employees")) {
+                    addFieldError("employeeIds", valid.getMessage());
+                    continue;
+                }
+                if (valid.getPropertyPath().toString().equals("contract")) {
+                    addFieldError("contractId", valid.getMessage());
+                    continue;
+                }
+                addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
+            }
+            return false;
+        }
+        return true;
     }
 
     public Project getProject() {
