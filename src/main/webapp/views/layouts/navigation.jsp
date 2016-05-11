@@ -18,7 +18,7 @@
         <ul class="nav navbar-nav navbar-right">
             <s:if test="session.containsKey('role')">
                 <li class="navbar-brand">Welcome, ${session.get('fullName')}!</li>
-                <li><a href="/signOut">Sign Out</a></li>
+                <li><a href="/signOut" class="needConfirmation">Sign Out</a></li>
             </s:if>
         </ul>
     </div>

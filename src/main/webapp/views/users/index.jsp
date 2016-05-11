@@ -23,7 +23,7 @@
                 <td><s:property value="email"/></td>
                 <td><a href="${id}">View</a></td>
                 <td><a href="edit/${id}">Edit</a></td>
-                <td><a href="delete/${id}">Delete</a></td>
+                <td><a href="delete/${id}" class="needConfirmation">Delete</a></td>
             </tr>
         </s:iterator>
         </tbody>
@@ -58,8 +58,8 @@
             <td>${employee.department.name}</td>
             <td><a href="${id}">View</a></td>
             <td><a href="edit/${id}">Edit</a></td>
-            <td><a href="delete/${id}">Delete</a></td>
-            <td><a href="makeManager/${id}">Make manager</a></td>
+            <td><a href="delete/${id}" class="needConfirmation">Delete</a></td>
+            <td><a href="makeManager/${id}" class="needConfirmation">Make manager</a></td>
         </tr>
     </s:iterator>
     </tbody>

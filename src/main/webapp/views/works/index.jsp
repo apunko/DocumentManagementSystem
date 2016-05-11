@@ -30,7 +30,7 @@
             <td><s:property value="employees.size()"/></td>
             <td><a href="${id}">View</a></td>
             <td><a href="edit/${id}">Edit</a></td>
-            <td><a href="delete/${id}">Delete</a></td>
+            <td><a href="delete/${id}" class="needConfirmation">Delete</a></td>
         </tr>
     </s:iterator>
     </tbody>

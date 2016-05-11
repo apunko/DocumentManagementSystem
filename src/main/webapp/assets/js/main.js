@@ -2,6 +2,9 @@ $(function() {
     debugger;
     setFormElements();
     setFooter();
+    $('.needConfirmation').click(function(){
+        return confirm("Are you sure?");
+    })
 });
 
 function setFooter(){
