@@ -30,3 +30,7 @@ div.text-primary {
 .navbar-fixed-bottom {
     z-index: -100;
 }
+
+thead {
+   background-color: lemonchiffon;
+}

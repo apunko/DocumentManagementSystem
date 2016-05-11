@@ -15,6 +15,9 @@
     <h3>Members:</h3>
     <table class="table">
         <tbody>
+            <s:if test="department.employees.size() == 0">
+                <h4>There are no employees yet!</h4>
+            </s:if>
             <s:iterator value="department.employees" var="member">
                 <tr>
                     <td><s:property value="fullName"/></td>

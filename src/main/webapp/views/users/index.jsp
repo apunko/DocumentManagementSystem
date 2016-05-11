@@ -1,15 +1,22 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<s:if test="clients.size() == 0">
+    <h4>There are no clients yet!</h4>
+</s:if>
+<s:else>
 <h2>Clients: </h2>
     <table class="table table-bordered">
-        <tr>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>View</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
         <s:iterator value="clients">
             <tr>
                 <td><s:property value="fullName"/></td>
@@ -19,20 +26,29 @@
                 <td><a href="delete/${id}">Delete</a></td>
             </tr>
         </s:iterator>
+        </tbody>
     </table>
+</s:else>
+<s:if test="employees.size() == 0">
+    <h4>There are no employees yet!</h4>
+</s:if>
+<s:else>
 <h2>Employees: </h2>
 <table class="table table-bordered">
-    <tr>
-        <th>Full Name</th>
-        <th>Email</th>
-        <th>Position</th>
-        <th>Experience</th>
-        <th>Department</th>
-        <th>View</th>
-        <th>Edit</th>
-        <th>Delete</th>
-        <th>Make manager</th>>
-    </tr>
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Position</th>
+            <th>Experience</th>
+            <th>Department</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Make manager</th>
+        </tr>
+    </thead>
+    <tbody>
     <s:iterator value="employees" var="employee">
         <tr>
             <td><s:property value="fullName"/></td>
@@ -46,6 +62,8 @@
             <td><a href="makeManager/${id}">Make manager</a></td>
         </tr>
     </s:iterator>
+    </tbody>
 </table>
+</s:else>
 <a href="<s:url action="new" />">Add employee</a>
 

@@ -1,6 +1,10 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<s:if test="departments.size() == 0">
+    <h4>There are no departments yet!</h4>
+</s:if>
+<s:else>
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -21,6 +25,7 @@
         </s:iterator>
     </tbody>
 </table>
+</s:else>
 <div>
     <a href="<s:url action="new" />">Add new Department</a>
 </div>

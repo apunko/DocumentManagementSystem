@@ -15,6 +15,9 @@
 <div class="col-xs-4"><h4>Work end date: ${work.stringEndDate}</h4></div>
 <div class="col-xs-6">
     <h3>Employees</h3>
+    <s:if test="work.employees.size() == 0">
+        <h4>There are no employees yet!</h4>
+    </s:if>
     <ul>
         <s:iterator value="work.employees">
             <li><a href="/users/<s:property value='id' />" ><s:property value="fullName" /></a></li>

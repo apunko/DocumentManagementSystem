@@ -1,7 +1,12 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<s:if test="works.size() == 0">
+    <h4>There are no works yet!</h4>
+</s:if>
+<s:else>
 <table class="table table-bordered">
+    <thead>
     <tr>
         <th>Title</th>
         <th>Description</th>
@@ -13,6 +18,8 @@
         <th>Edit</th>
         <th>Delete</th>
     </tr>
+    </thead>
+    <tbody>
     <s:iterator value="works" var="work">
         <tr>
             <td><s:property value="title"/></td>
@@ -26,6 +33,8 @@
             <td><a href="delete/${id}">Delete</a></td>
         </tr>
     </s:iterator>
+    </tbody>
 </table>
+</s:else>
 <a href="<s:url action="new" />">Add new work</a>
 
