@@ -1,6 +1,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<div class="col-xs-5">
 <s:form action="update" theme="bootstrap" method="post">
     <input type="hidden" name="id" value="${work.id}">
     <label>Title: </label><br/>
@@ -9,23 +10,24 @@
     <label>Description: </label><br/>
     <textarea class="form-control" rows="5" name="description">${work.description}</textarea><br/>
     <s:fielderror fieldName="description"/>
-    <div class="col-xs-3">
+    <div class="col-xs-6">
         <label>Work start date: </label><br/>
         <input type="date" class="form-control smallInput editDateInput" name="startDate" date-value="${work.stringStartDate}"/><br/>
         <s:fielderror fieldName="startDate"/>
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-6">
         <label>Work end date: </label><br/>
         <input type="date" class="form-control smallInput editDateInput" name="endDate" date-value="${work.stringEndDate}"/><br/>
         <s:fielderror fieldName="endDate"/>
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-6">
         <s:select class="form-control smallInput" name="projectId" label="Create on project:"
                   list="projects" listKey="Id" listValue="Title" value="projectId"/>
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-6">
         <s:select name="employeesIds" class="multiSelect" multiple="true" listKey="Id" label="Employees:"
                   list="employees" listValue="fullName"/>
     </div>
     <s:submit cssClass="btn btn-block btn-primary" value="Update"/>
 </s:form>
+</div>

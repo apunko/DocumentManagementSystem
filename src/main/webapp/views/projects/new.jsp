@@ -1,6 +1,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<div class="col-xs-5">
 <s:form action="create" theme="bootstrap" method="post">
     <label>Title: </label><br/>
     <input type="text"  class="form-control"  name="title" value="${project.title}"/><br/>
@@ -8,18 +9,19 @@
     <label>Description: </label><br/>
     <textarea class="form-control" rows="5" name="description">${project.description}</textarea><br/>
     <s:fielderror fieldName="description"/>
-    <div class="col-xs-4">
+    <div class="col-xs-6">
         <label>Plan end of project: </label><br/>
         <input type="date" class="form-control smallInput newDateInput" name="planEndDate"  date-value="${project.stringPlanEndDate}"/><br/>
         <s:fielderror fieldName="planEndDate"/>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-6">
         <s:select class="form-control smallInput" name="contractId" label="Belongs to contract Number:"
                   list="contracts" listKey="Id" listValue="Id" value="contractId" />
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-12">
         <s:select name="employeeIds" class="multiSelect" multiple="true" listKey="Id" label="Employees:"
                   list="employees" listValue="fullName"/>
     </div>
     <s:submit cssClass="btn btn-block btn-primary" value="Create"/>
 </s:form>
+</div>

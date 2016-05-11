@@ -1,6 +1,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<div class="col-xs-5">
 <s:form action="create" theme="bootstrap" method="post">
     <label>Department Name: </label>
     <input type="text" class="form-control" name="name" value="${department.name}"/><br/>
@@ -10,3 +11,4 @@
     <s:fielderror fieldName="description"/>
     <s:submit cssClass="btn btn-block btn-primary" value="Create"/>
 </s:form>
+</div>

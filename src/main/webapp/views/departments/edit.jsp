@@ -1,6 +1,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<div class="col-xs-5">
 <s:form action="update" theme="bootstrap" method="post">
     <input type="hidden" name="id" value="${department.id}">
     <label>Department Name: </label>
@@ -11,3 +12,4 @@
     <s:fielderror fieldName="description"/>
     <s:submit cssClass="btn btn-block btn-primary" value="Update"/>
 </s:form>
+</div>
