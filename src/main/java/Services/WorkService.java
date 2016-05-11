@@ -22,7 +22,7 @@ public class WorkService extends GenericService<Work> {
 
     public Set<User> getEmployeesByIds(int[] ids){
         UserService userService = new UserService();
-        return userService.getUsersByIds(ids);
+        return userService.getEmployeesByIds(ids);
     }
 
     public ArrayList<Project> getProjects(){

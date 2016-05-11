@@ -1,7 +1,17 @@
 $(function() {
     debugger;
     setFormElements();
+    setFooter();
 });
+
+function setFooter(){
+    if ($(document).height() > $(window).height()) {
+        $("#footer").removeClass("navbar-fixed-bottom");
+    }
+    else {
+        $("#footer").addClass("navbar-fixed-bottom");
+    }
+}
 
 function setFormElements() {
     setMultiSelectInputs();

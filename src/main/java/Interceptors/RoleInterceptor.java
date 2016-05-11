@@ -61,7 +61,10 @@ public class RoleInterceptor extends AbstractInterceptor {
         int id = (Integer) session.getAttribute("id");
         UserService service = new UserService();
         User user = service.getById(id);
-        if (user == null) return false;
+        if (user == null) {
+            session.invalidate();
+            return false;
+        }
         loginRole = user.getRole();
 
         if (allowedRoles.size() > 0) {

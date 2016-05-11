@@ -34,6 +34,8 @@ public class User {
     @Column(name="role")
     private String role;
 
+    @NotNull
+    @Length(min=2, max=15, message="Login should be between 2 - 15 symbols")
     @Column(name="login")
     private String login;
 
@@ -48,6 +50,7 @@ public class User {
     @Column(name="position")
     private String position;
 
+    @NotNull(message = "Field is required")
     @ManyToOne
     @JoinColumn(name="Department_id")
     private Department department;

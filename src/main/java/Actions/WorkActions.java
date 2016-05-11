@@ -102,6 +102,9 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware, Pr
             work.setStartDate(startDate);
             work.setProject(service.getProjectById(projectId));
             Set<User> employees = service.getEmployeesByIds(employeesIds);
+            /*if (employees.size() <= 0){
+                addActionError("Please select employees!");
+            }*/
             work.setEmployees(employees);
             if (!isWorkValid(work)){
                 return INPUT;
@@ -170,6 +173,10 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware, Pr
             for (ConstraintViolation<Work> valid : constraintViolations) {
                 if (valid.getPropertyPath().toString().equals("project")) {
                     addFieldError("projectId", valid.getMessage());
+                    continue;
+                }
+                if (valid.getPropertyPath().toString().equals("employees")) {
+                    addFieldError("employeesIds", valid.getMessage());
                     continue;
                 }
                 addFieldError(valid.getPropertyPath().toString(), valid.getMessage());

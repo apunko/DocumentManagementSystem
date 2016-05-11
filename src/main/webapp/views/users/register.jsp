@@ -12,8 +12,8 @@
     <input type="text" class="form-control" name="email" value="${user.email}"/><br/>
     <s:fielderror fieldName="email"/>
     <label>Login: </label><br/>
-    <s:fielderror fieldName="login"/>
     <input type="text" class="form-control" name="login" value="${user.login}"/><br/>
+    <s:fielderror fieldName="login"/>
     <label>Password: </label><br/>
     <input type="password" class="form-control" name="password"/><br/>
     <s:fielderror fieldName="password"/>

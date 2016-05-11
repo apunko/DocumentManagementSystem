@@ -87,10 +87,10 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD, Pr
     public String signUp(){
         try {
             user = service.getByUniqueAttribute("login", login);
-
+            boolean loginFailed = false;
             if (user != null) {
                 addFieldError("login", "Login must be unique");
-                return INPUT;
+                loginFailed = true;
             }
             user = new User();
             user.setFirstName(firstName);
@@ -102,7 +102,7 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD, Pr
             user.setRole("client");
             user.setDepartment(service.getDepartmentById(14));
 
-            if (!isUserValid(user)){
+            if (!isUserValid(user) || loginFailed){
                 return INPUT;
             }
             user.setPassword(UtilsService.getPasswordHash(password));
@@ -155,6 +155,13 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD, Pr
 
     public String create(){
         try {
+            user = service.getByUniqueAttribute("login", login);
+            boolean loginFailed = false;
+            if (user != null) {
+                addFieldError("login", "Login must be unique");
+                loginFailed = true;
+            }
+
             user = new User();
             user.setFirstName(firstName);
             user.setLastName(lastName);
@@ -163,11 +170,13 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD, Pr
             user.setEmail(email);
             user.setExperience(experience);
             user.setDepartment(service.getDepartmentById(departmentId));
+            user.setPassword("123456");
+            user.setLogin(login);
 
-            if (!isUserValid(user)){
+            if (!isUserValid(user) || loginFailed){
                 return INPUT;
             }
-
+            user.setPassword(UtilsService.getPasswordHash("123456"));
             service.create(user);
             this.id = user.getId();
             return SUCCESS;
@@ -191,8 +200,28 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD, Pr
             if (!isUserValid(user)){
                 return INPUT;
             }
-
             service.update(user);
+            return SUCCESS;
+        }
+        catch (Exception e){
+            addActionError(e.getMessage());
+            return ERROR;
+        }
+    }
+
+    public String makeManager(){
+        try {
+            user = service.getById(id);
+            if (!isUserValid(user)){
+                return ERROR;
+            }
+            if (user.getRole() == "client") {
+                addActionMessage("You cann't make manager from client");
+                return SUCCESS;
+            }
+            user.setRole("manager");
+            service.update(user);
+            addActionMessage("Made manager!");
             return SUCCESS;
         }
         catch (Exception e){
@@ -243,6 +272,10 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD, Pr
     }
 
     private boolean isUserValid(User user){
+        if (user == null){
+            addActionError("There are no such user");
+            return false;
+        }
         Set<ConstraintViolation<User>> constraintViolations =
                 validator.validate(user);
 

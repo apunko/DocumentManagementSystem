@@ -7,12 +7,14 @@
             <th>Full Name</th>
             <th>Email</th>
             <th>View</th>
+            <th>Edit</th>
             <th>Delete</th>
         </tr>
         <s:iterator value="clients">
             <tr>
                 <td><s:property value="fullName"/></td>
                 <td><s:property value="email"/></td>
+                <td><a href="${id}">View</a></td>
                 <td><a href="edit/${id}">Edit</a></td>
                 <td><a href="delete/${id}">Delete</a></td>
             </tr>
@@ -22,7 +24,6 @@
 <table class="table table-bordered">
     <tr>
         <th>Full Name</th>
-        <th>Passport</th>
         <th>Email</th>
         <th>Position</th>
         <th>Experience</th>
@@ -30,11 +31,11 @@
         <th>View</th>
         <th>Edit</th>
         <th>Delete</th>
+        <th>Make manager</th>>
     </tr>
     <s:iterator value="employees" var="employee">
         <tr>
             <td><s:property value="fullName"/></td>
-            <td><s:property value="passport"/></td>
             <td><s:property value="email"/></td>
             <td><s:property value="position"/></td>
             <td><s:property value="experience"/></td>
@@ -42,6 +43,7 @@
             <td><a href="${id}">View</a></td>
             <td><a href="edit/${id}">Edit</a></td>
             <td><a href="delete/${id}">Delete</a></td>
+            <td><a href="makeManager/${id}">Make manager</a></td>
         </tr>
     </s:iterator>
 </table>

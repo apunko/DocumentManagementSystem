@@ -8,6 +8,9 @@
     <label>Last Name: </label><br/>
     <input type="text" class="form-control" name="lastName" value="${user.lastName}"/><br/>
     <s:fielderror fieldName="lastName"/>
+    <label>Login: </label><br/>
+    <input type="text" class="form-control" name="login" value="${user.login}"/><br/>
+    <s:fielderror fieldName="login"/>
     <label>Email: </label><br/>
     <input type="email" class="form-control" name="email" value="${user.email}"/><br/>
     <s:fielderror fieldName="email"/>

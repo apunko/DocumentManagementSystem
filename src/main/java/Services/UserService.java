@@ -42,6 +42,17 @@ public class UserService extends GenericService<User> {
          return employees;
      }
 
+    public HashSet<User> getEmployeesByIds(int[] ids){
+        HashSet<User> users = new HashSet<User>();
+        for (int id: ids) {
+            User user = this.getById(id);
+            if (user.getRole() == "manager" || user.getRole() == "employee") {
+                users.add(this.getById(id));
+            }
+        }
+        return users;
+    }
+
     public HashSet<User> getUsersByIds(int[] ids){
         HashSet<User> users = new HashSet<User>();
         for (int id: ids) {

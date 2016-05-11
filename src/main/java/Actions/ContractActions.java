@@ -83,6 +83,18 @@ public class ContractActions extends ActionSupport implements CRUD, SessionAware
 
             if (constraintViolations.size() > 0){
                 for (ConstraintViolation<Contract> valid : constraintViolations) {
+                    if (valid.getPropertyPath().toString().equals("client")) {
+                        addFieldError("clientId", valid.getMessage());
+                        continue;
+                    }
+                    if (valid.getPropertyPath().toString().equals("template")) {
+                        addFieldError("templateId", valid.getMessage());
+                        continue;
+                    }
+                    if (valid.getPropertyPath().toString().equals("payForm")) {
+                        addFieldError("payFormId", valid.getMessage());
+                        continue;
+                    }
                     addFieldError(valid.getPropertyPath().toString(), valid.getMessage());
                 }
                 return INPUT;
