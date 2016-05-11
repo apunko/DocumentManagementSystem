@@ -2,12 +2,27 @@ $(function() {
     debugger;
     setFormElements();
     setFooter();
-    $('.needConfirmation').click(function(){
-        return confirm("Are you sure?");
+    $('.needConfirmation').click(function(e){
+        debugger;
+        e.preventDefault();
+        var location = $(this).attr('href');
+        return bootbox.confirm("Are you sure?", function(result) {
+            if(result) {
+                window.location.replace(location);
+            }
+        });
     })
 });
 
 function setFooter(){
+    $(window).resize(function () {
+        if ($(document).height() > $(window).height()) {
+            $("#footer").removeClass("navbar-fixed-bottom");
+        }
+        else {
+            $("#footer").addClass("navbar-fixed-bottom");
+        }
+    });
     if ($(document).height() > $(window).height()) {
         $("#footer").removeClass("navbar-fixed-bottom");
     }

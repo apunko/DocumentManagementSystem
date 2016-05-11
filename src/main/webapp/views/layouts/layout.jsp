@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/fSelect.css">
     <script type="text/javascript" src="/assets/js/fSelect.js"></script>
+    <script type="text/javascript" src="/assets/js/bootbox.min.js"></script>
 </head>
 <body>
 <div class="row">
