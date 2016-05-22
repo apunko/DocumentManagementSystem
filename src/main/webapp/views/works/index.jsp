@@ -17,7 +17,7 @@
         <th>View</th>
         <th>Edit</th>
         <th>Delete</th>
-        <th>Download Pdf<th>
+        <th>Download<th>
     </tr>
     </thead>
     <tbody>

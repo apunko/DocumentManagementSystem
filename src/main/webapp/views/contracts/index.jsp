@@ -31,8 +31,8 @@
                     <td><s:property value="stringPayDate"/></td>
                     <td><s:property value="stringStartDate"/></td>
                     <td><s:property value="stringEndDate"/></td>
-                    <td><a href="/contracts/${contract.id}">View</a></td>
-                    <td><a href="/contracts/download/${contract.id}">Download</a></td>
+                    <td><a href="/contracts/${id}">View</a></td>
+                    <td><a href="/contracts/download/${id}">Download</a></td>
                 </tr>
             </s:iterator>
         </tbody>

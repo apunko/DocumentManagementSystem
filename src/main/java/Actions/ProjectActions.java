@@ -2,6 +2,7 @@ package Actions;
 
 import Actions.Interfaces.CRUD;
 import DocumentsUtils.CsvUtils;
+import DocumentsUtils.PdfUtils;
 import DocumentsUtils.XlsUtils;
 import Models.Contract;
 import Models.Project;
@@ -174,6 +175,12 @@ public class ProjectActions extends ActionSupport implements CRUD, SessionAware,
             return false;
         }
         return true;
+    }
+
+    public String download() throws Exception {
+        project = service.getById(id);
+        fileInputStream = new ByteArrayInputStream(PdfUtils.getProjectPdf(project).toByteArray());
+        return SUCCESS;
     }
 
     public String downloadAllProjectsInXls() throws Exception {

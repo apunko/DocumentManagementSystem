@@ -139,7 +139,8 @@ public class ContractActions extends ActionSupport implements CRUD, SessionAware
     }
 
     public String download() throws Exception {
-        fileInputStream = new ByteArrayInputStream(PdfUtils.getDocument().toByteArray());
+        contract = service.getById(id);
+        fileInputStream = new ByteArrayInputStream(PdfUtils.getDocument(contract).toByteArray());
         return SUCCESS;
     }
 

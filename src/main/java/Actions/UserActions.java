@@ -2,6 +2,7 @@ package Actions;
 
 import Actions.Interfaces.CRUD;
 import DocumentsUtils.CsvUtils;
+import DocumentsUtils.PdfUtils;
 import DocumentsUtils.XlsUtils;
 import Models.Department;
 import Models.User;
@@ -61,6 +62,12 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD, Pr
 
     public void setSession(Map<String, Object> map) {
         this.session = (SessionMap<String, Object>) map;
+    }
+
+    public String download() throws Exception {
+        user = service.getById(id);
+        fileInputStream = new ByteArrayInputStream(PdfUtils.getUserPdf(user).toByteArray());
+        return SUCCESS;
     }
 
     public String signIn() {

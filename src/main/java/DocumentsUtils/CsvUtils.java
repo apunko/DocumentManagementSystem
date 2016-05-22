@@ -44,7 +44,7 @@ public class CsvUtils {
     }
 
     public static ByteArrayOutputStream generateDepartmentsInCSV() throws IOException {
-        String[] fileHeader = {"Title", "Description", "Users Amount"};
+        String[] fileHeader = {"Name", "Description", "Users Amount"};
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
         OutputStreamWriter os = new OutputStreamWriter(stream);

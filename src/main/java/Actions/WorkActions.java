@@ -2,6 +2,7 @@ package Actions;
 
 import Actions.Interfaces.CRUD;
 import DocumentsUtils.CsvUtils;
+import DocumentsUtils.PdfUtils;
 import DocumentsUtils.XlsUtils;
 import Models.Project;
 import Models.User;
@@ -60,6 +61,12 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware, Pr
             errorMessage = e.getMessage();
             return  ERROR;
         }
+        return SUCCESS;
+    }
+
+    public String download() throws Exception {
+        work = service.getById(id);
+        fileInputStream = new ByteArrayInputStream(PdfUtils.getWorkPdf(work).toByteArray());
         return SUCCESS;
     }
 

@@ -22,7 +22,7 @@
                 <td><s:property value="employees.size()"/></td>
                 <td><a href="${id}">View</a></td>
                 <td><a href="edit/${id}">Edit</a></td>
-                <td><a href="${id}">Download</a></td>
+                <td><a href="download/${id}">Download</a></td>
             </tr>
         </s:iterator>
     </tbody>

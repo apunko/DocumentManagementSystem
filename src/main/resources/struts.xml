@@ -152,6 +152,18 @@
             <result name="input" type="tiles">editDepartment</result>
         </action>
 
+        <action name="download/{id}"
+                class="Actions.DepartmentAction"
+                method="download">
+            <param name="id">{1}</param>
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="department.pdf"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+
         <action name="delete/{id}"
                 class="Actions.DepartmentAction"
                 method="delete">
@@ -307,6 +319,18 @@
             <result name="error" type="tiles">error</result>
         </action>
 
+        <action name="download/{id}"
+                class="Actions.UserActions"
+                method="download">
+            <param name="id">{1}</param>
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="user.pdf"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+
         <action name="{id}"
                 class="Actions.UserActions"
                 method="show">
@@ -330,17 +354,6 @@
         <interceptors>
             <interceptor name="roleInterceptor" class="Interceptors.RoleInterceptor"/>
         </interceptors>
-
-        <action name="download"
-                class="Actions.ContractActions"
-                method="download">
-            <result name="success" type="stream">
-                <param name="contentType">application/octet-stream</param>
-                <param name="inputName">fileInputStream</param>
-                <param name="contentDisposition">attachment;filename="doc.pdf"</param>
-                <param name="bufferSize">1024</param>
-            </result>
-        </action>
 
         <action name="downloadAllXml"
                 class="Actions.ContractActions"
@@ -399,6 +412,18 @@
             </result>
             <result name="error" type="tiles">error</result>
             <result name="input" type="tiles">newContract</result>
+        </action>
+
+        <action name="download/{id}"
+                class="Actions.ContractActions"
+                method="download">
+            <param name="id">{1}</param>
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="contract.pdf"</param>
+                <param name="bufferSize">1024</param>
+            </result>
         </action>
 
         <action name="{id}"
@@ -506,6 +531,18 @@
             <result name="error" type="tiles">error</result>
         </action>
 
+        <action name="download/{id}"
+                class="Actions.ProjectActions"
+                method="download">
+            <param name="id">{1}</param>
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="project.pdf"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+
         <action name="{id}"
                 class="Actions.ProjectActions"
                 method="show">
@@ -590,6 +627,18 @@
             </interceptor-ref>
             <result name="success" type="tiles">newWork</result>
             <result name="error" type="tiles">error</result>
+        </action>
+
+        <action name="download/{id}"
+                class="Actions.WorkActions"
+                method="download">
+            <param name="id">{1}</param>
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="work.pdf"</param>
+                <param name="bufferSize">1024</param>
+            </result>
         </action>
 
         <action name="delete/{id}"

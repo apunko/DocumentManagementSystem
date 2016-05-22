@@ -9,6 +9,7 @@ import java.util.Set;
 
 import Actions.Interfaces.CRUD;
 import DocumentsUtils.CsvUtils;
+import DocumentsUtils.PdfUtils;
 import DocumentsUtils.XlsUtils;
 import Models.Department;
 import Models.User;
@@ -169,6 +170,12 @@ public class DepartmentAction extends ActionSupport implements CRUD, SessionAwar
         if (department == null) {
             department = new Department();
         }
+    }
+
+    public String download() throws Exception {
+        department = service.getById(id);
+        fileInputStream = new ByteArrayInputStream(PdfUtils.getDepartmentPdf(department).toByteArray());
+        return SUCCESS;
     }
 
     public int getId() {

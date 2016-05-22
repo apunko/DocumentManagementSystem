@@ -93,7 +93,7 @@ public class XlsUtils {
         HSSFRow row = sheet.createRow(0);
         HSSFCell cell = row.createCell(0);
         cell.setCellStyle(headerCellStyle);
-        cell.setCellValue(new HSSFRichTextString("Title"));
+        cell.setCellValue(new HSSFRichTextString("Name"));
         cell = row.createCell(1);
         cell.setCellStyle(headerCellStyle);
         cell.setCellValue(new HSSFRichTextString("Description"));
