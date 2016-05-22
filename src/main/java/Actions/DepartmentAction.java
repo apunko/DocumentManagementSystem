@@ -1,11 +1,15 @@
 package Actions;
 
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
 import Actions.Interfaces.CRUD;
+import DocumentsUtils.CsvUtils;
+import DocumentsUtils.XlsUtils;
 import Models.Department;
 import Models.User;
 import Models.Work;
@@ -139,6 +143,26 @@ public class DepartmentAction extends ActionSupport implements CRUD, SessionAwar
 
     public String add() {
         return SUCCESS;
+    }
+
+    public String downloadAllDepartmentsInXls() throws Exception {
+        fileInputStream = new ByteArrayInputStream(XlsUtils.generateDepartmentsXls().toByteArray());
+        return SUCCESS;
+    }
+
+    public String downloadAllDepartmentsInCsv() throws Exception {
+        fileInputStream = new ByteArrayInputStream(CsvUtils.generateDepartmentsInCSV().toByteArray());
+        return SUCCESS;
+    }
+
+    private InputStream fileInputStream;
+
+    public InputStream getFileInputStream() {
+        return fileInputStream;
+    }
+
+    public void setFileInputStream(InputStream fileInputStream) {
+        this.fileInputStream = fileInputStream;
     }
 
     public void prepare() throws Exception {

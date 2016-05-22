@@ -1,10 +1,15 @@
 package Actions;
 
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Map;
 
 import Actions.Interfaces.CRUD;
+import DocumentsUtils.CsvUtils;
+import DocumentsUtils.PdfUtils;
+import DocumentsUtils.XlsUtils;
 import Models.*;
 import Services.ContractService;
 import Services.DepartmentService;
@@ -39,6 +44,7 @@ public class ContractActions extends ActionSupport implements CRUD, SessionAware
     private ArrayList<ContractTemplate> templates;
     private ArrayList<User> clients;
     private Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+    private InputStream fileInputStream;
 
     public String show(){
         try {
@@ -130,6 +136,21 @@ public class ContractActions extends ActionSupport implements CRUD, SessionAware
         if (contract == null) {
             contract = new Contract();
         }
+    }
+
+    public String download() throws Exception {
+        fileInputStream = new ByteArrayInputStream(PdfUtils.getDocument().toByteArray());
+        return SUCCESS;
+    }
+
+    public String downloadAllContractsInXls() throws Exception {
+        fileInputStream = new ByteArrayInputStream(XlsUtils.generateContractsXls().toByteArray());
+        return SUCCESS;
+    }
+
+    public String downloadAllContractsInCsv() throws Exception {
+        fileInputStream = new ByteArrayInputStream(CsvUtils.generateContractsInCSV().toByteArray());
+        return SUCCESS;
     }
 
     public String update(){
@@ -252,5 +273,13 @@ public class ContractActions extends ActionSupport implements CRUD, SessionAware
 
     public void setSession(Map<String, Object> map) {
         this.session = (SessionMap<String, Object>) map;
+    }
+
+    public InputStream getFileInputStream() {
+        return fileInputStream;
+    }
+
+    public void setFileInputStream(InputStream fileInputStream) {
+        this.fileInputStream = fileInputStream;
     }
 }

@@ -1,6 +1,8 @@
 package Actions;
 
 import Actions.Interfaces.CRUD;
+import DocumentsUtils.CsvUtils;
+import DocumentsUtils.XlsUtils;
 import Models.Project;
 import Models.User;
 import Models.Work;
@@ -14,6 +16,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
@@ -147,6 +151,26 @@ public class WorkActions extends ActionSupport implements CRUD, SessionAware, Pr
             errorMessage = e.getMessage();
             return ERROR;
         }
+    }
+
+    public String downloadAllWorksInXls() throws Exception {
+        fileInputStream = new ByteArrayInputStream(XlsUtils.generateWorksXls().toByteArray());
+        return SUCCESS;
+    }
+
+    public String downloadAllWorksInCsv() throws Exception {
+        fileInputStream = new ByteArrayInputStream(CsvUtils.generateWorksInCSV().toByteArray());
+        return SUCCESS;
+    }
+
+    private InputStream fileInputStream;
+
+    public InputStream getFileInputStream() {
+        return fileInputStream;
+    }
+
+    public void setFileInputStream(InputStream fileInputStream) {
+        this.fileInputStream = fileInputStream;
     }
 
     public void prepare() throws Exception {

@@ -1,6 +1,8 @@
 package Actions;
 
 import Actions.Interfaces.CRUD;
+import DocumentsUtils.CsvUtils;
+import DocumentsUtils.XlsUtils;
 import Models.Department;
 import Models.User;
 import Models.Work;
@@ -14,6 +16,8 @@ import org.apache.struts2.interceptor.SessionAware;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
@@ -244,6 +248,26 @@ public class UserActions extends ActionSupport implements SessionAware, CRUD, Pr
             addActionError(e.getMessage());
             return ERROR;
         }
+    }
+
+    public String downloadAllUsersInXls() throws Exception {
+        fileInputStream = new ByteArrayInputStream(XlsUtils.generateUsersXls().toByteArray());
+        return SUCCESS;
+    }
+
+    public String downloadAllUsersInCsv() throws Exception {
+        fileInputStream = new ByteArrayInputStream(CsvUtils.generateUsersInCSV().toByteArray());
+        return SUCCESS;
+    }
+
+    private InputStream fileInputStream;
+
+    public InputStream getFileInputStream() {
+        return fileInputStream;
+    }
+
+    public void setFileInputStream(InputStream fileInputStream) {
+        this.fileInputStream = fileInputStream;
     }
 
     public void prepare() throws Exception {

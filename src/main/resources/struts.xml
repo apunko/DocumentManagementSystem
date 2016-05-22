@@ -80,6 +80,28 @@
 
         <default-action-ref name="index" />
 
+        <action name="downloadAllXml"
+                class="Actions.DepartmentAction"
+                method="downloadAllDepartmentsInXls">
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="departments.xls"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+
+        <action name="downloadAllCsv"
+                class="Actions.DepartmentAction"
+                method="downloadAllDepartmentsInCsv">
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="departments.csv"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+
         <action name="index"
                 class="Actions.DepartmentAction"
                 method="index">
@@ -176,6 +198,28 @@
         <interceptors>
             <interceptor name="roleInterceptor" class="Interceptors.RoleInterceptor"/>
         </interceptors>
+
+        <action name="downloadAllXml"
+                class="Actions.UserActions"
+                method="downloadAllUsersInXls">
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="users.xls"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+
+        <action name="downloadAllCsv"
+                class="Actions.UserActions"
+                method="downloadAllUsersInCsv">
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="users.csv"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
 
         <action name="index"
                 class="Actions.UserActions"
@@ -287,6 +331,39 @@
             <interceptor name="roleInterceptor" class="Interceptors.RoleInterceptor"/>
         </interceptors>
 
+        <action name="download"
+                class="Actions.ContractActions"
+                method="download">
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="doc.pdf"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+
+        <action name="downloadAllXml"
+                class="Actions.ContractActions"
+                method="downloadAllContractsInXls">
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="contracts.xls"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+
+        <action name="downloadAllCsv"
+                class="Actions.ContractActions"
+                method="downloadAllContractsInCsv">
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="contracts.csv"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+
         <action name="index"
                 class="Actions.ContractActions"
                 method="index">
@@ -347,6 +424,29 @@
         <interceptors>
             <interceptor name="roleInterceptor" class="Interceptors.RoleInterceptor"/>
         </interceptors>
+
+
+        <action name="downloadAllXml"
+                class="Actions.ProjectActions"
+                method="downloadAllProjectsInXls">
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="projects.xls"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+
+        <action name="downloadAllCsv"
+                class="Actions.ProjectActions"
+                method="downloadAllProjectsInCsv">
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="projects.csv"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
 
         <action name="index"
                 class="Actions.ProjectActions"
@@ -447,6 +547,28 @@
         </interceptors>
 
         <default-action-ref name="index" />
+
+        <action name="downloadAllXml"
+                class="Actions.WorkActions"
+                method="downloadAllWorksInXls">
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="works.xls"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+
+        <action name="downloadAllCsv"
+                class="Actions.WorkActions"
+                method="downloadAllWorksInCsv">
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="works.csv"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
 
         <action name="index"
                 class="Actions.WorkActions"

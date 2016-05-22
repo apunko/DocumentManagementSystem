@@ -17,7 +17,7 @@ public class PayForm {
     @Column(name="type")
     private String type;
 
-    private PayForm(){}
+    public PayForm(){}
 
     public int getId() {
         return id;

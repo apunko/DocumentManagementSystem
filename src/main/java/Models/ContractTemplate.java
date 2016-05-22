@@ -20,7 +20,7 @@ public class ContractTemplate {
     @Column(name="content")
     private String content;
 
-    private ContractTemplate(){}
+    public ContractTemplate(){}
 
     public int getId() {
         return id;
