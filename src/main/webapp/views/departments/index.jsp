@@ -12,6 +12,7 @@
             <th>People amount</th>
             <th>View</th>
             <th>Edit</th>
+            <th>Download</th>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +22,7 @@
                 <td><s:property value="employees.size()"/></td>
                 <td><a href="${id}">View</a></td>
                 <td><a href="edit/${id}">Edit</a></td>
+                <td><a href="${id}">Download</a></td>
             </tr>
         </s:iterator>
     </tbody>
@@ -28,5 +30,7 @@
 </s:else>
 <div>
     <a href="<s:url action="new" />">Add new Department</a>
+    | <s:a href="/departments/downloadAllXml">Download all Departments in XML</s:a>
+    | <s:a href="/departments/downloadAllCsv">Download all Departments in CSV</s:a>
 </div>
 

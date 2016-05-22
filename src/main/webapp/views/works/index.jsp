@@ -17,6 +17,7 @@
         <th>View</th>
         <th>Edit</th>
         <th>Delete</th>
+        <th>Download Pdf<th>
     </tr>
     </thead>
     <tbody>
@@ -31,10 +32,13 @@
             <td><a href="${id}">View</a></td>
             <td><a href="edit/${id}">Edit</a></td>
             <td><a href="delete/${id}" class="needConfirmation">Delete</a></td>
+            <td><a href="download/${id}">Download</a></td>
         </tr>
     </s:iterator>
     </tbody>
 </table>
 </s:else>
 <a href="<s:url action="new" />">Add new work</a>
+| <s:a href="/works/downloadAllXml">Download all Works in XML</s:a>
+| <s:a href="/works/downloadAllCsv">Download all Works in CSV</s:a>
 

@@ -32,7 +32,7 @@
                     <td><s:property value="stringStartDate"/></td>
                     <td><s:property value="stringEndDate"/></td>
                     <td><a href="/contracts/${contract.id}">View</a></td>
-                    <td><a href="#">Download</a></td>
+                    <td><a href="/contracts/download/${contract.id}">Download</a></td>
                 </tr>
             </s:iterator>
         </tbody>
@@ -40,5 +40,7 @@
 </s:else>
 <div>
     <a href="<s:url action="new" />">Add new Contract</a>
+    | <s:a href="/contracts/downloadAllXml">Download all Contracts in XML</s:a>
+    | <s:a href="/contracts/downloadAllCsv">Download all Contracts in CSV</s:a>
 </div>
 

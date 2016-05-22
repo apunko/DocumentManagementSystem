@@ -16,6 +16,7 @@
         <th>View</th>
         <th>Edit</th>
         <th>Delete</th>
+        <th>Download</th>
     </tr>
     </thead>
     <tbody>
@@ -29,6 +30,7 @@
                 <td><a href="${id}">View</a></td>
                 <td><a href="edit/${id}">Edit</a></td>
                 <td><a href="delete/${id}" class="needConfirmation">Delete</a></td>
+                <td><a href="download/${id}">Download</a></td>
             </tr>
         </s:iterator>
     </tbody>
@@ -36,5 +38,7 @@
 </s:else>
 <div>
     <a href="<s:url action="new" />">Add new Project</a>
+    | <s:a href="/projects/downloadAllXml">Download all Projects in XML</s:a>
+    | <s:a href="/projects/downloadAllCsv">Download all Projects in CSV</s:a>
 </div>
 

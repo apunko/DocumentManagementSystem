@@ -30,6 +30,7 @@
                 ${request['error']}
             </div>
         </s:if>
+        <s:a href="/contracts/download">pdf test</s:a>
         <tiles:insertAttribute name="body" />
         <p></p>
         <br/>

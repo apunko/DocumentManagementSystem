@@ -14,6 +14,7 @@
                 <th>View</th>
                 <th>Edit</th>
                 <th>Delete</th>
+                <th>Download</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +25,7 @@
                 <td><a href="${id}">View</a></td>
                 <td><a href="edit/${id}">Edit</a></td>
                 <td><a href="delete/${id}" class="needConfirmation">Delete</a></td>
+                <td><a href="download/${id}">Download</a></td>
             </tr>
         </s:iterator>
         </tbody>
@@ -46,6 +48,7 @@
             <th>Edit</th>
             <th>Delete</th>
             <th>Make manager</th>
+            <th>Download</th>
         </tr>
     </thead>
     <tbody>
@@ -60,10 +63,13 @@
             <td><a href="edit/${id}">Edit</a></td>
             <td><a href="delete/${id}" class="needConfirmation">Delete</a></td>
             <td><a href="makeManager/${id}" class="needConfirmation">Make manager</a></td>
+            <td><a href="download/${id}">Download</a></td>
         </tr>
     </s:iterator>
     </tbody>
 </table>
 </s:else>
 <a href="<s:url action="new" />">Add employee</a>
+| <s:a href="/users/downloadAllXml">Download all Users in XML</s:a>
+| <s:a href="/users/downloadAllCsv">Download all Users in CSV</s:a>
 
